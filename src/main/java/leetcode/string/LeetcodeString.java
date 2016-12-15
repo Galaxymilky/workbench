@@ -6,18 +6,58 @@ import java.util.*;
  * Created by niu_ben on 2016/11/15.
  */
 public class LeetcodeString {
-    public static String reverseWords(String s) {
-        String result = "";
-        if ("".equals(s) || s == null) {
-            return result;
+
+    /**
+     * 459. Repeated Substring Pattern
+     * Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together.
+     * You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.
+     * <p>
+     * Input:"abcabcabcabc"  Output:True  Explanation: It's the substring "abc" four times. (And the substring "abcabc" twice.)
+     * Input:"abab"  Output:True  Explanation:It's the substring "ab" twice.
+     * Input:"aba"   Output:False
+     * Input:"acbacba" Output:False
+     */
+    public boolean repeatedSubstringPattern(String str) {
+        //TODO UnApproved
+        if (str.length() % 2 != 0) {
+            return false;
         }
 
-        String[] array = s.split(" ");
-        for (int i = array.length - 1; i > -1; i--) {
-            result += array[i] + " ";
+        if (str.length() == 2 && str.substring(0, 1).equals(str.substring(1, 2))) {
+            return true;
         }
-        return result.substring(0, result.length() - 1);
 
+        int i = 0;
+        while (i < str.length() - 1) {
+            String pattern = str.substring(i, i + 2);
+
+            int j = i + 2;
+            while (j < str.length() - 1) {
+                String parrternStr = str.substring(j, j + 2);
+                if (parrternStr.equals(pattern)) {
+                    return true;
+                }
+                j++;
+            }
+            i++;
+            j = i + 2;
+        }
+        return false;
+    }
+
+    /**
+     * 434. Number of Segments in a String
+     * Count the number of segments in a string, where a segment is defined to be a contiguous sequence of non-space characters.
+     * Please note that the string does not contain any non-printable characters.
+     * <p>
+     * Input: "Hello, my name is John"  Output: 5
+     */
+    public int countSegments(String s) {
+        if("".equals(s.trim())){
+            return 0;
+        }
+        String[] array = s.trim().split("\\s+");
+        return array.length;
     }
 
     /**
@@ -53,12 +93,10 @@ public class LeetcodeString {
         return new String(chars);
     }
 
-
-    public String reverseVowelsTimeLimit(String s) {
+    public String reverseVowelsPass(String s) {
 
         String vowels = "aeiouAEIOU";
 
-        char[] res = new char[s.length()];
         char[] opt = s.toCharArray();
 
         int j = opt.length - 1;
@@ -67,58 +105,36 @@ public class LeetcodeString {
             char curLeft = opt[i];
             char curRight = opt[j];
 
-            res[i] = curLeft;
-            res[j] = curRight;
-
             boolean flagLeft = vowels.contains(String.valueOf(curLeft));
             boolean flagRight = vowels.contains(String.valueOf(curRight));
 
             if (flagLeft && flagRight) {
-                res[i] = opt[j];
-                res[j] = opt[i];
+                opt[i] = curRight;
+                opt[j] = curLeft;
                 i++;
                 j--;
                 continue;
             }
             if (flagLeft && !flagRight) {
-                res[j] = opt[j];
                 j--;
                 continue;
             }
             if (!flagLeft && flagRight) {
-                res[i] = opt[i];
                 i++;
                 continue;
             }
             if (!flagLeft && !flagRight) {
-                res[i] = opt[i];
-                res[j] = opt[j];
                 i++;
                 j--;
                 continue;
             }
 
         }
-        if (i == j) {
-            res[i] = opt[i];
-        }
 
-        String str = "";
-        for (int k = 0; k < opt.length; k++) {
-            str += res[k];
-        }
+        String str = String.valueOf(opt);
         return str;
 
     }
-
-    private boolean isWowel(char currChar) {
-        String woels = "aeiouAEIOU";
-        if (currChar == 'a' || currChar == 'e' || currChar == 'i' || currChar == 'o' || currChar == 'u' || currChar == 'A' || currChar == 'E' || currChar == 'I' || currChar == 'O' || currChar == 'U') {
-            return true;
-        }
-        return false;
-    }
-
 
     /**
      * 330. Patching Array
@@ -360,6 +376,101 @@ public class LeetcodeString {
         array[1] = Integer.parseInt(ito.next() + "");
 
         return array;
+    }
+
+    /**
+     * 151. Reverse Words in a String
+     * Given an input string, reverse the string word by word.
+     * Given s = "the sky is blue", return "blue is sky the".
+     * <p>
+     * What constitutes a word? A sequence of non-space characters constitutes a word.
+     * Could the input string contain leading or trailing spaces? Yes. However, your reversed string should not contain leading or trailing spaces.
+     * How about multiple spaces between two words? Reduce them to a single space in the reversed string.
+     */
+    public String reverseWords(String s) {
+        String result = "";
+        if ("".equals(s.trim()) || s == null) {
+            return result;
+        }
+
+        String[] array = s.trim().split("\\s+");
+
+        for (int i = array.length - 1; i > -1; i--) {
+
+            result += array[i] + " ";
+        }
+        return result.substring(0, result.length() - 1);
+
+    }
+
+    public String reverseWordsBetter(String s) {
+        if (s == null)
+            return null;
+
+        char[] str = s.toCharArray();
+        int start = 0, end = str.length - 1;
+
+        // Trim start of string
+        while (start <= end && str[start] == ' ')
+            start++;
+
+        //Trim end of string
+        while (end >= 0 && str[end] == ' ')
+            end--;
+
+        if (start > end)
+            return new String("");
+
+        int i = start;
+        while (i <= end) {
+            if (str[i] != ' ') {
+                // case when i points to a start of word -  find the word reverse it
+                int j = i + 1;
+                while (j <= end && str[j] != ' ')
+                    j++;
+                reverse(str, i, j - 1);
+                i = j;
+            } else {
+                if (str[i - 1] == ' ') {
+                    //case when prev char is also space - shift char to left by 1 and decrease end pointer
+                    int j = i;
+                    while (j <= end - 1) {
+                        str[j] = str[j + 1];
+                        j++;
+                    }
+                    end--;
+                } else
+                    // case when there is just single space
+                    i++;
+            }
+        }
+        //Now that all words are reversed, time to reverse the entire string pointed by start and end - This step reverses the words in string
+        reverse(str, start, end);
+        // return new string object pointed by start with len = end -start + 1
+        return new String(str, start, end - start + 1);
+    }
+
+    private static void reverse(char[] str, int begin, int end) {
+        while (begin < end) {
+            char temp = str[begin];
+            str[begin] = str[end];
+            str[end] = temp;
+            begin++;
+            end--;
+        }
+    }
+
+    /**
+     * 38. Count and Say
+     * The count-and-say sequence is the sequence of integers beginning as follows:
+     * 1, 11, 21, 1211, 111221, ...
+     * 1 is read off as "one 1" or 11.
+     * 11 is read off as "two 1s" or 21.
+     * 21 is read off as "one 2, then one 1" or 1211.
+     * Given an integer n, generate the nth sequence.
+     * */
+    public String countAndSay(int n) {
+        return "";
     }
 
     /**

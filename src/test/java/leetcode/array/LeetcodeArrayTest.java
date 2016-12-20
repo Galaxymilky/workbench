@@ -61,5 +61,24 @@ public class LeetcodeArrayTest {
         lcArray.searchRange(a, target);
     }
 
+    @Test
+    public void testExist() {
+        char[][] board = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
+        //board = new char[0][0];
+        String word = "ABCCED";
+        word = "";
+        boolean flag = lcArray.exist(board, word);
+        System.out.println(flag);
+    }
+
+
+    @Test
+    public void testSearchMatrix() {
+        int[][] matrix = {};
+        int target = 3;
+        boolean flag = lcArray.searchMatrix(matrix, target);
+        System.out.println(flag);
+    }
+
 
 }

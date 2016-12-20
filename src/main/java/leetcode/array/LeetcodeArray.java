@@ -825,6 +825,7 @@ public class LeetcodeArray {
         return 0;
     }
 
+
     /**
      * 169. Majority Element
      * Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
@@ -858,6 +859,92 @@ public class LeetcodeArray {
         Arrays.sort(nums);
         int len = nums.length;
         return nums[len / 2];
+    }
+
+    /**
+     * 162. Find Peak Element
+     * A peak element is an element that is greater than its neighbors.
+     * Given an input array where num[i] ≠ num[i+1], find a peak element and return its index.
+     * The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.
+     * You may imagine that num[-1] = num[n] = -∞.
+     * Input:[1, 2, 3, 1], Output:2.
+     * <p>
+     * logarithmic complexity is needed...
+     */
+    public int findPeakElement(int[] nums) {
+
+
+        return -1;
+    }
+
+    /**
+     * 79. Word Search
+     * Given a 2D board and a word, find if the word exists in the grid.
+     * The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring.
+     * The same letter cell may not be used more than once.
+     * board = {{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}
+     * word = "ABCCED", -> returns true,
+     * word = "SEE", -> returns true,
+     * word = "ABCB", -> returns false.
+     */
+    public boolean exist(char[][] board, String word) {
+
+        if ("".equals(word)) {
+            return false;
+        }
+
+        Map<Character, Integer> keyMap = new HashMap<Character, Integer>();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (keyMap.containsKey(board[i][j])) {
+                    keyMap.put(board[i][j], keyMap.get(board[i][j]) + 1);
+                } else {
+                    keyMap.put(board[i][j], 1);
+                }
+            }
+        }
+
+        for (int k = 0; k < word.length(); k++) {
+            if (keyMap.containsKey(word.charAt(k))) {
+                if (keyMap.get(word.charAt(k)) == 0) {
+                    return false;
+                } else {
+                    keyMap.put(word.charAt(k), keyMap.get(word.charAt(k)) - 1);
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 74. Search a 2D Matrix
+     * Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
+     * Integers in each row are sorted from left to right.
+     * The first integer of each row is greater than the last integer of the previous row.
+     * [[1,   3,  5,  7],[10, 11, 16, 20],[23, 30, 34, 50]], target=3, return true
+     */
+    public boolean searchMatrix(int[][] matrix, int target) {
+        for (int i = 0; i < matrix.length; i++) {
+            int[] matrixY = matrix[i];
+            for (int j = 0; j < matrixY.length; j++) {
+                if (matrixY[j] == target) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 66. Plus One
+     * Given a non-negative number represented as an array of digits, plus one to the number.
+     * The digits are stored such that the most significant digit is at the head of the list.
+     */
+    public int[] plusOne(int[] digits) {
+        return digits;
     }
 
     /**

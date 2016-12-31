@@ -17,7 +17,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
-import work.utils.StringUtils;
+import work.utils.StrUtils;
 
 import javax.net.ssl.SSLContext;
 import java.io.File;
@@ -108,10 +108,10 @@ public class HttpClientTest {
      * 上传文件
      */
     public void upload(String filePath, String uploadUrl) {
-        if (StringUtils.isNullOrEmpty(filePath))
+        if (StrUtils.isNullOrEmpty(filePath))
             filePath = "D:\\1.txt";
 
-        if (StringUtils.isNullOrEmpty(uploadUrl))
+        if (StrUtils.isNullOrEmpty(uploadUrl))
             uploadUrl = "http://localhost:8080/myDemo/Ajax/serivceFile.action";
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -156,7 +156,7 @@ public class HttpClientTest {
      * Example how to use multipart/form encoded POST request.
      */
     public void clientMultipartFormPost(String filePath) throws IOException {
-        if (StringUtils.isNullOrEmpty(filePath)) {
+        if (StrUtils.isNullOrEmpty(filePath)) {
             System.out.println("File path not given");
             System.exit(1);
         }

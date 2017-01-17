@@ -164,4 +164,22 @@ public class StrUtils {
         return "";
     }
 
+    public static boolean isNullOrEmpty(String s) {
+        if (s == null || s.length() <= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isNullOrEmptyOrSpace(String s) {
+        if (s == null) {
+            return true;
+        }
+        s.trim();
+        if (s.length() <= 0) {
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -56,18 +56,25 @@ public class LeetcodeGreedy {
      */
     public int[][] reconstructQueue(int[][] people) {
         int rowLen = people.length;
-        List list = new ArrayList(rowLen);
-        for (int i = 0; i < rowLen; i++) {
 
-            int[] rows = people[i];
+        for (int i = 0; i < rowLen - 1; i++) {
+            for (int j = 0; j < rowLen - 1 - i; j++) {
+                if (people[j][0] > people[j + 1][0]) {
+                    int[] tmp = people[j];
+                    people[j] = people[j + 1];
+                    people[j + 1] = tmp;
+                }
+            }
+        }
 
-            int curHeight = rows[0];
-            int curVal = rows[1];
-
-
-
-            list.add(rows);
-
+        for (int i = 0; i < rowLen - 1; i++) {
+            for (int j = 0; j < rowLen - 1 - i; j++) {
+                if(people[j][1] > people[j + 1][1]){
+                    int[] tmp = people[j];
+                    people[j] = people[j + 1];
+                    people[j + 1] = tmp;
+                }
+            }
         }
 
         return people;

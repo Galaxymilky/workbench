@@ -22,10 +22,16 @@ public class FileUtils {
          fileUtils.writeFile(xmlStr);
          */
 
-        String s = fileUtils.readFile("C:\\syndata", "20161222152216.xml");
-        System.out.println(s);
+//        String s = fileUtils.readFile("C:\\syndata", "20161222152216.xml");
+//        System.out.println(s);
+
+        String path = "ftp://172.18.116.36:21/File";
+        File file = new File(path);
+        System.out.println(file.getPath());
 
     }
+
+
 
     /**
      * read content from a text
@@ -71,15 +77,15 @@ public class FileUtils {
 
     /**
      * @param directory 路径
-     * @param fileName 文件名
-     * @param content 要写入的内容
+     * @param fileName  文件名
+     * @param content   要写入的内容
      */
     public void writeFile(String directory, String fileName, String content) {
-        if("".equals(directory) || directory == null){
+        if ("".equals(directory) || directory == null) {
             String separator = File.separator;
             directory = "C:" + separator + "syndata";
         }
-        if("".equals(fileName) || fileName == null){
+        if ("".equals(fileName) || fileName == null) {
             fileName = DateUtils.getCurrDate("yyyyMMddHHmmss") + ".xml";
         }
 

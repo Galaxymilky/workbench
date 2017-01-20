@@ -2,6 +2,8 @@ package leetcode.greedy;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 /**
@@ -29,5 +31,27 @@ public class LeetcodeGreedyTest {
 
         System.out.println(x);
     }
+
+
+    @Test
+    public void reconstructQueue() throws Exception {
+        int[][] people = {{7, 0}, {4, 4}, {7, 1}, {5, 0}, {6, 1}, {5, 2}};
+        int[][] res = lcGreedy.reconstructQueue(people);
+        for (int i = 0; i < res.length; i++) {
+            System.out.print(Arrays.toString(res[i]) + ",");
+        }
+
+    }
+
+    @Test
+    public void testSome() {
+        int[] a = {1, 2, 3, 4, 5, 6};
+        int tmp = a[3];
+        a[3] = a[5];
+        a[5] = tmp;
+
+        System.out.println(Arrays.toString(a));
+    }
+
 
 }

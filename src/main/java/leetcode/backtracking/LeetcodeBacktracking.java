@@ -1,7 +1,9 @@
 package leetcode.backtracking;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by niu_ben on 2016/11/22.
@@ -56,15 +58,29 @@ public class LeetcodeBacktracking {
         }
     }
 
+    public int countNumbersWithUniqueDigitsCombinatorics(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        int res = 10;
+        int key = 9;
+        int validNum = 9;
+        while (n-- > 1 && validNum > 0) {
+            key = key * validNum;
+            res += key;
+            validNum--;
+        }
+        return res;
+    }
+
     /**
      * 357. Count Numbers with Unique Digits
      * Given a non-negative integer n, count all numbers with unique digits, x, where 0 ≤ x < 10^n.
      * Given n = 2, return 91. (The answer should be the total numbers in the range of 0 ≤ x < 100, excluding [11,22,33,44,55,66,77,88,99])
      */
     public int countNumbersWithUniqueDigits(int n) {
-        if (n > 10) {
-            return countNumbersWithUniqueDigits(10);
-        }
+        n = n > 10 ? 10 : n;
+
         int count = 1;
         long max = (long) Math.pow(10, n);
 
@@ -72,13 +88,13 @@ public class LeetcodeBacktracking {
 
         for (int i = 1; i < 10; i++) {
             used[i] = true;
-            count += isValid_nwud(i, max, used);
+            count += search(i, max, used);
             used[i] = false;
         }
         return count;
     }
 
-    public int isValid_nwud(long prev, long max, boolean[] used) {
+    public int search(long prev, long max, boolean[] used) {
         int count = 0;
 
         if (prev < max) {
@@ -91,12 +107,61 @@ public class LeetcodeBacktracking {
             if (!used[i]) {
                 used[i] = true;
                 long cur = 10 * prev + i;
-                count += isValid_nwud(cur, max, used);
+                count += search(cur, max, used);
                 used[i] = false;
             }
         }
         return count;
     }
+
+    /**
+     * 211. Add and Search Word - Data structure design
+     * Design a data structure that supports the following two operations:
+     * <p>
+     * void addWord(word)
+     * bool search(word)
+     * <p>
+     * search(word) can search a literal word or a regular expression string containing only letters a-z or .. A . means it can represent any one letter.
+     * <p>
+     * For example:
+     * addWord("bad")
+     * addWord("dad")
+     * addWord("mad")
+     * search("pad") -> false
+     * search("bad") -> true
+     * search(".ad") -> true
+     * search("b..") -> true
+     */
+    public class WordDictionary {
+
+        /**
+         * Initialize your data structure here.
+         */
+        public WordDictionary() {
+
+        }
+
+        /**
+         * Adds a word into the data structure.
+         */
+        public void addWord(String word) {
+
+        }
+
+        /**
+         * Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+         */
+        public boolean search(String word) {
+            return false;
+        }
+    }
+
+    /**
+     * Your WordDictionary object will be instantiated and called as such:
+     * WordDictionary obj = new WordDictionary();
+     * obj.addWord(word);
+     * boolean param_2 = obj.search(word);
+     */
 
 
     /**

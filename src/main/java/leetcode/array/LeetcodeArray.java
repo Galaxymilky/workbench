@@ -872,9 +872,67 @@ public class LeetcodeArray {
      * logarithmic complexity is needed...
      */
     public int findPeakElement(int[] nums) {
+        //int peakIndex = -1;
+        if (nums.length == 0) {
+            return -1;
+        }
+        if (nums.length == 1) {
+            return 0;
+        }
+        if (nums.length == 2) {
+            if (nums[0] > nums[1]) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+        if (nums[0] > nums[1]) {
+            return 0;
+        }
+        if (nums[nums.length - 1] > nums[nums.length - 2]) {
+            return nums.length - 1;
+        }
+        for (int i = 1; i < nums.length - 1; i++) {
+            if (nums[i - 1] < nums[i] && nums[i] > nums[i + 1]) {
+                return i;
+            }
+            if (nums[i - 1] <= nums[i] && nums[i] > nums[i + 1]) {
+                return i;
+            }
+            if (nums[i - 1] < nums[i] && nums[i] >= nums[i + 1]) {
+                return i;
+            }
 
+        }
 
         return -1;
+    }
+
+    /**
+     * 120. Triangle
+     * <p>
+     * [ [2], [3,4], [6,5,7], [4,1,8,3] ]
+     * <p>
+     * Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
+     * For example, given the following triangle
+     */
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int res = 0;
+        int index = 0;
+        int maxBottom = 2 ^ (triangle.get(triangle.size() - 1).size() - 1);
+        while (index <= maxBottom) {
+            for (int i = triangle.size() - 1; i >= 0; i--) {
+                res = loopMt(index, i, res);
+                index++;
+            }
+        }
+        return res;
+    }
+
+    private int loopMt(int index, int height, int sum) {
+
+
+        return 0;
     }
 
     /**

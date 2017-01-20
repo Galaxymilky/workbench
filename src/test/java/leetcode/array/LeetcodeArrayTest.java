@@ -3,7 +3,9 @@ package leetcode.array;
 import org.junit.Test;
 import work.utils.FileUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by niu_ben on 2016/11/23.
@@ -11,6 +13,23 @@ import java.util.Arrays;
 public class LeetcodeArrayTest {
 
     LeetcodeArray lcArray = new LeetcodeArray();
+
+    @Test
+    public void testMain() {
+
+        StringBuffer sb1 = new StringBuffer();
+        sb1.append("hello");
+        StringBuffer sb2 = new StringBuffer();
+        sb2.append("hello");
+
+        System.out.println(sb1.equals(sb2));
+        System.out.println(sb1 == sb2);
+
+        System.out.println(sb1.toString().equals(sb2.toString()));
+        System.out.println(sb1.toString() == sb2.toString());
+
+    }
+
 
     @Test
     public void testMissingNumber() {
@@ -120,5 +139,33 @@ public class LeetcodeArrayTest {
         System.out.println(flag);
     }
 
+    @Test
+    public void findPeakElement() {
+        int[] nums = {1, 2, 3};
+        int x = lcArray.findPeakElement(nums);
+        System.out.println(x);
+    }
+
+    @Test
+    public void minimumTotal() {
+        List<List<Integer>> triangle = new ArrayList<>();
+        List<Integer> list1 = new ArrayList<>();
+        list1.add(-1);
+        List<Integer> list2 = new ArrayList<>();
+        list2.add(2);
+        list2.add(3);
+        List<Integer> list3 = new ArrayList<>();
+        list3.add(1);
+        list3.add(-1);
+        list3.add(-3);
+
+        triangle.add(list1);
+        triangle.add(list2);
+        triangle.add(list3);
+        //triangle.add(list4);
+        int res = lcArray.minimumTotal(triangle);
+        System.out.println(res);
+
+    }
 
 }

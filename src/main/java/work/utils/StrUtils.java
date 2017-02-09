@@ -13,6 +13,7 @@ public class StrUtils {
 
         System.out.println(Test2(str));
 
+
     }
 
     private static String Test2(String str) {
@@ -29,6 +30,19 @@ public class StrUtils {
 
     private static String Test1(String str) {
         return firstNoRepeatChar(str);
+    }
+
+    public static boolean isSymmetric(String str) {
+        int len = str.length();
+        if (len == 0 || len == 1) {
+            return true;
+        }
+
+        char a = str.charAt(0);
+        char b = str.charAt(len - 1);
+        boolean flag = (a == b) ? true : false;
+
+        return flag && isSymmetric(str.substring(1, len - 1));
     }
 
     /**
@@ -148,16 +162,16 @@ public class StrUtils {
             char key = str.charAt(i);
             Object valObj = hashMap.get(key);
             int val = 0;
-            if(valObj != null){
+            if (valObj != null) {
                 val = Integer.parseInt(String.valueOf(valObj));
             }
             hashMap.remove(key);
-            hashMap.put(key, val+1);
+            hashMap.put(key, val + 1);
         }
 
-        for(Object obj : hashMap.keySet()){
+        for (Object obj : hashMap.keySet()) {
             String x = String.valueOf(hashMap.get(obj));
-            if(Integer.parseInt(x) == 1){
+            if (Integer.parseInt(x) == 1) {
                 return String.valueOf(obj);
             }
         }
@@ -165,10 +179,7 @@ public class StrUtils {
     }
 
     public static boolean isNullOrEmpty(String s) {
-        if (s == null || s.length() <= 0) {
-            return true;
-        }
-        return false;
+        return (s == null || s.length() <= 0);
     }
 
     public static boolean isNullOrEmptyOrSpace(String s) {

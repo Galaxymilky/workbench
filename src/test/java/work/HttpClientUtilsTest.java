@@ -20,6 +20,12 @@ public class HttpClientUtilsTest {
         HttpClientUtils.getInstance().httpPost("http://172.18.116.162:8081/0128-2015-0001.pdf", params);
     }
 
+    @Test
+    public void testDownload(){
+        HttpClientUtils.getInstance().download("http://www.gamersky.com/showimage/id_gamersky.shtml?http://img1.gamersky.com/image2016/08/20160820_ls_141_7/gamersky_04origin_07_201682020333CA.jpg","");
+    }
+
+
     /**
      * 测试下载文件 异步下载
      */

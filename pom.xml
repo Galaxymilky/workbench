@@ -16,6 +16,7 @@
         <slf4j.version>1.7.21</slf4j.version>
         <junit.version>4.11</junit.version>
         <dom4j.version>1.6.1</dom4j.version>
+        <protostuff.version>1.0.8</protostuff.version>
     </properties>
 
     <dependencies>
@@ -91,12 +92,12 @@
         <dependency>
             <groupId>com.dyuproject.protostuff</groupId>
             <artifactId>protostuff-core</artifactId>
-            <version>1.0.8</version>
+            <version>${protostuff.version}</version>
         </dependency>
         <dependency>
             <groupId>com.dyuproject.protostuff</groupId>
             <artifactId>protostuff-runtime</artifactId>
-            <version>1.0.8</version>
+            <version>${protostuff.version}</version>
         </dependency>
 
         <!-- Servlet web相关依赖 -->

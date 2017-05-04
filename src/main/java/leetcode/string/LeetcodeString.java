@@ -53,7 +53,7 @@ public class LeetcodeString {
      * Input: "Hello, my name is John"  Output: 5
      */
     public int countSegments(String s) {
-        if("".equals(s.trim())){
+        if ("".equals(s.trim())) {
             return 0;
         }
         String[] array = s.trim().split("\\s+");
@@ -468,9 +468,47 @@ public class LeetcodeString {
      * 11 is read off as "two 1s" or 21.
      * 21 is read off as "one 2, then one 1" or 1211.
      * Given an integer n, generate the nth sequence.
-     * */
+     */
     public String countAndSay(int n) {
         return "";
+    }
+
+    /**
+     * @param s
+     * @param numRows
+     */
+    public String convert(String s, int numRows) {
+        if(numRows == 1){
+            return s;
+        }
+        String res = "";
+        int num = 2 * (numRows - 1);
+        int stage = 0;
+
+        for (int i = 0; i < numRows; i++) {
+            boolean flag = true;
+            if (i == 0 || i == numRows - 1) {
+                flag = false;
+            }
+            boolean flag1 = true;
+            int cur = i;
+            while (cur + stage < s.length()) {
+                cur += stage;
+                res += s.charAt(cur);
+                if (!flag) {
+                    stage = 2 * (numRows - 1);
+                } else {
+                    if (flag1) {
+                        stage = 2 * (numRows - i - 1);
+                    } else {
+                        stage = num - stage;
+                    }
+                    flag1 = !flag1;
+                }
+            }
+            stage = 0;
+        }
+        return res;
     }
 
     /**

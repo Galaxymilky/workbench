@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssmdemo.dao.AppUserDao">
+    <select id="queryByLoginName" resultType="AppUser">SELECT * FROM app_user WHERE loginname = #{loginName} limit 1</select>
+    <select id="queryAll" resultType="AppUser">SELECT * FROM app_user ORDER BY create_time DESC limit #{offset}, #{limit}</select>
+    <update id="updatePriority">UPDATE app_user SET priority = #{newPriority}</update>
+
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+</mapper>

@@ -1,0 +1,240 @@
+.menuBody,.listBody{background:url(images/bg.jpg) repeat-x top #2c8bc5; padding:7px }
+.menuDiv{border:1px solid #013775; border-bottom:0;width:217px; }
+.menuTop{background:url(images/menuTop.gif); width:217px; height:69px; margin-bottom:1px}
+.menuLink a{color:#000000; display:block; background:url(images/menuLinkLi.gif) 0 0 no-repeat #6eacf3;width:217px; height:32px; line-height:30px; text-indent:24px; border:1px solid #013775; font-size:14px; border-right:none; margin-top:-1px} 
+.menuLink a:hover{background:url(images/menuLinkLi.gif) 0 -60px no-repeat #d7e5f5; text-decoration:none; color:#000; }
+.menuLink2 a{ font-weight:bold;color:#000000; display:block; background:url(images/menuLinkLi.gif) 0 -30px no-repeat #d7e5f5;width:217px; height:32px; line-height:30px; text-indent:24px; border:1px solid #013775; font-size:14px; border-right:none; margin-top:-1px} 
+
+
+
+.listBody{ padding-left:2px;}
+.listTopBg{ background:url(images/listTopBg.gif); height:40px; width:100%; padding:10px; overflow:hidden}
+.listBottomBg{ background:url(images/listBottomBg.gif); height:34px; width:100%; padding:10px; overflow:hidden;}
+.listDiv{ border:1px solid #013775; width:100%;}
+.listBottomBg div{margin-top:-6px}
+.listBottomBg div font{font-weight:bold; margin:0 2px}
+
+.winOpen{overflow:hidden;background:url(images/bg.jpg) repeat-x top #2c8bc5;}
+.winOpen .listDiv{ margin:10px;}
+.winOpen .listTopBg{ font-size:14px;color:#000; font-weight:bold; font-family: Arial, Helvetica, sans-serif}
+.winOpen .listTopBg i{ display:block; width:10px; height:10px; line-height:10px; margin-top:5px; margin-right:10px; overflow:hidden;background:#000000; float:left}
+.winOpen .winOpenTable .listTable td{ padding:4px; vertical-align:top}
+.winOpenTable{padding:10px; width:100%; background:#EFF7FF; border-top:1px solid #CCCCCC}
+.winOpenTableList{overflow:auto; overflow-x:hidden; height:318px; background:#EFF7FF}
+.winOpen .height{ height:295px;}
+.winOpen .ok{ padding-left:10px; padding-right:10px}
+
+
+.listTable td{ padding-left:5px}
+.listTable tr td{}
+
+
+
+
+.winOpen .listBottomBg{padding-top:3px; background:url(images/listBottomBg.gif) 2px  repeat-x ; height:34px; }
+
+.listTable{background:#eff7ff;width:100%;}
+		.listTable thead td{ background:#d6ebf7; color:#000000; line-height:26px; border-bottom:1px solid #DCDCDC; border-top:1px solid #DCDCDC}
+		.listTable td{border-bottom:1px solid #DCDCDC; height:25px; color:#333}
+.winOpenBottom{ border-top:1px solid #000; text-align:center; padding:7px}		
+		
+		
+.formbg{ background:#EFF7FF}
+
+
+
+
+
+
+
+
+/*  个性化定义  */
+.winOpenTableList .list .tr1 td{border-bottom:1px solid #000; text-align:center}
+
+
+
+
+
+
+
+
+
+
+@charset "utf-8";
+*{padding:0;margin:0; font-family: Arial,;}
+html{height:100%}
+body,div,td,th{font-size:12px; line-height:150%;}
+body{ margin:0; padding:0;height:100%; overflow:auto;}
+a{color:#666; text-decoration:none}
+a:hover{color:#666; text-decoration:underline}
+a,img, a img{outline:0;}
+img{border:0}
+font{font-size:12px;}
+h5{font-size:10px}
+h5{font-size:12px}
+h4{font-size:14px}
+h3{font-size:16px}
+h2{font-size:18px}
+h1{font-size:20px}
+
+
+.fleft {float:left;}
+.fright {float:right;}
+.cleft{clear:left}
+.cright{clear:right}
+.cboth{clear:both}
+
+
+
+
+
+
+
+/*  弹出窗口的定义  */
+/*背景色去掉*/
+.openWin{height:100%; width:100%; overflow:hidden;position:relative}
+.openWin .top{ background:url(images/listTopBg.gif); height:40px; width:100%; padding:10px; overflow:hidden}
+.openWin .top font{font-size:14px;color:#000; font-weight:bold; font-family: Arial, Helvetica, sans-serif}
+.openWin .top i{  display:block; width:10px; height:10px; line-height:10px; margin-top:5px; margin-right:10px; overflow:hidden;background:#000000; float:left}
+/*  按钮样式一 */
+.openWin .bottom{height:44px; border-top:1px solid #003473; border-bottom:5px solid #5394EF; text-align:center; background:#6BAEF7;position:absolute; bottom:0; width:100%; padding-top:8px}
+.openWin .bottom input,.openWin .bottom a{cursor:pointer;border:1px solid #A5CBE7; font-size:12px;line-height:16px; height:22px; padding:2px 2px 0 2px;margin:0 3px -1px 0;border-bottom:#000 solid 1px;border-right:#000 solid 1px;background:#003063;color:#FFFFFF; }
+.openWin .bottom a{padding:4px 7px; padding-bottom:2px; line-height: normal; height: auto;}
+.openWin .bottom a:active{color:#00CC00}
+.openWin .bottom a:hover{background:#00309A;color:#FFFFFF}
+/*  按钮样式二
+.openWin .bottom{height:53px; border-top:1px solid #D0D0D0; text-align:center; background:#E8F3FD;position:absolute; bottom:0; width:100%;}
+.openWin .bottom input{ margin:10px;background: url(../images/bt1.gif) 0 0; width:69px;height:28px;line-height:28px; border:none; cursor:pointer;}
+.openWin .bottom a{background-image: url(../images/bt1.gif);display:-moz-inline-box !important;display: inline-block;-moz-box-align:center !important;-moz-box-pack:center !important;text-align:center; color:#000000; text-decoration:none; font-size:12px;background-position:0 0; width:69px;height:28px;line-height:28px; margin:10px;}
+.openWin .bottom a:hover{background-position:0 -28px; color: #FF3300;}  */
+/*背景色去掉*/
+.openWin .main{ width:100%;}
+/*  弹出窗口的表格为表单的定义  */
+/*背景色去掉*/
+.openWin table.form{background:#eff7ff;border-collapse:collapse; border-spacing: 0px; border-cellpadding:0px;border:10px solid #EFF7FF; width:100%}
+.openWin table.form thead td{ background:#d6ebf7; color:#000000; line-height:26px; border-bottom:1px solid #DCDCDC; border-top:1px solid #DCDCDC}
+.openWin table.form td{border-bottom:1px solid #DCDCDC; height:25px; color:#333; vertical-align:top;  padding:6px; padding-top:0}
+/*  弹出窗口的表格为列表的定义  */
+.openWin table.list{background:#eff7ff;width:100%;border-collapse:collapse; border-spacing: 0px; border-cellpadding:0px;border:0px;}
+.openWin table.list thead td{ background:#d6ebf7; color:#000000; line-height:26px; border-bottom:1px solid #DCDCDC; border-top:1px solid #DCDCDC}
+.openWin table.list td{border-bottom:1px solid #DCDCDC; height:25px; line-height:25px; color:#333;padding-left:3px; vertical-align:top}
+
+.openWin table.form td input.max,table.form td textarea{ width:100%}
+
+
+.openWin table.form td.title{ width:100px; padding-top:4px}
+.openWin table.form td{padding-right:5px;}
+.openWin table.form td span.must{ position:absolute; font-size:12px; margin-left:3px; margin-top:4px; color:#FF0000; }
+
+.openWin table.form td select{margin-bottom:-3px; margin-top:3px}
+
+.openWin table.form td input,
+.openWin table.form td textarea,{ padding:2px; height:22px; margin-bottom:-3px; margin-top:3px}
+
+.openWin table.form td textarea{height:60px}
+
+.openWin table.form td .wenz1i{ display:inline-block;  margin-bottom:3px; margin-right:1px; margin-left:-2px}
+
+
+
+
+
+#scrollDiv{overflow:auto; border:1px solid #000000; border-left:none; border-right: none; height:154px}
+#scrollDiv table.list thead td{ border-top:none}
+#scrollDiv table.list thead tr{ top:expression(document.getElementById('scrollDiv').scrollTop); position:relative;}
+
+
+
+
+/*  弹出窗口的定义  */
+
+.normalWin{ width:100%; background:#EFF7FF; border:1px solid #000000}
+.normalWin .top{ background:url(images/listTopBg.gif); height:40px; width:100%; padding:10px; overflow:hidden}
+.normalWin .top font{font-size:14px;color:#000; font-weight:bold; font-family: Arial, Helvetica, sans-serif}
+.normalWin .top i{  display:block; width:10px; height:10px; line-height:10px; margin-top:5px; margin-right:10px; overflow:hidden;background:#000000; float:left}
+/*  按钮样式一 */
+.normalWin .bottom{height:44px; border-top:1px solid #003473; border-bottom:5px solid #5394EF; text-align:center; background:#6BAEF7; bottom:0; width:100%; padding-top:8px}
+.normalWin .bottom input,.normalWin .bottom a{cursor:pointer;border:1px solid #A5CBE7; font-size:12px;line-height:16px; height:22px; padding:2px 2px 0 2px;margin:0 3px -1px 0;border-bottom:#000 solid 1px;border-right:#000 solid 1px;background:#003063;color:#FFFFFF; }
+.normalWin .bottom a{padding:4px 7px; padding-bottom:2px; line-height: normal; height: auto;}
+.normalWin .bottom a:active{color:#00CC00}
+.normalWin .bottom a:hover{background:#00309A;color:#FFFFFF}
+.normalWin .top input,.normalWin .top a{cursor:pointer;border:1px solid #A5CBE7; font-size:12px;line-height:16px; height:22px; padding:2px 2px 0 2px;margin:0 3px -1px 0;border-bottom:#000 solid 1px;border-right:#000 solid 1px;background:#003063;color:#FFFFFF; }
+.normalWin .top a{padding:4px 7px; padding-bottom:2px; line-height: normal; height: auto;}
+.normalWin .top a:active{color:#00CC00}
+.normalWin .top a:hover{background:#00309A;color:#FFFFFF}
+/*  按钮样式二
+.normalWin .bottom{height:53px; border-top:1px solid #D0D0D0; text-align:center; background:#E8F3FD;position:absolute; bottom:0; width:100%;}
+.normalWin .bottom input{ margin:10px;background: url(../images/bt1.gif) 0 0; width:69px;height:28px;line-height:28px; border:none; cursor:pointer;}
+.normalWin .bottom a{background-image: url(../images/bt1.gif);display:-moz-inline-box !important;display: inline-block;-moz-box-align:center !important;-moz-box-pack:center !important;text-align:center; color:#000000; text-decoration:none; font-size:12px;background-position:0 0; width:69px;height:28px;line-height:28px; margin:10px;}
+.normalWin .bottom a:hover{background-position:0 -28px; color: #FF3300;}  */
+
+.normalWin .main{ width:100%; background:#EFF7FF;}
+/*  弹出窗口的表格为表单的定义  */
+.normalWin table.form{background:#eff7ff;border-collapse:collapse; border-spacing: 0px; border-cellpadding:0px;border:0px; margin:10px;}
+.normalWin table.form thead td{ background:#d6ebf7; color:#000000; line-height:26px; border-bottom:1px solid #DCDCDC; border-top:1px solid #DCDCDC}
+.normalWin table.form td{border-bottom:1px solid #DCDCDC; height:25px; color:#333; vertical-align:top;  padding:6px; padding-top:0}
+/*  弹出窗口的表格为列表的定义  */
+.normalWin table.list{background:#eff7ff;width:100%;border-collapse:collapse; border-spacing: 0px; border-cellpadding:0px;border:0px;}
+.normalWin table.list thead td{ background:#d6ebf7; color:#000000; line-height:26px; border-bottom:1px solid #DCDCDC; border-top:1px solid #DCDCDC}
+.normalWin table.list td{border-bottom:1px solid #DCDCDC; height:25px; line-height:25px; color:#333;padding-left:3px; vertical-align:top}
+
+.normalWin table.form td input.max,table.form td textarea{ width:100%}
+
+.normalWin table.form td.title{ width:100px}
+.normalWin table.form td{padding-right:5px}
+.normalWin table.form td span.must{ position:absolute; margin-left:3px; margin-top:4px; color:#FF0000; font-size:14px}
+
+
+
+.normalWin .page{ text-align:right}
+.normalWin .page a{color:; margin:0 3px; }
+.normalWin .page input{ width:24px; height:21px; border:1px solid  #006699; border-top:#333 solid 1px; border-left:#333 solid 1px; margin-bottom:-2px; color:#000000; background:#FFFFFF; margin-left:5px}
+	.page span{ color:red; font-weight:bold; margin:0 2px}	 
+		 
+		 
+.page a.go{border:1px solid #000000; background:#4A4D4A; font-size:9px; padding:3px 4px; padding-top:4px;color:#FFFFFF;border-top:1px solid #A5A2A5;border-left:1px solid #A5A2A5; margin-bottom:-5px; margin-right:13px}
+.page .go{border:1px solid #000000; background:#4A4D4A; font-size:9px; padding:1px 4px; width:24px; height:18px; cursor:pointer; color:#FFFFFF;border-top:1px solid #A5A2A5;border-left:1px solid #A5A2A5; margin-left:3px;}
+.page a.go:hover{ background:#666666;}
+.page a.go:active{color:#6c0}
+
+
+.top_1{text-align:right; margin-top:-34px; margin-bottom:10px; padding-right:5px}
+
+.top_1 a{cursor:pointer;border:1px solid #A5CBE7; font-size:12px;line-height:16px; height:22px; padding:2px 2px 0 2px;margin:0 3px -1px 0;border-bottom:#000 solid 1px;border-right:#000 solid 1px;background:#003063;color:#FFFFFF; padding:4px 7px; padding-bottom:2px; line-height: normal; height: auto;}
+.top_1 a:active{color:#00CC00}
+.top_1 a:hover{background:#00309A;color:#FFFFFF}
+
+/*  箭头的定义  */
+.arrowLeft,.arrowRight,.arrowAllLeft,.arrowAllRight,.arrowTop,.arrowBottom,.arrowMaxTop,.arrowMaxBottom{background-image:url(images/arrow.gif); background-repeat:no-repeat; display:-moz-inline-box !important;display: inline-block;-moz-box-align:center !important;-moz-box-pack:center !important; margin:2px 0;}
+.arrowLeft{background-position:0 0px;width:25px; height:25px;}
+.arrowAllLeft{background-position:0 -175px;width:25px; height:25px;}
+.arrowRight{background-position:0 -25px;width:25px; height:25px;}
+.arrowAllRight{background-position:0 -150px;width:25px; height:25px;}
+.arrowMaxBottom{background-position:0 -50px;width:25px; height:25px;}
+.arrowBottom{background-position:0 -75px;width:25px; height:25px;}
+.arrowMaxBottom{background-position:0 -50px;width:25px; height:25px;}
+.arrowTop{background-position:0 -100px;width:25px; height:25px;}
+.arrowMaxTop{background-position:0 -125px;width:25px; height:25px;}
+
+
+
+.form_1{ text-align:center}
+.form_1 table.form  td{ border:none}
+
+.form_1 table.form { width: auto}
+
+.form_1 .form_div1{overflow: auto; height:100%; width:200px; border:2px inset; background:#fff; margin-top:2px}
+
+
+
+
+
+
+a.tab3:hover{ color:#A3D0FF;}
+.tab3{border:1px solid #013775; background:#A3D0FF; margin-left:4px; float:left; margin-bottom:-6px; padding:0px 10px; font-weight:normal; color:#A3D0FF; margin-top:26px; font-size:12px; cursor:default; height:1px; line-height:1px}
+
+
+
+
+.resourceBody_jsp-top{height:397px}
+.assetFrame_jsp-List{width:100%;height:303px}

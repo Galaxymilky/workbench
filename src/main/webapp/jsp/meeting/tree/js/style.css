@@ -1,0 +1,399 @@
+@import url(frame.css); 
+@import url(frameset.css); 
+
+
+*{padding:0;margin:0; font-family: "榛戜綋",Arial;}
+html{height:100%}
+body,div,td,th{font-size:12px; line-height:150%;}
+body{ margin:0; padding:0;height:100%; overflow:auto;background-color:transparent}
+a{color:#666; text-decoration:none}
+a:hover{color:#666; text-decoration:underline}
+a,img, a img{outline:0;}
+img{border:0}
+font{font-size:12px;}
+h5{font-size:10px}
+h5{font-size:12px}
+h4{font-size:14px}
+h3{font-size:16px;}
+h2{font-size:18px}
+h1{font-size:20px}
+
+
+.fleft {float:left;}
+.fright {float:right;}
+.cleft{clear:left}
+.cright{clear:right}
+.cboth{clear:both}
+
+
+
+
+
+
+.iframe1{border:0;width:100%;height:100%;margin:0;padding:0; overflow: auto; height:100%;  border:2px inset; background:#fff; margin-top:2px}
+
+/*  瀵懓鍤粣妤�經閻ㄥ嫬鐣炬稊锟�*/
+.openWin .main{ height:100%;}
+.openWin{height:100%; width:100%; overflow:hidden;position:relative;}
+.openWin .top,
+.normalWin .top
+{ height:30px;_height:40px; padding-top:10px; padding-left:10px; overflow:hidden}
+
+.openWin .bottom
+{position:absolute; width:100%}
+
+.openWin .bottom,
+.normalWin .bottom
+{bottom:0;text-align:center}
+
+.openWin .top font{font-size:14px;color:#000; font-weight:bold; font-family: Arial, Helvetica, sans-serif}
+.openWin .top i{  display:block; width:10px; height:10px; line-height:10px; margin-top:5px; margin-right:10px; overflow:hidden;background:#000000; float:left}
+
+
+
+/*  閹稿鎸�*/
+.openWin .bottom_middle{position: relative; height:35px; padding-top:4px}
+.openWin .bottom input,
+.openWin .bottom a,
+.openWin .top input,
+.openWin .top a,
+.normalWin .top input,
+.normalWin .bottom input,
+.normalWin .bottom a,
+.normalWin .top a,
+.button
+{cursor:pointer;font-size:12px;height:22px;}
+
+.openWin .bottom a:active{color:#00CC00}
+.normalWin .bottom a:active{color:#00CC00}
+.normalWin .top a:active,
+.openWin .top a:active
+{color:#00CC00}
+
+
+
+
+.normalWin .main,
+.openWin .main{width:100%; }
+.normalWin .main_one select{ margin-bottom:25px}
+.main_one select{ width:80%; }
+.main_one textarea{ width:80%; }
+.main_one { text-align:center;padding-top:25px}
+
+.openWin_maxMain{padding-bottom:87px}
+.openWin_maxMain_bottom{padding-bottom:39px}
+.openWin_maxMain2{padding-bottom:40px;}
+.openWin_maxMain5{padding-bottom:44px;}
+.openWin_maxMain3{padding-bottom:0px;}
+.openWin_maxMain_top_2{padding-bottom:70px;}
+.openWin_maxMain6{padding-bottom:84px;}
+.openWin_maxMain7{padding-bottom:117px;}
+
+.openWin_maxMain4 .maxMain,
+.openWin_maxMain3 .maxMain,
+.openWin_maxMain2 .maxMain
+{padding:0; height:100%; }
+.openWin_maxMain .maxMain{padding:10px; height:100%}
+
+
+
+.openWin_maxMain4 .maxMainScroll,
+.openWin_maxMain3 .maxMainScroll,
+.openWin_maxMain2 .maxMainScroll,
+.openWin_maxMain .maxMainScroll
+{width:100%; height:100%; border:0px; overflow:auto;}
+/*  閺堬拷銇囬崠鏉乮v 閺堝绮撮崝銊︽蒋 閺堝绔熷锟介惂鍊熷鎼达拷*/
+.openWin_maxMain4 .maxMainScroll_Class1,
+.openWin_maxMain3 .maxMainScroll_Class1,
+.openWin_maxMain2 .maxMainScroll_Class1,
+.openWin_maxMain .maxMainScroll_Class1
+{overflow:auto; width:100%; height:100%; border:1px solid #ccc; background:#fff; padding:8px}
+
+
+
+			
+
+.openWin .maxMain_bottom{padding-bottom:44px}
+
+
+
+/*  瀵懓鍤粣妤�經閻ㄥ嫯銆冮弽闂磋礋閸掓銆冮惃鍕暰娑旓拷 */
+.openWin table.list{background:#eff7ff;width:100%;border-collapse:collapse; border-spacing: 0px; border-cellpadding:0px;border:0px;}
+.openWin table.list td{border-bottom:1px solid #DCDCDC; height:25px; line-height:25px; color:#333;padding-left:3px; vertical-align:top}
+input.date{width:73px; line-height:14px}
+.scrollDiv{overflow:auto; border-left:none; border-right: none; height:100%; }
+.scrollDiv table.list thead td{ border-top:none;   background-image:url(images/dian.gif);background-repeat:repeat-x; background-position:bottom; line-height:25px; height:27px}
+.scrollDiv table.list thead tr{ position:relative;}
+#scrollDiv table.list thead tr{ top:expression(document.getElementById('scrollDiv').scrollTop);}
+
+
+
+
+/*  瀵懓鍤粣妤�經閻ㄥ嫬鐣炬稊锟�*/
+
+.normalWin{ width:100%;  border:1px solid #000000;}
+.normalWin .top font{font-size:14px;color:#000; font-weight:bold; font-family: Arial, Helvetica, sans-serif}
+.normalWin .top i{  display:block; width:10px; height:10px; line-height:10px; margin-top:5px; margin-right:10px; overflow:hidden;background:#000000; float:left}
+
+.main_tr1 tr{background-color:expression((this.rowIndex%2==0)?"#EFF7FF":"#F8FCFF");ryo:expression(onmouseover=function(){this.style.backgroundColor='#FFFFBE'},onmouseout=function(){this.style.backgroundColor=(this.style.backgroundColor='#CCFFFF'?((this.rowIndex%2==0)?"#EFF7FF":"#F8FCFF"):'#CCFFFF')},onclick=function(){this.style.backgroundColor='#CCFFFF'})
+}
+
+.main_tr2 tr{background-color:expression((this.rowIndex%2==0)?"#EFF7FF":"#F3FAFF");)}
+
+
+
+
+/*  瀵懓鍤粣妤�經閻ㄥ嫯銆冮弽闂磋礋鐞涖劌宕熼惃鍕暰娑旓拷 */
+.normalWin table.form{background:#eff7ff;border-collapse:collapse; border-spacing: 0px; border-cellpadding:0px;border:0px; margin:10px;}
+
+/*  鐞涖劍鐗搁惃鍕暰娑旓拷 */
+/*  閻楄鐣╃悰銊︾壐閻ㄥ嫬鐣炬稊锟�*/
+.openWin table.form,
+.normalWin table.form{border:10px solid #EFF7FF;background:#eff7ff;}
+/*  閻楄鐣╃悰銊︾壐閻ㄥ嫬鐣炬稊锟絜nd  */
+
+table.list thead td,
+table.form thead td{background:#d6ebf7; color:#000000; line-height:26px; border-bottom:1px solid #DCDCDC; border-top:1px solid #DCDCDC}
+table.list thead.thead1 td,
+table.form thead.thead1 td{background:#add1eb;}
+
+
+table.list{width:100%;border-collapse:collapse; border-spacing: 0px; border-cellpadding:0px;border:0px;}
+
+table.form{border-collapse:collapse; border-spacing: 0px; border-cellpadding:0px; width:100%}
+table.form td{border-bottom:1px solid #DCDCDC; height:30px; color:#333; vertical-align:top; line-height:30px;padding-right:5px;}
+table.form td.title{width:110px; text-indent:9px}
+table.form td span.must{ position:absolute; margin-left:3px; margin-top:4px; color:#FF0000; font-size:12px}
+table.form td span.help{ color:#06C}
+table.form td select{margin-bottom:-3px; margin-top:3px}
+table.form td input,
+table.form td textarea{padding:2px; height:22px; margin-bottom:-3px; margin-top:3px; font-size:12px}
+table.form td textarea{height:60px; width:100%; margin-bottom:2px; }
+table.form td select.max,
+table.form td input.max{width:100%}
+table.form td select.max50,
+table.form td input.max50{width:50%}
+
+
+/*  鐞涖劍鐗搁惃鍕暰娑旓拷end  */
+ 
+table.list td{border-bottom:1px solid #DCDCDC; height:25px; line-height:25px; color:#333;padding-left:3px; vertical-align:top}
+table.list tr.odd{ background:#EFF7FF;}
+table.list tr.even{background:#F8FCFF}
+table.list tr.sele{ background:#7AE2FF;}
+/* 閺佺増宓侀崚妤勩�  */
+.list_li  td i{ margin-top:3px}
+.list_li  td{ text-align:center}
+.list_li{table-layout:fixed;}
+td.list_li_left{overflow:hidden;white-space:nowrap;text-overflow:ellipsis; text-align:left}
+
+
+.mainCenter { text-align:center}
+.mainCenter .form{ width:auto}
+.mainCenter .form td.title{ text-align:right; width:auto}
+
+
+/*  娑撳秵宕茬悰宀�畱閺嶅嘲绱＄�姘疅  */
+.openWin .nowrapList{ margin-bottom:44px; height:auto}
+
+.normalWin .nowrapList,
+.openWin .nowrapList
+{overflow:auto; overflow-y:hidden; padding-bottom:15px; }
+.normalWin .nowrapList .list,
+.openWin .nowrapList .list
+{ float:left}
+.normalWin .nowrapList .list td,
+.openWin .nowrapList .list td
+{ white-space: nowrap; padding-left:8px; padding-right:8px}
+.normalWin table.form{ width:96%}
+.normalWin .nowrapList2,
+.openWin .nowrapList2{overflow-y:auto; padding-bottom:0px; height:100% }
+
+input.max{word-break :break-all}
+
+
+
+
+
+.normalWin .bottom_1
+{height:35px; padding-top:3px;border-bottom:none}
+
+.openWin .bottom_1{ margin-bottom:44px;height:35px; padding-top:3px;border-bottom:none}
+
+
+
+/*  缂堝銆夐幐澶愭尦  */
+.openWin .page,
+.normalWin .page
+{text-align:right;padding-right:7px; }
+
+
+.openWin input.text ,
+.normalWin input.text 
+{ width:24px; height:21px; border:1px solid  #006699; border-top:#333 solid 1px; border-left:#333 solid 1px; margin-bottom:-2px; color:#000000; background:#FFFFFF; margin-left:5px}
+.openWin .page span,
+.normalWin .page span
+{ color:red; font-weight:bold; margin:0 2px}	 
+.openWin .page a.disabled,
+.normalWin .page a.disabled
+{color:#6E87AA; cursor:default;}	 
+.openWin .page a.disabled:hover,
+.normalWin .page a.disabled:hover
+{color:#6E87AA; background:#003063; text-decoration:none}	 
+
+
+
+/*  閹兼粎鍌ㄩ惃锟�*/
+
+
+.normalWin .top_1{text-align:right; margin-top:-35px; padding-bottom:0px;_padding-bottom:10px; padding-right:5px;  border-bottom:1px solid #000}
+
+
+.normalWin .top_1 { line-height:33px;}
+.normalWin .top_1 a{cursor:pointer;border:1px solid #A5CBE7; font-size:12px;line-height:16px; height:22px; padding:2px 2px 0 2px;margin:0 3px -1px 0;border-bottom:#000 solid 1px;border-right:#000 solid 1px;background:#003063;color:#FFFFFF; padding:4px 7px; padding-bottom:2px; line-height: normal; height: auto;}
+.normalWin .top_1 a:active{color:#00CC00}
+.normalWin .top_1 a:hover{background:#00309A;color:#FFFFFF}
+
+
+.openWin .top_1{text-align:right; margin-top:-32px; padding-bottom:10px;  padding-right:5px;  border-bottom:1px solid #000}
+.openWin .top_1 .button,
+.normalWin .top_1 .button
+{ margin-bottom:-3px}
+.button
+{cursor:pointer;font-size:12px;height:22px;}
+a.button
+{padding:4px 7px; padding-bottom:2px; line-height: normal; height: auto; }
+a.button:active,
+{color:#00CC00}
+a.button:hover{background:#EFFAFF; text-decoration:none}
+
+
+.openWin input,.openWin select{ margin-bottom:-3px}
+.normalWin input,.normalWin select{ margin-bottom:-3px; margin-top:3px}
+
+.normalWin input[type=checkbox] { margin-bottom:-19px; margin-left:4px}
+.openWin input[type=checkbox] { width:10px; height:10px; margin-bottom:-19px;margin-left:4px }
+ 
+.openWin .top_1 { line-height:33px;}
+.openWin .top_1 a{cursor:pointer;border:1px solid #A5CBE7; font-size:12px;line-height:16px; height:22px; padding:2px 2px 0 2px;margin:0 3px -1px 0;border-bottom:#000 solid 1px;border-right:#000 solid 1px;background:#003063;color:#FFFFFF; padding:4px 7px; padding-bottom:2px; line-height: normal; height: auto;}
+.openWin .top_1 a:active{color:#00CC00}
+.openWin .top_1 a:hover{background:#00309A;color:#FFFFFF}
+
+
+/*  2鐏炲倹瀵滈柦锟�*/
+.normalWin .top_2,
+.openWin .top_2
+{height:24px;_height:33px; padding:5px; float:left; width:100%; }
+
+.normalWin .top_2 input.text,
+.openWin .top_2 input.text
+{ background:#fff; color:#000; cursor:auto; border:1px inset; margin-bottom:-3px; width:100px}
+
+
+
+
+
+/*  缁狀厼銇旈惃鍕暰娑旓拷 */
+a.arrowLeft,a.arrowRight,a.arrowAllLeft,a.arrowAllRight,a.arrowTop,a.arrowBottom,a.arrowMaxTop,a.arrowMaxBottom{background-image:url(arrow.gif); background-repeat:no-repeat; display:-moz-inline-box !important;display: inline-block;-moz-box-align:center !important;-moz-box-pack:center !important; margin:2px 0;}
+a.arrowLeft{background-position:0 0px;width:25px; height:25px;}
+a.arrowLeft:hover{background-position:-25px 0px;}
+a.arrowAllLeft{background-position:0 -175px;width:25px; height:25px;}
+a.arrowAllLeft:hover{background-position:-25px -175px;}
+a.arrowRight{background-position:0 -25px;width:25px; height:25px;}
+a.arrowRight:hover{background-position:-25px -25px;}
+a.arrowAllRight{background-position:0 -150px;width:25px; height:25px;}
+a.arrowAllRight:hover{background-position:-25px -150px;}
+a.arrowMaxBottom{background-position:0 -50px;width:25px; height:25px;}
+a.arrowMaxBottom:hover{background-position:-25px -50px;}
+a.arrowBottom{background-position:0 -75px;width:25px; height:25px;}
+a.arrowBottom:hover{background-position:-25px -75px;}
+a.arrowMaxBottom{background-position:0 -50px;width:25px; height:25px;}
+a.arrowMaxBottom:hover{background-position:-25px -50px;}
+a.arrowTop{background-position:0 -100px;width:25px; height:25px;}
+a.arrowTop:hover{background-position:-25px -100px;}
+a.arrowMaxTop{background-position:0 -125px;width:25px; height:25px;}
+a.arrowMaxTop:hover{background-position:-25px -125px;}
+
+input.arrowAllLeft,
+input.arrowLeft,
+input.arrowAllRight,
+input.arrowRight,
+input.arrowMaxTop,
+input.arrowTop,
+input.arrowBottom,
+input.arrowMaxBottom
+{background-color:transparent;border:none;cursor:pointer }
+
+.form_1{ text-align:center}
+.form_1 table { margin:0 auto}
+.form_1 table td{ border:none}
+
+.form_1 table.form {width: auto}
+
+.form_1 .form_div1{overflow:auto; height:100%;   border:2px inset; background:#fff; margin-top:2px}
+.form_1 .form_div1 td{margin:0; padding:0}
+
+
+.form_1 table.form select{ float:left}
+
+
+
+/* -------------------------------------------
+ 閸ョ偓鐖�
+ ------------------------------------------- */
+.linkDay,
+.linkWeek, 
+.linkMoon, 
+.linkYear, 
+.linkDay_2, 
+.linkWeek_2, 
+.linkMoon_2, 
+.linkYear_2 
+{ border:1px solid #5394EF; padding:2px; background:#DCF6FF; display:-moz-inline-box !important;display: inline-block;-moz-box-align:center !important;-moz-box-pack:center !important; }
+
+
+.linkDay i,
+.linkWeek i,
+.linkMoon i,
+.linkYear i,
+.linkDay_2 i,
+.linkWeek_2 i,
+.linkMoon_2 i,
+.linkYear_2 i
+{background-image:url(images/ico4.gif); background-repeat:no-repeat; display:-moz-inline-box !important;display: inline-block;-moz-box-align:center !important;-moz-box-pack:center !important;  margin-right:4px}
+
+.linkDay i{background-position: 0 -68px;width:14px; height:16px;}
+.linkWeek i{background-position: -14px -68px;width:14px; height:16px;}
+.linkMoon i{background-position: -28px -68px;width:14px; height:16px;}
+.linkYear i{background-position: -42px -68px;width:15px; height:16px;}
+.linkDay_2 i{background-position: 0 -88px;width:14px; height:16px;}
+.linkWeek_2 i{background-position: -14px -88px;width:14px; height:16px;}
+.linkMoon_2 i{background-position: -28px -88px;width:14px; height:16px;}
+.linkYear_2 i{background-position: -42px -88px;width:15px; height:16px;}
+
+
+
+i.date{background-image:url(images/date.gif); background-repeat:no-repeat; display:-moz-inline-box !important;display: inline-block;-moz-box-align:center !important;-moz-box-pack:center !important; width:16px; height:16px; margin:0 3px; margin-right:7px; cursor:pointer}
+
+.normalWin_td{height:1px; overflow:visible}
+.normalWin_td .normalWin{ border:none}
+
+
+.top a.disabled{ color:#999; cursor:default; background:#eaeef0}
+.top a.disabled:hover{ color:#999; text-decoration:none; background:#eaeef0}
+a.disabled{ color:#999; cursor:default; background:#eaeef0}
+a.disabled:hover{ color:#999; text-decoration:none; background:#eaeef0}
+
+.menuDiv a.shu_2ji{border-top:0; font-size:12px; font-weight: normal; padding-left:12px;padding-top:4px}
+
+.font_14{font-size:12px;}
+@import url(bg.css); 
+@import url(ico.css); 
+
+/*  娑擃亝锟介崠鏍у棘閺侊拷濞Ｂゆ憫  */
+@import url(gxh_danlan.css);
+
+
+/*  娑擃亝锟介崠鏍у棘閺侊拷濞ｈ精鎽�
+@import url("gxh_shenlan.css");
+ */  

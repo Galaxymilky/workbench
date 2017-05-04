@@ -105,10 +105,14 @@
 
 #### 一对一、一对多关联查询，有哪些实现方式，区别
 答：多对一 == 一对一，selectList 改为 selectOne；
-    多对多 == 一对多，
+    多对多 == 一对多，selectOne 改为 selectlist；
+    关联查询方式一：单独发送一个sql去查询关联对象；
+    关联查询方式二：嵌套查询，使用join查询；
 
-####
-答：
+#### MyBatis 是否支持延迟加载，原理是什么？
+答：仅支持 association 关联对象和 collection 关联集合对象的延迟加载，association 指的一对一，collection 指的是一对多；
+    可以配置是否启用延迟加载：lazyLoadingEnable=true|false；
+    原理：使用 CGLIB 创建目标对象的代理对象，当调用目标方法时，进入拦截器方法，
 
 ####
 答：

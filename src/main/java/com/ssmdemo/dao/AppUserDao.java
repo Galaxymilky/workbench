@@ -2,13 +2,28 @@ package com.ssmdemo.dao;
 
 import com.ssmdemo.entity.AppUser;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by dynam on 2017/4/30.
  */
+
 public interface AppUserDao {
+
+    /**
+     * 增加新对象
+     *
+     * @param userName
+     * @param loginName
+     * @param userPhone
+     * @param priority
+     * @return
+     */
+    int insertUser(@Param("userName") String userName, @Param("loginName") String loginName,
+                   @Param("userPhone") long userPhone, @Param("priority") int priority);
+
     /**
      * 根据登陆名查询用户对象
      *
@@ -27,7 +42,27 @@ public interface AppUserDao {
     List<AppUser> queryAll(@Param("offset") int offset, @Param("limit") int limit);
 
     /**
+     * 获取用户总数
+     *
+     * */
+    int queryTotalCount();
+
+    /**
      * 更新优先级
+     *
+     * @param newPriority
      */
     void updatePriority(@Param("newPriority") int newPriority);
+
+    /**
+     * 列表页面检索
+     *
+     * @param offset
+     * @param limit
+     * @param priority
+     * @return
+     */
+    List<AppUser> queryRetrieval(@Param("offset") int offset, @Param("limit") int limit,
+                                 @Param("priority") String priority, @Param("userName") String userName,
+                                 @Param("userPhone") String userPhone);
 }

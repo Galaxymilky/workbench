@@ -5,97 +5,112 @@ import java.util.List;
 
 public class DataPager {
 
-	private int pageIndex;
-	private int pageSize;
-	private int draw;
-	private int recordsTotal;
-	private int recordsFiltered;
-	private String sort;
-	private String order;
-	private List<?> data;
-	private String searchVal;
-	
-	public int getPageIndex() {
-		return pageIndex;
-	}
+    private int pageIndex;
+    private int pageSize;
+    private int draw;
+    private int recordsTotal;
+    private int recordsFiltered;
+    private String sort;
+    private String order;
+    private List<?> data;
+    private String searchVal;
 
-	public void setPageIndex(int pageIndex) {
-		this.pageIndex = pageIndex;
-	}
+    public int getPageIndex() {
+        return pageIndex;
+    }
 
-	public int getPageSize() {
-		return pageSize;
-	}
+    public void setPageIndex(int pageIndex) {
+        this.pageIndex = pageIndex;
+    }
 
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
+    public int getPageSize() {
+        return pageSize;
+    }
 
-	public int getDraw() {
-		return draw;
-	}
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
 
-	public void setDraw(int draw) {
-		this.draw = draw;
-	}
+    public int getDraw() {
+        return draw;
+    }
 
-	public int getRecordsTotal() {
-		return recordsTotal;
-	}
+    public void setDraw(int draw) {
+        this.draw = draw;
+    }
 
-	public void setRecordsTotal(int recordsTotal) {
-		this.recordsTotal = recordsTotal;
-	}
+    public int getRecordsTotal() {
+        return recordsTotal;
+    }
 
-	public int getRecordsFiltered() {
-		return recordsFiltered;
-	}
+    public void setRecordsTotal(int recordsTotal) {
+        this.recordsTotal = recordsTotal;
+    }
 
-	public void setRecordsFiltered(int recordsFiltered) {
-		this.recordsFiltered = recordsFiltered;
-	}
+    public int getRecordsFiltered() {
+        return recordsFiltered;
+    }
 
-	public String getSort() {
-		return sort;
-	}
+    public void setRecordsFiltered(int recordsFiltered) {
+        this.recordsFiltered = recordsFiltered;
+    }
 
-	public void setSort(String sort) {
-		this.sort = sort;
-	}
+    public String getSort() {
+        return sort;
+    }
 
-	public String getOrder() {
-		return order;
-	}
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
 
-	public void setOrder(String order) {
-		this.order = order;
-	}
+    public String getOrder() {
+        return order;
+    }
 
-	public List<?> getData() {
-		return data;
-	}
+    public void setOrder(String order) {
+        this.order = order;
+    }
 
-	public void setData(List<?> data) {
-		this.data = data;
-	}
-	
-	public String getSearchVal() {
-		return searchVal;
-	}
+    public List<?> getData() {
+        return data;
+    }
 
-	public void setSearchVal(String searchVal) {
-		this.searchVal = searchVal;
-	}
+    public void setData(List<?> data) {
+        this.data = data;
+    }
 
-	public void init(HttpServletRequest request){
-		int start = Integer.parseInt(request.getParameter("start"));
-		int length = Integer.parseInt(request.getParameter("length"));
-		this.setPageIndex(start/length + 1);
-		this.setPageSize(Integer.parseInt(request.getParameter("length")));
-		this.setDraw(Integer.parseInt(request.getParameter("draw")));
-		int sortindex = Integer.parseInt(request.getParameter("order[0][column]"));
-		this.setSort(request.getParameter("columns["+sortindex+"][data]"));
-		this.setOrder(request.getParameter("order[0][dir]"));
-		this.setSearchVal(request.getParameter("search[value]"));
-	}
+    public String getSearchVal() {
+        return searchVal;
+    }
+
+    public void setSearchVal(String searchVal) {
+        this.searchVal = searchVal;
+    }
+
+    public void init(HttpServletRequest request) {
+        int start = Integer.parseInt(request.getParameter("start"));
+        int length = Integer.parseInt(request.getParameter("length"));
+        this.setPageIndex(start / length + 1);
+        this.setPageSize(Integer.parseInt(request.getParameter("length")));
+        this.setDraw(Integer.parseInt(request.getParameter("draw")));
+        int sortindex = Integer.parseInt(request.getParameter("order[0][column]"));
+        this.setSort(request.getParameter("columns[" + sortindex + "][data]"));
+        this.setOrder(request.getParameter("order[0][dir]"));
+        this.setSearchVal(request.getParameter("search[value]"));
+        this.toString();
+    }
+
+    @Override
+    public String toString() {
+        System.out.print("pageIndex = " + pageIndex + " ");
+        System.out.print("pageSize = " + pageSize + " ");
+        System.out.print("draw = " + draw + " ");
+        System.out.print("recordsTotal = " + recordsTotal + " ");
+        System.out.print("sort = " + sort + " ");
+        System.out.print("recordsFiltered = " + recordsFiltered + " ");
+        System.out.print("order = " + order + " ");
+        System.out.print("data = " + data + " ");
+        System.out.print("searchVal = " + searchVal + " ");
+        return super.toString();
+    }
 }

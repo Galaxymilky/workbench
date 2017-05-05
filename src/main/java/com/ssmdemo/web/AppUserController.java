@@ -23,10 +23,24 @@ import java.util.List;
 @Controller
 @RequestMapping("/appuser")
 public class AppUserController {
-    private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private AppUserService appUserService;
+    @RequestMapping("/multiInsert")
+    public String multiInsert() {
+        LOG.info("invoke -------- /appuser/multiInsert");
+
+        for (int i = 1; i < 1000; i++) {
+            System.out.println();
+            AppUser appUser = new AppUser();
+            appUser.setLoginName("test" + i);
+            appUser.setPriority(i);
+            appUser.setUserName("测试" + i);
+            int res = appUserService.multiInsert(appUser);
+            System.out.println("Curr is " + i + " & res = " + res);
+        }
+
+        return "";
+
+    }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model, Integer offset, Integer limit) {
@@ -57,15 +71,22 @@ public class AppUserController {
         try {
             pager.init(request);
 
-            List<AppUser> list = appUserService.getAppUserList(0, pager.getPageSize());
-
+            //List<AppUser> list = appUserService.getAppUserList(0, pager.getPageSize());
+            List<AppUser> list = appUserService.getAppUserListAjax(pager);
             pager.setData(list);
-            pager.setRecordsTotal(list.size());
+
+            int count = appUserService.getTotalCount();
+            pager.setRecordsTotal(count);
             pager.setRecordsFiltered(pager.getRecordsTotal());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return pager;
     }
+
+    private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private AppUserService appUserService;
 
 }

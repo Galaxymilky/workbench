@@ -33,7 +33,8 @@
                     {"data": "userId", "targets": 0},
                     {"data": "userName", "targets": 1},
                     {"data": "loginName", "targets": 2},
-                    {"data": "priority", "targets": 3}
+                    {"data": "priority", "targets": 3},
+                    {"data": "userPhone", "targets": 4}
                 ],
                 "paging": true,//是否分页
                 "lengthMenu": [10, 25, 50, 75, 100],//分页长度列表
@@ -90,6 +91,7 @@
                 <th>用户名</th>
                 <th>登录名</th>
                 <th>优先级</th>
+                <th>手机号</th>
             </tr>
             </thead>
         </table>

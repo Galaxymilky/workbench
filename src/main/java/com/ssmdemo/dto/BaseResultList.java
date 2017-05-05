@@ -1,27 +1,22 @@
 package com.ssmdemo.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.io.Serializable;
 
 /**
- * Created by dynam on 2017/5/1.
- * <p>
- * ajax 请求的返回类型封装 JSON 结果
+ * Created by niu_ben on 2017/5/5.
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class BaseResult<T> implements Serializable {
-    private static final long serialVersionUID = 2553501235592830994L;
+public class BaseResultList<T> implements Serializable {
+    private static final long serialVersionUID = -4042979343030843949L;
     private boolean success;
     private T data;
     private String error;
 
-    public BaseResult(boolean success, String error) {
+    public BaseResultList(boolean success, String error) {
         this.success = success;
         this.error = error;
     }
 
-    public BaseResult(boolean success, T data) {
+    public BaseResultList(boolean success, T data) {
         this.success = success;
         this.data = data;
     }

@@ -30,10 +30,8 @@ Spring 2.x中针对WebApplicationContext新增了3个作用域，分别是：
 - request（每次HTTP请求都会创建一个新的Bean）；
 - session（同一个HttpSession共享同一个Bean，不同的HttpSession使用不同的Bean）；
 - globalSession（同一个全局Session共享一个Bean）。
-此三种作用域，需要在容器级增加配置（web.xml）：
-  <listener>
-    <listener-class>>org.springframework.web.context.request.RequestContextListener</listener-class>
-  </listener>
+此三种作用域，需要在容器级增加配置（web.xml），增加 RequestContextListener：
+
 基于LocalThread将HTTP Request 对象绑定到为该请求提供服务的线程上，使得request 和 session作用域的bean能够在调用链中被访问到；
   <bean id="loginAction" class="com.founder.loginAction" scope="request"/>
 针对每次HTTP请求，Spring容器根据loginAction定义创建一个新的loginAction实例，且该实例仅在当前HTTP Request内有效，因此可以放心

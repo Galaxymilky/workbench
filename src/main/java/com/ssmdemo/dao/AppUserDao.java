@@ -43,8 +43,7 @@ public interface AppUserDao {
 
     /**
      * 获取用户总数
-     *
-     * */
+     */
     int queryTotalCount();
 
     /**
@@ -55,14 +54,24 @@ public interface AppUserDao {
     void updatePriority(@Param("newPriority") int newPriority);
 
     /**
-     * 列表页面检索
+     * 按条件检索
+     * @param priority
+     * @param userName
+     * @return
+     */
+    List<AppUser> queryByCondition(@Param("offset") int offset, @Param("limit") int limit,
+                                   @Param("priority") String priority, @Param("userName") String userName,
+                                   @Param("userPhone") String userPhone, @Param("loginName") String loginName);
+
+    /**
+     * DataTable 列表页面检索，模糊查询
      *
      * @param offset
      * @param limit
      * @param priority
      * @return
      */
-    List<AppUser> queryRetrieval(@Param("offset") int offset, @Param("limit") int limit,
-                                 @Param("priority") String priority, @Param("userName") String userName,
-                                 @Param("userPhone") String userPhone);
+    List<AppUser> queryFuzzy(@Param("offset") int offset, @Param("limit") int limit,
+                             @Param("priority") String priority, @Param("userName") String userName,
+                             @Param("userPhone") String userPhone, @Param("loginName") String loginName);
 }

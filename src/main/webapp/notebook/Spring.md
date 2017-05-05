@@ -21,6 +21,7 @@ setter注入需要类提供无参构造器或者无参的静态工厂方法来�
 #### Spring中Bean的作用域有哪些？
 答：早期版本的Spring，两个作用域：singleton单例和prototype原型，
 单例表示Bean以单例的方式存在；原型表示每次从容器中调用Bean时，都会返回一个新的实例。
+无状态Bean使用单例，有状态Bean使用原型。
 
 补充：设计模式中的创建型模式中也有一个原型模式，原型模式也是一个常用的模式，
 例如室内设计软件，所有素材都在工具箱中，从工具箱中取出的都是素材对象的一个原型，可以通过对象克隆来实现原型模式。
@@ -29,6 +30,17 @@ Spring 2.x中针对WebApplicationContext新增了3个作用域，分别是：
 - request（每次HTTP请求都会创建一个新的Bean）；
 - session（同一个HttpSession共享同一个Bean，不同的HttpSession使用不同的Bean）；
 - globalSession（同一个全局Session共享一个Bean）。
+此三种作用域，需要在容器级增加配置（web.xml）：
+  <listener>
+    <listener-class>>org.springframework.web.context.request.RequestContextListener</listener-class>
+  </listener>
+基于LocalThread将HTTP Request 对象绑定到为该请求提供服务的线程上，使得request 和 session作用域的bean能够在调用链中被访问到；
+  <bean id="loginAction" class="com.founder.loginAction" scope="request"/>
+针对每次HTTP请求，Spring容器根据loginAction定义创建一个新的loginAction实例，且该实例仅在当前HTTP Request内有效，因此可以放心
+根据需要修改实例的内部状态，当处理请求结束，Request作用域的bean实例将被销毁。
+
+Web相关作用域的Bean，注入singleton或prototype的Bean中，需要
+  <aop:scoped-proxy/>
 
 说明：单例模式和原型模式都是重要的设计模式。一般情况下，无状态或状态不可变的类适合使用单例模式。
 在传统开发中，由于DAO持有Connection这个非线程安全对象因而没有使用单例模式；

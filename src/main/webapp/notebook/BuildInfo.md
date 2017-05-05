@@ -14,3 +14,10 @@
     org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'appUserController': Unsatisfied dependency expressed through field 'appUserService'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean found for dependency [com.ssmdemo.service.AppUserService]: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
     ***
     Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean found for dependency [com.ssmdemo.service.AppUserService]: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+
+### Git 相关
+#### 提交失败
+21:21	Push failed
+		Failed with error: The remote end hung up unexpectedly
+		The remote end hung up unexpectedly
+		RPC failed; curl 55 SSL_write() returned SYSCALL, errno = 10053

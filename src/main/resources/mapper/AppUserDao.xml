@@ -17,20 +17,22 @@
 
     <!-- 查询总数 -->
     <select id="queryTotalCount" resultType="java.lang.Integer">
-        SELECT COUNT(*) AS totalCount FROM app_user
+        SELECT COUNT(*) FROM app_user
     </select>
-    <select id="queryAll" resultType="BaseResultmap">
+    <select id="queryAll" resultType="AppUser">
         SELECT * FROM app_user ORDER BY user_id ASC limit #{offset}, #{limit}
     </select>
-    <resultMap id="BaseResultmap" type="AppUser">
+    <!--
+    <resultMap id="BaseResultMap" type="AppUser">
         <id column="user_id" property="userId" jdbcType="BIGINT"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="priority" property="priority" jdbcType="INT"/>
+        <result column="priority" property="priority" jdbcType="INTEGER"/>
         <result column="user_phone" property="userPhone" jdbcType="BIGINT"/>
-        <association property="totalCount" select="queryTotalCount" jdbcType="java.lang.Integer"/>
+        <association property="totalCount" select="queryTotalCount" jdbcType="BIGINT"/>
     </resultMap>
+    -->
 
 
     <!-- 更新 priority -->

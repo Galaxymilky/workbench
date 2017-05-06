@@ -16,6 +16,19 @@ CREATE TABLE app_user (
 ) ENGINE = INNODB AUTO_INCREMENT = 1000 DEFAULT CHARSET=UTF8 COMMENT='用户表'
 
 
+-- 博客信息表
+CREATE TABLE blog_info (
+  `blog_id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '博客ID',
+  `blog_name` VARCHAR(50) NOT NULL COMMENT '博客名',
+  `blogger_id` BIGINT NOT NULL COMMENT '博主ID',
+  `blogger_name` VARCHAR(50) COMMENT '博主名',
+  `lever` INT COMMENT '博客等级',
+  `blog_address` VARCHAR(100) COMMENT '博客地址',
+  PRIMARY KEY (`blog_id`)
+) ENGINE = INNODB AUTO_INCREMENT = 1000 DEFAULT CHARSET=UTF8 COMMENT='博客信息表'
+
+
+
 -- 插入初始数据
 INSERT INTO 
 	app_user(`user_name`, `login_name`, `priority`)

@@ -42,6 +42,7 @@ public class AppUserServiceImpl implements AppUserService {
         if (StrUtils.isNullOrEmpty(srchVal)) {
             result = appUserDao.queryAll(offset, limit);
         } else {
+            //srchVal = "%"+ srchVal +"%";
             result = appUserDao.queryFuzzy(offset, limit, srchVal, srchVal, srchVal, srchVal);
         }
         return result;

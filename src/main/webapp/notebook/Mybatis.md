@@ -116,14 +116,18 @@
      原理：使用 CGLIB 创建目标对象的代理对象，当调用目标方法时，进入拦截器方法，
  
  #### MyBatis 执行批处理
- 答：
+ 答：使用BatchExecutor完成批处理。
  
  #### MyBatis 有哪些 Executor 执行器？区别是什么？
- 答：
- 
+ 答：三种基本：Simple、Reuse、Batch
+ - Simple：每次 update 或 select，开启新的 Statement 对象，完成后关闭；
+ - Reuse：执行update或select，以sql作为key查找Statement对象，存在就使用，不存在就创建，用完后，不关闭Statement对象，
+    而是放置于Map<String, Statement>内，供下一次使用。简言之，就是重复使用Statement对象。
+ - Batch：将所有sql都添加到批处理中（addBatch()），等待统一执行（executeBatch()），它缓存了多个Statement对象，
+    每个Statement对象都是addBatch()完毕后，等待逐一执行executeBatch()批处理。与JDBC批处理相同。
  
  #### MyBatis 指定 Executor 执行器；
- 答：
+ 答：在Mybatis配置文件中，可以指定默认的ExecutorType执行器类型，也可以手动给DefaultSqlSessionFactory的创建SqlSession的方法传递ExecutorType类型参数。
  
  
  #### MyBatis 映射 Enum 枚举类；

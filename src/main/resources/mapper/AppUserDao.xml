@@ -53,7 +53,22 @@
     <!-- 模糊查询 -->
     <select id="queryFuzzy" resultType="AppUser">
         SELECT * FROM app_user WHERE 1 = 1
-        AND (priority = #{priority} or user_name = #{userName} or user_phone = #{userPhone} or login_name = #{loginName})
+        <!--
+        AND (priority LIKE concat('%', #{priority}, '%')
+        or user_name LIKE concat('%', #{userName}, '%')
+        or user_phone LIKE concat('%', #{userPhone}, '%')
+        or login_name LIKE concat('%', #{loginName}, '%'))
+        -->
+        <bind name="priority" value="'%' + _parameter.priority + '%'"/>
+        <bind name="userName" value="'%' + _parameter.userName + '%'"/>
+        <bind name="userPhone" value="'%' + _parameter.userPhone + '%'"/>
+        <bind name="loginName" value="'%' + _parameter.loginName + '%'"/>
+
+        AND (priority LIKE #{priority}
+        or user_name LIKE #{userName}
+        or user_phone LIKE #{userPhone}
+        or login_name LIKE #{loginName})
+
         ORDER BY user_id ASC limit #{offset}, #{limit}
     </select>
 

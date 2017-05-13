@@ -105,7 +105,7 @@ Hypermedia API的设计被称为HATEOAS。Github的API就是这种设计，访�
 REST的优点：
 - 轻量级的解决方案，不必向SOAP那样要构建一个标准的SOAP XML。
 - 可读性比较好:可以把URL的名字取得有实际意义。
-- 不需要SDK支持：直接一个Http请求就可以，但是SOAP则可能需要使用到一些Webservice的类库（例如Apache的Axis）。
+- 不需要SDK支持：直接一个 HTTP 请求就可以，但是SOAP则可能需要使用到一些Webservice的类库（例如Apache的Axis）。
 REST的缺点：
 - 复杂的应用中，URL可能非常长，而且不容易解析。
 

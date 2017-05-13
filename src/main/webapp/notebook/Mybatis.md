@@ -94,7 +94,8 @@
  答：可编写针对 ParameterHandler、ResultSetHandler、StatementHandler、Executor 四种接口插件，
      MyBatis 使用 JDK 动态代理，为需要拦截的接口生成代理对象以实现接口方法。每当执行这4中对象的方法，就进入拦截方法，
      即 InvocationHandler 的 invoke() 方法。
-     实现 MyBatis 的 Interceptor 接口并复写 intercept() 方法，然后给插件编写注释，指定要拦截那个接口的哪个方法。
+     实现 MyBatis 的 Interceptor 接口并覆盖 intercept() 方法，然后给插件编写注释，指定要拦截那个接口的哪个方法。
+     常见插件：分页、乐观锁（version）
      
  #### 执行批量插入，并返回数据库主键列表
  答：

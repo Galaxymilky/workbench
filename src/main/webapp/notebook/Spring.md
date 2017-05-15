@@ -159,3 +159,10 @@ AOP（Aspect Oriented Programming）指一种程序设计范型，该范型以�
 - ModelAndView的视图是逻辑视图，DispatcherServlet还要借助ViewResolver完成从逻辑视图到真实视图对象的解析工作。
 - 当得到真正的视图对象后，DispatcherServlet会利用视图对象对模型数据进行渲染。
 - 客户端得到响应，可能是一个普通的HTML页面，也可以是XML或JSON字符串，还可以是一张图片或者一个PDF文件。
+
+
+
+#### 单例还是原型
+Struts2 中的 action 为原型；
+Spring3、Struts 中的 controller 默认为单例模式
+单例模式情况下，慎用成员变量，因为此时是共享的成员变量；

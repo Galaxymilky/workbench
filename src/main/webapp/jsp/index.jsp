@@ -41,13 +41,13 @@
                     <ul id="uimapp" class="nav nav-list collapse secondmenu">
 
                         <li class="li-active">
-                            <a href="#" url="/appuser/newlist.jsp">
+                            <a href="#" url="<%=contextPath %>/jsp/appuser/newlist.jsp">
                                 <i class="fa fa-pencil-square-o"></i>
                                 用户管理</a>
                         </li>
 
                         <li class="">
-                            <a href="#" url="/appuser/list.jsp">
+                            <a href="#" url="<%=contextPath %>/appuser/list">
                                 <i class="fa fa-bars"></i>
                                 用户管理</a>
                         </li>
@@ -187,6 +187,8 @@
 
 
     function changeMenu(destStr) {
+        alert('1');
+        alert(destStr);
         switch (destStr) {
             case "new":
                 index = 0;

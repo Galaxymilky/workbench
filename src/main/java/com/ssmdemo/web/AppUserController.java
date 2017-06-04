@@ -62,8 +62,8 @@ public class AppUserController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model, Integer offset, Integer limit) {
         LOG.info("invoke -------- /appuser/list");
-        offset = offset == null ? 0 : offset;
-        limit = limit == null ? 0 : limit;
+        offset = offset == null ? 0 : offset; // 从第几行开始
+        limit = limit == null ? 15 : limit; // 检索多少行
         List<AppUser> list = appUserService.getAppUserList(offset, limit);
         model.addAttribute("userList", list);
         return "appuser/list";
@@ -73,7 +73,7 @@ public class AppUserController {
     public String newlist(Model model, Integer offset, Integer limit) {
         LOG.info("invoke -------- /appuser/newlist");
         offset = offset == null ? 0 : offset;
-        limit = limit == null ? 0 : limit;
+        limit = limit == null ? 15 : limit;
         List<AppUser> list = appUserService.getAppUserList(offset, limit);
         model.addAttribute("userList", list);
         return "appuser/newlist";
@@ -88,7 +88,6 @@ public class AppUserController {
         try {
             pager.init(request);
 
-            //List<AppUser> list = appUserService.getAppUserList(0, pager.getPageSize());
             List<AppUser> list = appUserService.getAppUserListAjax(pager);
             pager.setData(list);
 

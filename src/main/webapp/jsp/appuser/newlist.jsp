@@ -50,7 +50,7 @@
                 },
                 "stateSave": false,	//保存状态
                 "order": [[0, "desc"]],
-                rowId: 'userId'//数据标识,
+                rowId: 'userId'//数据标识
                 //"dom": '<"toolbar">'
             });
             $("div.toolbar").html('<b style="color:red">自定义文字、图片等等</b>');

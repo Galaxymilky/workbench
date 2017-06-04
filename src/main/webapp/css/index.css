@@ -1,14 +1,5 @@
-#header {
-    width: 100%;
-    height: 82px;
-    margin-bottom: 0;
-}
-
 #main-nav {
     margin-left: 1px;
-    border-bottom: 0px solid #ddd;
-    background: #F3F3F3;
-    border-radius: 6px
 }
 
 #main-nav.nav-tabs.nav-stacked > li > a {
@@ -59,16 +50,12 @@
     margin-bottom: 4px;
 }
 
-/*定义li选中后的样式*/
+/*å®šä¹‰lié€‰ä¸­åŽçš„æ ·å¼*/
 .li-active {
     background-color: #c6e0fb;
 }
 
-.secondmenu {
-    height: 0px;
-}
-
-/*定义二级菜单样式*/
+/*å®šä¹‰äºŒçº§èœå•æ ·å¼*/
 .secondmenu a {
     font-size: 16px;
     color: #4A515B;
@@ -85,6 +72,11 @@
     vertical-align: middle;
     padding-left: 50px;
     color: #fff;
+}
+
+#main-nav {
+    background: #F3F3F3;
+    border-radius: 6px
 }
 
 .row .col-md-2, .row .col-md-10, .row {
@@ -110,10 +102,6 @@
 
 .li-active a {
     color: #fff
-}
-
-#meetingNotice {
-    margin-top: 5px
 }
 
 #iframe-main {

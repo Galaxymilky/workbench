@@ -17,7 +17,11 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="<%=contextPath %>/js/plugins/webuploader-0.1.5/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="<%=
+
+
+
+     %>/js/plugins/webuploader-0.1.5/webuploader.css">
     <script type="text/javascript" src="<%=contextPath %>/js/plugins/webuploader-0.1.5/webuploader.js"></script>
     <script type="text/javascript" src="<%=contextPath %>/js/ui/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
 </head>

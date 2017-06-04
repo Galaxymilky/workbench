@@ -7,7 +7,8 @@
 --%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%
-    //    if (null == null || "".equals(null)) {
+
+//    if (null == null || "".equals(null)) {
 //        out.println("<script>alert('没有登录！');window.close();</script>");
 //        return;
 //    }
@@ -17,130 +18,9 @@
 <html>
 <head>
 
-    <%--<link rel="stylesheet" href="css/index.css" type="text/css"/>--%>
+    <link rel="stylesheet" href="../css/index.css" type="text/css"/>
 
-    <style type="text/css">
-        #main-nav {
-            margin-left: 1px;
-        }
-
-        #main-nav.nav-tabs.nav-stacked > li > a {
-            padding: 10px 8px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #4A515B;
-            background: #E9E9E9;
-            background: -moz-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%);
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FAFAFA),
-            color-stop(100%, #E9E9E9));
-            background: -webkit-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%);
-            background: -o-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%);
-            background: -ms-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%);
-            background: linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA',
-            endColorstr='#E9E9E9');
-            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9')";
-            border: 1px solid #D5D5D5;
-            border-radius: 4px;
-        }
-
-        #main-nav.nav-tabs.nav-stacked > li > a > span {
-            color: #4A515B;
-        }
-
-        #main-nav.nav-tabs.nav-stacked > li.active > a, #main-nav.nav-tabs.nav-stacked > li > a:hover {
-            color: #FFF;
-            background: #3C4049;
-            background: -moz-linear-gradient(top, #87CEFF 20%, #CAE1FF 80%);
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4A515B),
-            color-stop(100%, #3C4049));
-            background: -webkit-linear-gradient(top, #4A515B 0%, #3C4049 100%);
-            background: -o-linear-gradient(top, #4A515B 0%, #3C4049 100%);
-            background: -ms-linear-gradient(top, #4A515B 0%, #3C4049 100%);
-            background: linear-gradient(top, #4A515B 0%, #3C4049 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#87CEFF',
-            endColorstr='#CAE1FF');
-            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#87CEFF', endColorstr='#CAE1FF')";
-            border-color: #2B2E33;
-        }
-
-        #main-nav.nav-tabs.nav-stacked > li.active > a, #main-nav.nav-tabs.nav-stacked > li > a:hover > span {
-            color: #FFF;
-        }
-
-        #main-nav.nav-tabs.nav-stacked > li {
-            margin-bottom: 4px;
-        }
-
-        /*å®šä¹‰lié€‰ä¸­åŽçš„æ ·å¼*/
-        .li-active {
-            background-color: #c6e0fb;
-        }
-
-        /*å®šä¹‰äºŒçº§èœå•æ ·å¼*/
-        .secondmenu a {
-            font-size: 16px;
-            color: #4A515B;
-        }
-
-        .navbar-static-top {
-            background-color: rgb(219, 234, 249);
-            margin-bottom: 5px;
-        }
-
-        .navbar-brand {
-            background: url('') no-repeat 10px 8px;
-            display: inline-block;
-            vertical-align: middle;
-            padding-left: 50px;
-            color: #fff;
-        }
-
-        #main-nav {
-            background: #F3F3F3;
-            border-radius: 6px
-        }
-
-        .row .col-md-2, .row .col-md-10, .row {
-            background: #fff
-        }
-
-        .li-active {
-            border-radius: 6px;
-            background: #2786C6;
-            color: #fff
-        }
-
-        .nav > li > a:hover, .nav > li > a:focus {
-            background: #2786C6;
-            color: #fff
-        }
-
-        .li-active a:focus {
-            border-radius: 6px;
-            background: #2786C6;
-            color: #fff
-        }
-
-        .li-active a {
-            color: #fff
-        }
-
-        #iframe-main {
-            font-size: 0;
-            height: 100%;
-            padding: 4px;
-            padding-top: 7px;
-            padding-bottom: 0;
-            padding-left: 0;
-        }
-
-        #content {
-            width: 100%;
-            height: 100%;
-        }
-
-    </style>
+    <%--<style type="text/css"></style>--%>
 
     <title>Application</title>
 </head>
@@ -161,13 +41,13 @@
                     <ul id="uimapp" class="nav nav-list collapse secondmenu">
 
                         <li class="li-active">
-                            <a href="#" url="jsp/appuser/newlist.jsp">
+                            <a href="#" url="/appuser/newlist.jsp">
                                 <i class="fa fa-pencil-square-o"></i>
                                 用户管理</a>
                         </li>
 
                         <li class="">
-                            <a href="#" url="jsp/appuser/list.jsp">
+                            <a href="#" url="/appuser/list.jsp">
                                 <i class="fa fa-bars"></i>
                                 用户管理</a>
                         </li>
@@ -179,15 +59,15 @@
                 <li>
                     <a id="main2" href="#mtgRoom" class="nav-header collapsed" data-toggle="collapse">
                         <i class="fa fa-home">&nbsp;</i>
-                        会议管理<span class="pull-right glyphicon glyphicon-chevron-down"></span>
+                        其他应用<span class="pull-right glyphicon glyphicon-chevron-down"></span>
                     </a>
 
                     <ul id="mtgRoom" class="nav nav-list collapse secondmenu">
 
                         <li class="">
-                            <a href="#" url="jsp/mtgRoom/meeting_add_room.jsp">
+                            <a href="#" url="jsp/websocket/demo.jsp">
                                 <i class="fa fa-gear"></i>
-                                会议管理</a>
+                                聊天室</a>
                         </li>
 
                     </ul>

@@ -14,7 +14,7 @@ CREATE TABLE app_user (
   PRIMARY KEY (`user_id`),
   KEY `idx_appuser_loginname`(`login_name`)
 ) ENGINE = INNODB AUTO_INCREMENT = 1000 DEFAULT CHARSET=UTF8 COMMENT='用户表'
-
+;
 
 -- 博客信息表
 CREATE TABLE blog_info (
@@ -26,12 +26,53 @@ CREATE TABLE blog_info (
   `blog_address` VARCHAR(100) COMMENT '博客地址',
   PRIMARY KEY (`blog_id`)
 ) ENGINE = INNODB AUTO_INCREMENT = 1000 DEFAULT CHARSET=UTF8 COMMENT='博客信息表'
+;
 
+-- 版块频道表
+CREATE TABLE app_channel (
+  `channel_id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '版块ID',
+  `channel_name` VARCHAR(50) NOT NULL COMMENT '版块名',
+  `is_display` TINYINT NOT NULL COMMENT '是否显示',
+  PRIMARY KEY (`channel_id`)
+) ENGINE = INNODB AUTO_INCREMENT = 1000 DEFAULT CHARSET=UTF8 COMMENT='版块频道表'
+;
 
+-- 版块主题表
+CREATE TABLE app_theme (
+  `theme_id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主题ID',
+  `theme_name` VARCHAR(50) NOT NULL COMMENT '主题名',
+  `channel_id` BIGINT NOT NULL COMMENT '所属版块',
+  `is_display` TINYINT NOT NULL COMMENT '是否显示',
+  PRIMARY KEY (`theme_id`)
+) ENGINE = INNODB AUTO_INCREMENT = 1000 DEFAULT CHARSET=UTF8 COMMENT='版块主题表'
+;
 
 -- 插入初始数据
 INSERT INTO 
 	app_user(`user_name`, `login_name`, `priority`)
 VALUES
 	('李雷雷', 'lileilei', 0),
-	('韩梅梅', 'hanmeimei', 0);
+	('韩梅梅', 'hanmeimei', 0)
+;
+
+-- 插入初始数据
+INSERT INTO
+  app_channel(`channel_name`, `is_display`)
+VALUES
+  ('版块A', 1),
+  ('版块B', 1),
+  ('版块C', 1),
+  ('版块D', 0)
+;
+
+-- 插入初始数据
+INSERT INTO
+  app_theme(`theme_name`, `channel_id`, `is_display`)
+VALUES
+  ('1000主题A1', 1000, 1),
+  ('1000主题A2', 1000, 1),
+  ('1001主题A1', 1001, 1),
+  ('1001主题B1', 1001, 1),
+  ('1002主题C1', 1002, 1),
+  ('1000主题D1', 1000, 1)
+;

@@ -166,3 +166,10 @@ AOP（Aspect Oriented Programming）指一种程序设计范型，该范型以�
 Struts2 中的 action 为原型；
 Spring3、Struts 中的 controller 默认为单例模式
 单例模式情况下，慎用成员变量，因为此时是共享的成员变量；
+
+
+### 事务
+#### 事务的传播特性
+
+
+#### 事务的四种特性

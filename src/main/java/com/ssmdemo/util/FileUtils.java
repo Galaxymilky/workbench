@@ -1,4 +1,4 @@
-package com.ssmdemo.common;
+package com.ssmdemo.util;
 
 import java.io.*;
 

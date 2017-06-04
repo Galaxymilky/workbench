@@ -1,6 +1,9 @@
 package com.ssmdemo.web;
 
 
+import com.ssmdemo.entity.AppChannel;
+import com.ssmdemo.entity.AppTheme;
+import com.ssmdemo.service.AppBlogService;
 import com.ssmdemo.common.DataPager;
 import com.ssmdemo.entity.AppUser;
 import com.ssmdemo.service.AppUserService;
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by dynam on 2017/5/1.
@@ -23,6 +26,20 @@ import java.util.List;
 @Controller
 @RequestMapping("/appuser")
 public class AppUserController {
+
+    @RequestMapping(value = "/blog", method = RequestMethod.GET)
+    public String blog(Model model, Integer offset, Integer limit) {
+        LOG.info("invoke -------- /appuser/blog");
+        List<AppChannel> channelList = appBlogService.getAppChannelList();
+        List<AppTheme> themesList = appBlogService.getAppThemeList();
+        model.addAttribute("channelList", channelList);
+        model.addAttribute("themesList", themesList);
+
+        Map<String, List<AppTheme>> map = appBlogService.getAppThemeByChannel();
+        model.addAttribute("map", map);
+
+        return "jeecms/loginon";
+    }
 
     @RequestMapping("/multiInsert")
     public String multiInsert() {
@@ -88,5 +105,8 @@ public class AppUserController {
 
     @Autowired
     private AppUserService appUserService;
+
+    @Autowired
+    private AppBlogService appBlogService;
 
 }

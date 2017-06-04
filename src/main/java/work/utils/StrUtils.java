@@ -2,6 +2,7 @@ package work.utils;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 /**
  * Created by niu_ben on 2016/11/15.
@@ -9,12 +10,65 @@ import java.util.LinkedHashMap;
 public class StrUtils {
     public static void main(String[] args) {
         String str = "aeadbccdebf";
-        System.out.println(Test1(str));
+        //System.out.println(Test1(str));
 
-        System.out.println(Test2(str));
+        //System.out.println(Test2(str));
 
+        byte[] bytes = new byte[]{7, 0, 0, 0};
+        byte[] byteb = new byte[]{78, 97, -68, 0};
+
+        int x = bytesToInt(bytes, 0);
+        int y = bytesToInt2(bytes, 0);
+
+        System.out.println(x);
+        System.out.println(y);
+
+        int xb = bytesToInt(byteb, 0);
+        int yb = bytesToInt2(byteb, 0);
+
+        System.out.println(xb);
+        System.out.println(yb);
 
     }
+
+    /**
+     * byte数组中取int数值，本方法适用于(低位在前，高位在后)的顺序，和和intToBytes（）配套使用
+     *
+     * @param src    byte数组
+     * @param offset 从数组的第offset位开始
+     * @return int数值
+     */
+    public static int bytesToInt(byte[] src, int offset) {
+        int value;
+        value = (int) ((src[offset] & 0xFF)
+                | ((src[offset + 1] & 0xFF) << 8)
+                | ((src[offset + 2] & 0xFF) << 16)
+                | ((src[offset + 3] & 0xFF) << 24));
+        return value;
+    }
+
+    /**
+     * byte数组中取int数值，本方法适用于(低位在后，高位在前)的顺序。和intToBytes2（）配套使用
+     */
+    public static int bytesToInt2(byte[] src, int offset) {
+        int value;
+        value = (int) (((src[offset] & 0xFF) << 24)
+                | ((src[offset + 1] & 0xFF) << 16)
+                | ((src[offset + 2] & 0xFF) << 8)
+                | (src[offset + 3] & 0xFF));
+        return value;
+    }
+
+    private static int byteArrayToInt(byte[] bytes) {
+        int value = 0;
+        //
+        for (int i = 0; i < bytes.length; i++) {
+            int shift = (4 - 1 - i) * 8;
+            value += (bytes[i] & 0x000000FF) << shift;//
+        }
+        return value;
+    }
+
 
     private static String Test2(String str) {
         int[] intArray = new int[str.length()];

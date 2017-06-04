@@ -58,6 +58,11 @@ public class AppUserServiceImpl implements AppUserService {
         return res;
     }
 
+    @Override
+    public AppUser getAppUserByLoginName(String loginName) {
+        return appUserDao.queryByLoginName(loginName);
+    }
+
     private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
     @Autowired

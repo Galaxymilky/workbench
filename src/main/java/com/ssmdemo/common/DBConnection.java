@@ -20,9 +20,6 @@ public class DBConnection {
 
     private static void initDateSource() {
         if (ds == null) {
-            //不再使用此方法获得context
-            //org.springframework.context.ApplicationContext ac =
-            //		new org.springframework.context.support.FileSystemXmlApplicationContext("classpath:applicationContext.xml");
             AbstractApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
             ds = (DataSource) context.getBean("dataSource");
             context.close();

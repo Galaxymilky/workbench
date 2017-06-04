@@ -18,6 +18,8 @@ public class AppUser {
 
     private int priority;
 
+    private String password;
+
     public long getUserId() {
         return userId;
     }
@@ -64,6 +66,14 @@ public class AppUser {
 
     public void setUserPhone(long userPhone) {
         this.userPhone = userPhone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

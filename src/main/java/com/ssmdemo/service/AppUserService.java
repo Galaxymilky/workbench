@@ -13,7 +13,16 @@ public interface AppUserService {
 
     List<AppUser> getAppUserList(int offset, int limit);
 
+
     List<AppUser> getAppUserListAjax(DataPager page);
 
     int getTotalCount();
+
+    /**
+     * 根据用户登录名获取用户
+     *
+     * @param loginName 登录名
+     * @return
+     */
+    AppUser getAppUserByLoginName(String loginName);
 }

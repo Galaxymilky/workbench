@@ -1,4 +1,4 @@
-package com.ssmdemo.common;
+package com.ssmdemo.util;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;

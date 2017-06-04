@@ -11,8 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import work.utils.EncryptUtil;
 import work.utils.StrUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Created by niu_ben on 2017/5/5.
@@ -51,17 +57,27 @@ public class LoginAction {
         return "redirect:/jsp/signin.jsp";
     }
 
-    @RequestMapping("/login")
-    public String login() {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public String login(HttpServletRequest request, HttpServletResponse response, String loginName, String password) {
         LOG.info("invoke -------- /loginAction/login");
-        return "appuser/list";
+
+        String resp = "{\"accessGranted\":true}";
+
+        return resp;
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+        return "";
     }
 
     @RequestMapping(value = "/loginSession", method = RequestMethod.GET)
     public String loginSession() {
-
         LOG.info("invoke -------- /loginAction/loginSession");
+
         System.out.println(this.getClass().toString());
+
         return "appuser/list";
     }
 

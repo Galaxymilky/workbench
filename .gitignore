@@ -24,3 +24,6 @@ hs_err_pid*
 # my configuration
 .idea/
 target/
+
+# xenon
+src/main/webapp/xenon

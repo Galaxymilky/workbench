@@ -1010,6 +1010,35 @@ public class LeetcodeArray {
      *
      * */
 
+
+    /**
+     * 48. Rotate Image
+     * You are given an n x n 2D matrix representing an image.
+     * Rotate the image by 90 degrees (clockwise).
+     * Follow up: Could you do this in-place?
+     */
+    public void rotate(int[][] matrix) {
+        // 3 * 3
+        // 11-13 12-23 13-33
+        // 21-12 22-22 23-32
+        // 31-11 32-21 33-31
+        // 780 456 123
+        // 147 258 369
+        if (matrix.length == 0) {
+            return;
+        }
+        int n = matrix[0].length;
+        int[][] newMatrix = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            int[] matrixX = new int[n];
+            for (int j = n - 1; j >= 0; j--) {
+                matrixX[n - j - 1] = matrix[j][i];
+            }
+            newMatrix[i] = matrixX;
+        }
+        matrix = newMatrix;
+    }
+
     /**
      * 39. Combination Sum. Tag[Backtracking]
      * Given a set of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.

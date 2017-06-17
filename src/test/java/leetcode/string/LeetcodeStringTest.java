@@ -2,6 +2,8 @@ package leetcode.string;
 
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * Created by niu_ben on 2016/12/13.
  */
@@ -9,7 +11,7 @@ public class LeetcodeStringTest {
     LeetcodeString lcString = new LeetcodeString();
 
     @Test
-    public void testRepeatedSubstringPattern(){
+    public void testRepeatedSubstringPattern() {
         String str = "bbcb";
         str = "acbacba"; //false
         System.out.println(lcString.repeatedSubstringPattern(str));

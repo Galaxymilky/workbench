@@ -39,6 +39,13 @@ public class LeetcodeArrayTest {
     }
 
     @Test
+    public void testRotate(){
+        int[][] matrix_0 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        int[][] matrix_1 = {};
+        lcArray.rotate(matrix_0);
+    }
+
+    @Test
     public void testGameOfLife() {
         int[][] array = {{0, 0, 0, 0, 0, 0}, {0, 0, 1, 1, 0, 0}, {0, 1, 0, 0, 1, 0}, {0, 0, 1, 1, 0, 0}, {0, 0, 0, 0, 0, 0}};
         lcArray.gameOfLife(array);

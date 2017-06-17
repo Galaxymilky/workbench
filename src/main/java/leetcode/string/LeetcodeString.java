@@ -478,7 +478,7 @@ public class LeetcodeString {
      * @param numRows
      */
     public String convert(String s, int numRows) {
-        if(numRows == 1){
+        if (numRows == 1) {
             return s;
         }
         String res = "";

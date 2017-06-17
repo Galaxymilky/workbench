@@ -112,6 +112,40 @@ public class LeetcodeHashTable {
         return res;
     }
 
+    /**
+     * 49. Group Anagrams
+     * Given an array of strings, group anagrams together.
+     * For example, given: ["eat", "tea", "tan", "ate", "nat", "bat"],
+     * Return: [["ate", "eat","tea"],["nat","tan"],["bat"]]
+     */
+    public List<List<String>> groupAnagrams(String[] strs) {
+
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+
+        for (String s : strs) {
+            char[] c = s.toCharArray();
+            Arrays.sort(c);
+            String keyStr = String.valueOf(c);
+
+            List<String> curList = new ArrayList<String>();
+
+            if (map.containsKey(keyStr)) {
+                curList = map.get(keyStr);
+            }
+
+            curList.add(s);
+
+            map.put(keyStr, curList);
+
+        }
+
+        for (String key : map.keySet()) {
+            Collections.sort(map.get(key));
+        }
+        return new ArrayList<List<String>>(map.values());
+
+    }
+
     public static void main(String[] args) {
         System.out.println();
 

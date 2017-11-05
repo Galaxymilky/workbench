@@ -1,5 +1,8 @@
 package leetcode.string;
 
+import com.alibaba.druid.sql.visitor.functions.Char;
+import com.sun.tools.classfile.CharacterRangeTable_attribute;
+
 import java.util.*;
 
 /**
@@ -19,29 +22,46 @@ public class LeetcodeString {
      */
     public boolean repeatedSubstringPattern(String str) {
         //TODO UnApproved
-        if (str.length() % 2 != 0) {
+
+        int len = str.length();
+
+        if (str == null || "".equals(str)) {
             return false;
         }
 
-        if (str.length() == 2 && str.substring(0, 1).equals(str.substring(1, 2))) {
+        if (len == 1) {
+            return false;
+        }
+
+        if (len == 2 && str.charAt(0) == str.charAt(1)) {
             return true;
         }
 
-        int i = 0;
-        while (i < str.length() - 1) {
-            String pattern = str.substring(i, i + 2);
+        for (int i = len / 2; i > 0; i--) {
+            if (len % i == 0) {
+                String patternStr = str.substring(0, i);
+                if (len / i % 2 == 0) {
+                    int index = len / 2;
+                    String left = str.substring(0, index);
+                    String right = str.substring(index, len);
 
-            int j = i + 2;
-            while (j < str.length() - 1) {
-                String parrternStr = str.substring(j, j + 2);
-                if (parrternStr.equals(pattern)) {
-                    return true;
+                    if (left.equals(right)) {
+                        return true;
+                    }
+                } else {
+                    int leftIndex = len / 2 - i / 2;
+                    int rightIndex = len / 2 + i / 2;
+                    String left = str.substring(0, leftIndex);
+                    String right = str.substring(rightIndex + 1, len);
+
+                    if (left.equals(right) && str.substring(leftIndex, rightIndex + 1).equals(patternStr)) {
+                        return true;
+                    }
                 }
-                j++;
+
             }
-            i++;
-            j = i + 2;
         }
+
         return false;
     }
 
@@ -461,6 +481,27 @@ public class LeetcodeString {
     }
 
     /**
+     * Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last word in the string.
+     * If the last word does not exist, return 0.
+     * Note: A word is defined as a character sequence consists of non-space characters only.
+     * For example: Given s = "Hello World", return 5.
+     */
+    public int lengthOfLastWord(String s) {
+        if (s == null || "".equals(s)) {
+            return 0;
+        }
+
+        if (!s.contains(" ")) {
+            return s.length();
+        }
+
+        int index = s.lastIndexOf(" ");
+        return s.length() - index;
+
+    }
+
+
+    /**
      * 38. Count and Say
      * The count-and-say sequence is the sequence of integers beginning as follows:
      * 1, 11, 21, 1211, 111221, ...
@@ -512,8 +553,29 @@ public class LeetcodeString {
     }
 
     /**
-     *
-     * */
+     * 20. Valid Parentheses
+     * Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+     * The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+     */
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<Character>();
+
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                stack.push(')');
+            } else if (c == '[') {
+                stack.push(']');
+            } else if (c == '{') {
+                stack.push('}');
+            } else if (stack.isEmpty() || stack.pop() != c) {
+                return false;
+            }
+        }
+
+        return stack.isEmpty();
+    }
+
+
     public static void main(String[] args) {
         System.out.println("");
         //String[] s = "111".split("");

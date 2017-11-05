@@ -6,6 +6,62 @@ import java.util.*;
  * Created by niu_ben on 2016/11/15.
  */
 public class LeetcodeHashTable {
+
+    /**
+     * 409. Longest Palindrome
+     * <p>
+     * Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.
+     * This is case sensitive, for example "Aa" is not considered a palindrome here.
+     * Note:
+     * Assume the length of given string will not exceed 1,010.
+     * Example:
+     * Input:   "abccccdd"
+     * Output:  7
+     * Explanation:
+     * One longest palindrome that can be built is "dccaccd", whose length is 7.
+     */
+    public int longestPalindrome(String s) {
+        int res = 0;
+
+        if (s == null || "".equals(s) || s.length() == 0) {
+            return res;
+        }
+
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+
+        for (char sChar : s.toCharArray()) {
+            if (map.containsKey(sChar)) {
+                map.put(sChar, map.get(sChar) + 1);
+            } else {
+                map.put(sChar, 1);
+            }
+        }
+        boolean flag = false;
+        Set entrySet = map.entrySet();
+        Iterator iterator = entrySet.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry entry = (Map.Entry) iterator.next();
+            Integer cur = Integer.parseInt(String.valueOf(entry.getValue()));
+            if (cur >= 2) {
+                if (cur % 2 == 0) {
+                    res += cur;
+                } else {
+                    res += cur - 1;
+                    flag = true;
+                }
+            } else {
+                flag = true;
+            }
+        }
+
+        if (flag) {
+            res = res + 1;
+        }
+
+        return res;
+    }
+
+
     /**
      * 350. Intersection of Two Arrays II
      * Given two arrays, write a function to compute their intersection.
@@ -144,6 +200,49 @@ public class LeetcodeHashTable {
         }
         return new ArrayList<List<String>>(map.values());
 
+    }
+
+    /**
+     * Determine if a Sudoku is valid, according to: Sudoku Puzzles - The Rules.
+     * The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
+     * Note: A valid Sudoku board (partially filled) is not necessarily solvable. Only the filled cells need to be validated.
+     */
+    public boolean isValidSudoku(char[][] board) {
+
+        for (int i = 0; i < 9; i++) {
+            HashSet<Character> cube = new HashSet<Character>();
+            HashMap tableX = new HashMap();
+            HashMap tableY = new HashMap();
+
+            for (int j = 0; j < 9; j++) {
+                char cx = board[i][j];
+                if (cx != '.') {
+                    if (cx < '1' || cx > '9')
+                        return false;
+                    if (tableX.containsKey(cx))
+                        return false;
+                    tableX.put(cx, 1);
+                }
+
+
+                char cy = board[j][i];
+                if (cy != '.') {
+                    if (cy < '1' || cy > '9')
+                        return false;
+                    if (tableY.containsKey(cy))
+                        return false;
+                    tableY.put(cy, 1);
+                }
+
+                int RowIndex = 3 * (i / 3);
+                int ColIndex = 3 * (i % 3);
+                if (board[RowIndex + j / 3][ColIndex + j % 3] != '.' && !cube.add(board[RowIndex + j / 3][ColIndex + j % 3]))
+                    return false;
+            }
+        }
+
+
+        return true;
     }
 
     public static void main(String[] args) {

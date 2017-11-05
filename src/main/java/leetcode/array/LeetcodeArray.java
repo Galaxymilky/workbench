@@ -151,6 +151,30 @@ public class LeetcodeArray {
     }
 
     /**
+     * 495. Teemo Attacking
+     * In LOL world, there is a hero called Teemo and his attacking can make his enemy Ashe be in poisoned condition.
+     * Now, given the Teemo's attacking ascending time series towards Ashe and the poisoning time duration per Teemo's attacking,
+     * you need to output the total time that Ashe is in poisoned condition.
+     * You may assume that Teemo attacks at the very beginning of a specific time point, and makes Ashe be in poisoned condition immediately.
+     */
+    public int findPoisonedDuration(int[] timeSeries, int duration) {
+
+        if (timeSeries.length == 0) {
+            return 0;
+        }
+
+        int count = 0;
+        for (int i = 0; i < timeSeries.length - 1; i++) {
+            if (timeSeries[i + 1] - timeSeries[i] < duration) {
+                count += timeSeries[i + 1] - timeSeries[i];
+            } else {
+                count += duration;
+            }
+        }
+        return count + duration;
+    }
+
+    /**
      * 448. Find All Numbers Disappeared in an Array
      * Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
      * Find all the elements of [1, n] inclusive that do not appear in this array.
@@ -981,7 +1005,7 @@ public class LeetcodeArray {
      * Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
      * Integers in each row are sorted from left to right.
      * The first integer of each row is greater than the last integer of the previous row.
-     * [[1,   3,  5,  7],[10, 11, 16, 20],[23, 30, 34, 50]], target=3, return true
+     * [[1, 3, 5, 7],[10, 11, 16, 20],[23, 30, 34, 50]], target=3, return true
      */
     public boolean searchMatrix(int[][] matrix, int target) {
         for (int i = 0; i < matrix.length; i++) {
@@ -1006,10 +1030,108 @@ public class LeetcodeArray {
     }
 
     /**
-     * 40. Combination Sum II
-     *
-     * */
+     * 59. Spiral Matrix II
+     * Given an integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
+     * <p>
+     * For example, Given n = 3,
+     * You should return the following matrix:
+     * [
+     * [ 1, 2, 3 ],
+     * [ 8, 9, 4 ],
+     * [ 7, 6, 5 ]
+     * ]
+     */
+    public int[][] generateMatrix(int n) {
+        int[][] matrix = new int[n][n];
+        int round = n % 2 > 0 ? (n / 2 + 1) : n / 2;
+        int next = 0;
+        for (int i = 0; i < round; i++) {
+            int len = n - i - 1;
+            for (int j = i; j <= len; j++) {
+                next++;
+                matrix[i][j] = next; // 0 0-4 || 1 1-3 || 2 2
+            }
+            next--;
 
+            for (int j = i; j <= len; j++) {
+                next++;
+                matrix[j][len] = next; // 4 0-4
+            }
+            next--;
+
+            for (int j = i; j <= len; j++) {
+                next++;
+                matrix[len][len - j + i] = next; // 4 4-0
+            }
+            next--;
+
+            for (int j = i; j < len; j++) {
+                next++;
+                matrix[len - j + i][i] = next; // 0 4-0 len-j
+            }
+        }
+        return matrix;
+    }
+
+    /**
+     * 54. Spiral Matrix
+     * Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+     * For example, Given the following matrix:
+     * [
+     * [ 1, 2, 3 ],
+     * [ 8, 9, 4 ],
+     * [ 7, 6, 5 ]
+     * ]
+     * <p>
+     * You should return [1,2,3,6,9,8,7,4,5].
+     */
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> list = new ArrayList<Integer>();
+        int row = matrix.length;
+        if (matrix == null || row == 0) {
+            return list;
+        }
+
+        int col = matrix[0].length;
+        int min = row > col ? col : row;
+        int round = min % 2 > 0 ? (min / 2 + 1) : min / 2;
+
+        for (int i = 0; i < round; i++) {
+
+            row--;
+            col--;
+
+            if (col == i) {
+                for (int k = i; k <= row; k++) {
+                    list.add(matrix[k][i]);
+                }
+                return list;
+            } else if (row == i) {
+                for (int k = i; k <= col; k++) {
+                    list.add(matrix[i][k]);
+                }
+                return list;
+            } else if (col == row && row == i) {
+                list.add(matrix[row][col]);
+                return list;
+            }
+
+            for (int j = i; j < col; j++) {
+                list.add(matrix[i][j]);
+            }
+            for (int j = i; j < row; j++) {
+                list.add(matrix[j][col]);
+            }
+            for (int j = i; j < col; j++) {
+                list.add(matrix[row][col - j + i]);
+            }
+            for (int j = i; j < row; j++) {
+                list.add(matrix[row - j + i][i]);
+            }
+        }
+
+        return list;
+    }
 
     /**
      * 48. Rotate Image
@@ -1019,9 +1141,9 @@ public class LeetcodeArray {
      */
     public void rotate(int[][] matrix) {
         // 3 * 3
-        // 11-13 12-23 13-33
-        // 21-12 22-22 23-32
-        // 31-11 32-21 33-31
+        // 00-02 12-23 02-22
+        // 10-12 22-22 23-32
+        // 20-11 32-21 22-20
         // 780 456 123
         // 147 258 369
         if (matrix.length == 0) {
@@ -1037,6 +1159,51 @@ public class LeetcodeArray {
             newMatrix[i] = matrixX;
         }
         matrix = newMatrix;
+    }
+
+    public void rotate_2(int[][] matrix) {
+        if (matrix.length == 0) {
+            return;
+        }
+
+        int n = matrix[0].length;
+
+        // 层数 n=4:2 n=3:1 n=5:2 n=6:3
+        int index = n / 2;
+
+        for (int i = 0; i < index; i++) {
+            int key = n - i - 1;
+            int[] cur = new int[n];
+            for (int k = 0; k < n; k++) {
+                cur[k] = matrix[i][k];
+            }
+
+            int j = i;
+            while (j <= key) {
+                matrix[i][j] = matrix[key - j + i][i];
+                j++;
+            }
+
+            j = key;
+            while (j >= i) {
+                matrix[key - j + i][i] = matrix[key][key - j + i];
+                j--;
+            }
+
+            j = i;
+            while (j <= key) {
+                matrix[key][j] = matrix[key - j + i][key];
+                j++;
+            }
+
+            j = key;
+            while (j >= i) {
+                matrix[j][key] = cur[j];
+                j--;
+            }
+
+        }
+
     }
 
     /**
@@ -1126,6 +1293,24 @@ public class LeetcodeArray {
         }
     }
 
+    /**
+     * 21. Merge Two Sorted Lists
+     * Merge two sorted linked lists and return it as a new list.
+     * The new list should be made by splicing together the nodes of the first two lists.
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+
+        return null;
+    }
+
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
 
     public static void main(String[] args) {
         LeetcodeArray arrayCode = new LeetcodeArray();
@@ -1138,6 +1323,8 @@ public class LeetcodeArray {
         int[][] array = {{0, 0, 0, 0, 0, 0}, {0, 0, 1, 1, 0, 0}, {0, 1, 0, 0, 1, 0}, {0, 0, 1, 1, 0, 0}, {0, 0, 0, 0, 0, 0}};
         gameOfLife(array);
 
+        System.out.printf("Xxx");
+        arrayCode.spiralOrder(array);
 
         int[] array_missingNumber = {0, 1, 2, 3, 4};
         System.out.println(missingNumber(array_missingNumber));

@@ -57,6 +57,32 @@ public class LeetcodeMath {
     }
 
 
+    /**
+     * 9. Palindrome Number
+     * <p>
+     * Determine whether an integer is a palindrome. Do this without extra space.
+     */
+    public boolean isPalindrome(int x) {
+
+        String s = String.valueOf(x);
+
+        if (s.length() == 1) {
+            return true;
+        }
+
+        int len = s.length();
+        int round = len / 2;
+
+        for (int i = 0; i < round; i++) {
+            if (s.charAt(i) != s.charAt(len - i - 1)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
     public void testMain() {
 
     }

@@ -11,10 +11,31 @@ public class LeetcodeStringTest {
     LeetcodeString lcString = new LeetcodeString();
 
     @Test
+    public void testLengthOfLastWord() {
+        String s = "Hello world";
+        System.out.println(lcString.lengthOfLastWord(s));
+    }
+
+
+    @Test
+    public void testIsValid() {
+        String s = "[{]}";
+        s = "{}()[{]}";
+        System.out.println(lcString.isValid(s));
+    }
+
+    @Test
     public void testRepeatedSubstringPattern() {
         String str = "bbcb";
-        str = "acbacba"; //false
+
+        str = "ababab"; //false
         System.out.println(lcString.repeatedSubstringPattern(str));
+//        str = "acbacbacbacb";
+//        System.out.println(lcString.repeatedSubstringPattern(str));
+//        str = "zzz"; //false
+//        System.out.println(lcString.repeatedSubstringPattern(str));
+//        str = "zxz"; //false
+//        System.out.println(lcString.repeatedSubstringPattern(str));
     }
 
     @Test

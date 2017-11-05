@@ -30,6 +30,13 @@ public class LeetcodeArrayTest {
 
     }
 
+    @Test
+    public void testFindPoisonedDuration() {
+        int[] array = {1, 4};
+        int duration = 2;
+        System.out.println(lcArray.findPoisonedDuration(array, duration));
+    }
+
 
     @Test
     public void testMissingNumber() {
@@ -39,10 +46,10 @@ public class LeetcodeArrayTest {
     }
 
     @Test
-    public void testRotate(){
+    public void testRotate() {
         int[][] matrix_0 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         int[][] matrix_1 = {};
-        lcArray.rotate(matrix_0);
+        lcArray.rotate_2(matrix_0);
     }
 
     @Test

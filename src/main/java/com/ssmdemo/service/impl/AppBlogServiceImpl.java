@@ -22,17 +22,17 @@ import java.util.Map;
 public class AppBlogServiceImpl implements AppBlogService {
 
     @Override
-    public List<AppChannel> getAppChannelList() {
+    public List<AppChannel> listAppChannel() {
         return appChannelDao.queryAll();
     }
 
     @Override
-    public List<AppTheme> getAppThemeList() {
+    public List<AppTheme> listAppTheme() {
         return appThemeDao.queryAll();
     }
 
     @Override
-    public Map<String, List<AppTheme>> getAppThemeByChannel() {
+    public Map<String, List<AppTheme>> listAppThemeByChannel() {
         Map<String, List<AppTheme>> map = new HashMap<String, List<AppTheme>>();
 
         // appThemeList must be ordered

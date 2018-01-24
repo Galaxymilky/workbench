@@ -30,12 +30,12 @@ public class AppUserController {
     @RequestMapping(value = "/blog", method = RequestMethod.GET)
     public String blog(Model model, Integer offset, Integer limit) {
         LOG.info("invoke -------- /appuser/blog");
-        List<AppChannel> channelList = appBlogService.getAppChannelList();
-        List<AppTheme> themesList = appBlogService.getAppThemeList();
+        List<AppChannel> channelList = appBlogService.listAppChannel();
+        List<AppTheme> themesList = appBlogService.listAppTheme();
         model.addAttribute("channelList", channelList);
         model.addAttribute("themesList", themesList);
 
-        Map<String, List<AppTheme>> map = appBlogService.getAppThemeByChannel();
+        Map<String, List<AppTheme>> map = appBlogService.listAppThemeByChannel();
         model.addAttribute("map", map);
 
         return "jeecms/loginon";
@@ -64,7 +64,7 @@ public class AppUserController {
         LOG.info("invoke -------- /appuser/list");
         offset = offset == null ? 0 : offset; // 从第几行开始
         limit = limit == null ? 15 : limit; // 检索多少行
-        List<AppUser> list = appUserService.getAppUserList(offset, limit);
+        List<AppUser> list = appUserService.listAppUser(offset, limit);
         model.addAttribute("userList", list);
         return "appuser/list";
     }
@@ -74,7 +74,7 @@ public class AppUserController {
         LOG.info("invoke -------- /appuser/newlist");
         offset = offset == null ? 0 : offset;
         limit = limit == null ? 15 : limit;
-        List<AppUser> list = appUserService.getAppUserList(offset, limit);
+        List<AppUser> list = appUserService.listAppUser(offset, limit);
         model.addAttribute("userList", list);
         return "appuser/newlist";
     }
@@ -88,7 +88,7 @@ public class AppUserController {
         try {
             pager.init(request);
 
-            List<AppUser> list = appUserService.getAppUserListAjax(pager);
+            List<AppUser> list = appUserService.listAppUserAjax(pager);
             pager.setData(list);
 
             int count = appUserService.getTotalCount();

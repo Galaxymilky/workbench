@@ -9,12 +9,15 @@ import java.util.List;
  * Created by dynam on 2017/5/1.
  */
 public interface AppUserService {
+
     int multiInsert(AppUser appUser);
+    
 
-    List<AppUser> getAppUserList(int offset, int limit);
+    List<AppUser> listAppUser(int offset, int limit);
 
 
-    List<AppUser> getAppUserListAjax(DataPager page);
+    List<AppUser> listAppUserAjax(DataPager page);
+
 
     int getTotalCount();
 

@@ -9,9 +9,9 @@ import java.util.*;
  * Created by dynamicniu on 2017/5/23.
  */
 public interface AppBlogService {
-    List<AppChannel> getAppChannelList();
+    List<AppChannel> listAppChannel();
 
-    List<AppTheme> getAppThemeList();
+    List<AppTheme> listAppTheme();
 
-    Map<String, List<AppTheme>> getAppThemeByChannel();
+    Map<String, List<AppTheme>> listAppThemeByChannel();
 }

@@ -25,7 +25,7 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public List<AppUser> getAppUserList(int offset, int limit) {
+    public List<AppUser> listAppUser(int offset, int limit) {
         List<AppUser> result = new ArrayList<>();
 
         result = appUserDao.queryAll(offset, limit);
@@ -34,7 +34,7 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public List<AppUser> getAppUserListAjax(DataPager pager) {
+    public List<AppUser> listAppUserAjax(DataPager pager) {
         List<AppUser> result = new ArrayList<>();
         int offset = (pager.getPageIndex() - 1) * 10;
         int limit = pager.getPageSize();

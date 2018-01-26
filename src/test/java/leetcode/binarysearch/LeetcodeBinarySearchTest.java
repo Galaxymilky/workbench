@@ -19,4 +19,15 @@ public class LeetcodeBinarySearchTest {
         System.out.println(res);
     }
 
+    @Test
+    public void isSubsequence() {
+        String s = "leeeeetcode";
+        String t = "yyyyylyyyyyyyeyyyyyyyeyyyeyyyytyyyyycyyyyyyoyyyyyyyyyydyyyyey";
+
+        s = "letcode";
+        t = "le2tco1de11";
+        boolean bool = lb.isSubsequence(s, t);
+        System.out.println(bool);
+    }
+
 }

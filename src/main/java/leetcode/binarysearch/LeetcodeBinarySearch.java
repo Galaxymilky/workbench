@@ -26,35 +26,27 @@ public class LeetcodeBinarySearch {
     }
 
     public boolean isSubsequenceBinarySearch(String s, String t) {
-        int indexT = 0;
-        int indexS = 0;
-        char[] chars = s.toCharArray();
-        for (int i = 0; i < s.length(); i++) {
-            indexT = t.indexOf(chars[indexS]);
-            if (indexT > -1 && indexT >= 1) {
-                indexS++;
-                continue;
-            } else {
-                return false;
-            }
-        }
-        return true;
+        return false;
     }
 
     public boolean isSubsequenceTwoPointers(String s, String t) {
-        int indexT = 0;
+        if (s.length() == 0) {
+            return true;
+        }
+
         int indexS = 0;
-        char[] chars = s.toCharArray();
-        for (int i = 0; i < s.length(); i++) {
-            indexT = t.indexOf(chars[indexS]);
-            if (indexT > -1 && indexT >= 1) {
+        int indexT = 0;
+        while (indexS < s.length()) {
+            if (s.charAt(indexS) == t.charAt(indexT)) {
                 indexS++;
-                continue;
+                if (indexS == s.length()) {
+                    return true;
+                }
             } else {
-                return false;
+                indexT++;
             }
         }
-        return true;
+        return false;
     }
 
     public int findRadius(int[] houses, int[] heaters) {

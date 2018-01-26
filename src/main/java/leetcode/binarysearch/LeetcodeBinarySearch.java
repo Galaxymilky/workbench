@@ -6,6 +6,57 @@ import java.util.Arrays;
  * Created by dynamicniu on 2017/11/5.
  */
 public class LeetcodeBinarySearch {
+    public boolean isSubsequence(String s, String t) {
+        if (s.length() > t.length()) {
+            return false;
+        }
+
+        int indexT = 0;
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < s.length(); i++) {
+            indexT = t.indexOf(chars[i]);
+            if (indexT > -1) {
+                t = t.substring(indexT + 1, t.length());
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isSubsequenceBinarySearch(String s, String t) {
+        int indexT = 0;
+        int indexS = 0;
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < s.length(); i++) {
+            indexT = t.indexOf(chars[indexS]);
+            if (indexT > -1 && indexT >= 1) {
+                indexS++;
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isSubsequenceTwoPointers(String s, String t) {
+        int indexT = 0;
+        int indexS = 0;
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < s.length(); i++) {
+            indexT = t.indexOf(chars[indexS]);
+            if (indexT > -1 && indexT >= 1) {
+                indexS++;
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public int findRadius(int[] houses, int[] heaters) {
 
         if (houses.length == 0 || heaters.length == 0) {

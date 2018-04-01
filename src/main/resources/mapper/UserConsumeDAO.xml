@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pait.consumeAnnual.dao.UserConsumeDAO">
+
+    <!-- 插入数据 -->
+    <insert id="insertUserConsume">
+        INSERT INTO app_user_consume
+          (user_name, login_name, user_phone, priority)
+        VALUES
+          (#{userName}, #{loginName}, #{userPhone}, #{priority})
+    </insert>
+
+    <!-- 查询总数 -->
+    <select id="countUserConsume" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM app_user_consume
+    </select>
+    <select id="queryAll" resultType="com.pait.consumeAnnual.dto.UserConsume">
+        SELECT id_user_consume as 'idUserConsume',
+               user_id as 'userId',
+               order_id as 'orderId',
+               consume_amount as 'consumeAmount',
+               consume_address as 'consumeAddress',
+               consume_time as 'consumeTime',
+               consume_time as 'consumeTimeStr',
+               created_by as 'createdBy',
+               pay_method as 'payMethod',
+               product_desc as 'productDesc',
+               product_type as 'productType',
+               memo as 'memo',
+               pay_platform as 'payPlatform'
+          FROM app_user_consume ORDER BY user_id ASC limit #{offset}, #{limit}
+    </select>
+
+    <select id="listAllData" resultType="com.pait.consumeAnnual.dto.UserConsume">
+        SELECT id_user_consume as 'idUserConsume',
+               user_id as 'userId',
+               order_id as 'orderId',
+               consume_amount as 'consumeAmount',
+               consume_address as 'consumeAddress',
+               consume_time as 'consumeTime',
+               consume_time as 'consumeTimeStr',
+               created_by as 'createdBy',
+               pay_method as 'payMethod',
+               product_desc as 'productDesc',
+               product_type as 'productType',
+               memo as 'memo',
+               pay_platform as 'payPlatform'
+          FROM app_user_consume
+         ORDER BY consume_time DESC
+    </select>
+
+    <!--
+
+    private Long id_user_consume;
+    private Long user_id;
+    private Double consume_amount;
+    private String consume_address;
+    private String pay_method;
+    private String product_desc;
+    private String product_type;
+    private java.sql.Timestamp created_time;
+    private String created_by;
+    private String memo;
+    private Long priority;
+    private String pay_platform;
+    private String consume_time;
+
+    <resultMap id="userConsumeMap" type="UserConsume">
+        <id column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="priority" property="priority" jdbcType="INTEGER"/>
+        <result column="user_phone" property="userPhone" jdbcType="BIGINT"/>
+        <association property="totalCount" select="queryTotalCount" jdbcType="BIGINT"/>
+    </resultMap>
+    -->
+
+
+    <!-- 更新 priority -->
+    <update id="updatePriority">
+        UPDATE app_user_consume SET priority = #{newPriority}
+    </update>
+
+    <!-- 条件查询 -->
+    <select id="listUserConsumeByCondition" resultType="UserConsume">
+        SELECT id_user_consume,
+        consume_amount,
+        consume_address,
+        consume_time,
+        pay_method,
+        pay_platform,
+        product_desc,
+        product_type,
+        created_time,
+        created_by
+        FROM app_user_consume
+        WHERE 1 = 1
+        <if test="priority != null">AND priority = #{priority}</if>
+        <if test="userID != null">AND user_id = #{userID}</if>
+        <if test="payMethod != null">AND pay_method = #{payMethod}</if>
+        <if test="payPlatform != null">AND pay_platform = #{payPlatform}</if>
+        limit #{offset}, #{limit}
+    </select>
+
+    <!-- 模糊查询 -->
+    <select id="listUserConsumeByFuzzy" resultType="UserConsume">
+        SELECT * FROM app_user_consume WHERE 1 = 1
+        <!--
+        AND (priority LIKE concat('%', #{priority}, '%')
+        or user_name LIKE concat('%', #{userName}, '%')
+        or user_phone LIKE concat('%', #{userPhone}, '%')
+        or login_name LIKE concat('%', #{loginName}, '%'))
+        -->
+        <bind name="priority" value="'%' + _parameter.priority + '%'"/>
+        <bind name="userName" value="'%' + _parameter.userName + '%'"/>
+        <bind name="userPhone" value="'%' + _parameter.userPhone + '%'"/>
+        <bind name="loginName" value="'%' + _parameter.loginName + '%'"/>
+
+        AND (priority LIKE #{priority}
+        or user_name LIKE #{userName}
+        or user_phone LIKE #{userPhone}
+        or login_name LIKE #{loginName})
+
+        ORDER BY user_id ASC limit #{offset}, #{limit}
+    </select>
+
+
+    <!-- 定义缓存 -->
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+</mapper>

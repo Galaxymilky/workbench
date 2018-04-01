@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" href="TaskLogView.css" type="text/css"/>
+
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="TaskLogViewPlugin.js"></script>
+    <script type="text/javascript" src="TaskLogView.js"></script>
+
+    <title>jQuery 浮动轮播插件示例</title>
+</head>
+<body>
+<h1>jQuery 浮动轮播插件示例</h1>
+<h2>默认配置：</h2>
+
+<div class="carousel" id="carousel-default">
+</div>
+
+<button onclick="initPageView()">开始测试</button>
+
+</body>
+<script type="text/javascript">
+    var htmlStr = '';
+
+    var initPageView = function () {
+        generateHtmlCode();
+
+        $('#carousel-default').html(htmlStr);
+        htmlStr = '';
+
+        $('#carousel-default').floatingCarousel();
+
+    }
+
+    var generateHtmlCode = function () {
+        var date = '2017-01-02'
+
+        htmlStr += '<ul>';
+        for (var i = 0; i < 15; i++) {
+            htmlStr += '<li><span>';
+            htmlStr += i + '<br>';
+            htmlStr += i + '<br>';
+            htmlStr += i + '<br>';
+            htmlStr += date;
+            htmlStr += '</span></li>';
+        }
+        htmlStr += '</ul>';
+    }
+
+</script>
+</html>
+

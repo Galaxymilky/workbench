@@ -60,6 +60,8 @@ function validateUserInfo() {
     var loginName = $('#inputLoginName').val();
     var password = $('#inputPassword').val();
 
+    alert(contextPath);
+
     $.ajax({
         type: "POST",
         url: contextPath + '/loginAction/signin',
@@ -70,7 +72,7 @@ function validateUserInfo() {
         error: function (request) {
 
         },
-        success: function (result) {{
+        success: function (result) {
             if (result.success) {
                 alert("Error");
             }

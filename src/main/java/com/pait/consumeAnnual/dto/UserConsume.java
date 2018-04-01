@@ -18,6 +18,7 @@ public class UserConsume {
     private java.sql.Timestamp consumeTime;
     private String consumeTimeStr;
     private String orderId;
+    private int hashCode;
 
     public Long getIdUserConsume() {
         return idUserConsume;
@@ -137,5 +138,13 @@ public class UserConsume {
 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
+    }
+
+    public int getHashCode() {
+        return hashCode;
+    }
+
+    public void setHashCode(int hashCode) {
+        this.hashCode = hashCode;
     }
 }

@@ -82,7 +82,22 @@ function getTaskPool() {
         "payPlatform": payPlatform
     }
 
-    $.post(contextPath + "/userConsume/getTaskPool", params, function(data){
+    $.post(contextPath + "/userConsume/getTaskPool", params, function (data) {
+        alert(data.result);
+    })
+}
+
+function batchTaskPool() {
+    var payPlatform = '1'
+    var consumeAddress = '南阳'
+    var createdBy = 'NIUBEN'
+    var params = {
+        "payPlatform": payPlatform,
+        "consumeAddress": consumeAddress,
+        "createdBy": createdBy
+    }
+
+    $.post(contextPath + "/userConsume/batchTaskPool", params, function (data) {
         alert(data.result);
     })
 }

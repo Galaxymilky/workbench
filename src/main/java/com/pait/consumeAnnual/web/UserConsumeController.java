@@ -2,11 +2,8 @@ package com.pait.consumeAnnual.web;
 
 
 import com.pait.consumeAnnual.dao.UserConsumeDAO;
-import com.pait.taskPool.thread.Consumer;
-import com.pait.taskPool.thread.Porter;
+import com.pait.taskPool.thread.*;
 
-import com.pait.taskPool.thread.SingleExecutorService;
-import com.pait.taskPool.thread.SinglePorter;
 import com.ssmdemo.common.DataPager;
 import com.pait.consumeAnnual.dto.UserConsume;
 import com.pait.consumeAnnual.service.UserConsumeService;
@@ -91,15 +88,15 @@ public class UserConsumeController {
 
         Map<String, Object> result = new HashMap<String, Object>();
 
-        System.out.println("测试开始!");
+        System.out.println("开始单个获取任务!");
 
-        String payPlatformStr = request.getParameter("payPlatform") == null ? "PP1" : "PP4";
+        String payPlatform = request.getParameter("payPlatform") == null ? "PP1" : "PP4";
 
         int t = new Random().nextInt(10);
         if (t >= 5) {
-            payPlatformStr = "PP1";
+            payPlatform = "PP1";
         } else {
-            payPlatformStr = "PP4";
+            payPlatform = "PP4";
         }
 
         Consumer consumer = null;
@@ -107,13 +104,15 @@ public class UserConsumeController {
             ExecutorService executorService = SingleExecutorService.getInstance();
             if (porter == null) {
                 System.out.println("Create Porter");
-                porter = new Porter(buffer4, buffer1, userConsumeDAO);
+                porter = new Porter(buffer4, buffer3, buffer1, userConsumeDAO);
                 executorService.execute(porter);
             }
 
-            if (Porter.PAY_PLATFORM_1.equals(payPlatformStr)) {
+            if (Porter.PAY_PLATFORM_1.equals(payPlatform)) {
                 consumer = new Consumer(buffer1, Porter.PAY_PLATFORM_1);
-            } else if (Porter.PAY_PLATFORM_4.equals(payPlatformStr)) {
+            } else if (Porter.PAY_PLATFORM_3.equals(payPlatform)) {
+                consumer = new Consumer(buffer3, Porter.PAY_PLATFORM_4);
+            } else if (Porter.PAY_PLATFORM_4.equals(payPlatform)) {
                 consumer = new Consumer(buffer4, Porter.PAY_PLATFORM_4);
             }
 
@@ -133,11 +132,65 @@ public class UserConsumeController {
 //        return "userConsume/list";
     }
 
+    @RequestMapping(value = "/batchTaskPool", method = RequestMethod.POST)
+    public Map<String, Object> batchTaskPool(Model model, HttpServletRequest request, HttpServletResponse response) {
+        LOG.info("invoke -------- /userConsume/batchTaskPool");
+
+        Map<String, Object> result = new HashMap<String, Object>();
+
+
+        String payPlatform = "PP3";
+        String createdBy = request.getParameter("createdBy");
+        String consumeAddress = request.getParameter("consumeAddress");
+
+        System.out.println("开始批量获取任务! 参数：payPlatform=" + payPlatform + ",createdBy=" + createdBy + ".consumeAddress=" + consumeAddress);
+
+        int hashCode = getTargetHash(payPlatform, createdBy, consumeAddress);
+        System.out.println("目标HashCode：" + hashCode);
+
+        ConsumerPrimer consumer = null;
+        try {
+            ExecutorService executorService = SingleExecutorService.getInstance();
+            if (porter == null) {
+                System.out.println("Create Porter");
+                porter = new Porter(buffer4, buffer3, buffer1, userConsumeDAO);
+                executorService.execute(porter);
+            }
+
+            if (Porter.PAY_PLATFORM_3.equals(payPlatform)) {
+                consumer = new ConsumerPrimer(buffer3, hashCode);
+            } else {
+                return null;
+            }
+
+            Future future = executorService.submit(consumer);
+            if (future.get() == null) {
+                System.out.println("暂时没有任务，清稍后再点击获取");
+            } else {
+                System.out.println(future.get());
+                System.out.println(future.isDone());
+            }
+            result.put("result", "3");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    private static int getTargetHash(String v1, String v2, String v3) {
+        String s = v1 + v2 + v3;
+        return s.hashCode();
+    }
 
 
     private BlockingQueue<UserConsume> buffer1 = new LinkedBlockingQueue<>();
 
+    private BlockingQueue<UserConsume> buffer3 = new LinkedBlockingQueue<>();
+
     private BlockingQueue<UserConsume> buffer4 = new LinkedBlockingQueue<>();
+
+    private BlockingQueue bufferPriority = new PriorityBlockingQueue();
 
     private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 

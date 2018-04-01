@@ -64,7 +64,7 @@ function loadData() {
             "dataType": "json"
         },
         "stateSave": false,	//保存状态
-        "order": [[1, "desc"]], //默认第i+1列排序
+        // "order": [[1, "desc"]], //默认第i+1列排序
         rowId: 'id'//数据标识,
         //"dom": '<"toolbar">'
     });

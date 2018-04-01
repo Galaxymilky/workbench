@@ -82,6 +82,15 @@ public class UserConsumeController {
             ex.printStackTrace();
         }
 
+        return pager;
+    }
+
+    @RequestMapping(value = "/getTaskPool", method = RequestMethod.POST)
+    public Map<String, Object> getTaskPool(Model model, HttpServletRequest request, HttpServletResponse response) {
+        LOG.info("invoke -------- /userConsume/getTaskPool");
+
+        Map<String, Object> result = new HashMap<String, Object>();
+
         System.out.println("测试开始!");
 
         String payPlatformStr = request.getParameter("payPlatform") == null ? "PP1" : "PP4";
@@ -115,33 +124,12 @@ public class UserConsumeController {
                 System.out.println(future.get());
                 System.out.println(future.isDone());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return pager;
-    }
-
-    @RequestMapping(value = "/getTaskPool", method = RequestMethod.POST)
-    public Model getTaskPool(Model model, HttpServletRequest request, HttpServletResponse response) {
-        LOG.info("invoke -------- /userConsume/getTaskPool");
-
-        Map<String, Object> params = new HashMap<String, Object>();
-
-        Consumer consumer = null;
-        try {
-            String payPlatformStr = request.getParameter("payPlatform") == null ? "1" : "0";
-//            int payPlatform = Integer.parseInt(payPlatformStr);
-//            if (taskType == 0) {
-//                taskType = new Random(System.currentTimeMillis()).nextInt();
-//            }
-
-
-            model.addAttribute("result", "3");
+            result.put("result", "3");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return model;
+        return result;
 //        return "userConsume/list";
     }
 

@@ -50,7 +50,7 @@ public class UserConsumeServiceImpl implements UserConsumeService {
     @Override
     public List<UserConsume> listUserConsumePager(DataPager pager) {
         List<UserConsume> result = new ArrayList<UserConsume>();
-        int offset = (pager.getPageIndex() - 1) * 10;
+        int offset = (pager.getPageIndex() - 1) * pager.getPageSize();
         int limit = pager.getPageSize();
         String srchVal = pager.getSearchVal();
         if (StrUtils.isNullOrEmpty(srchVal)) {

@@ -28,7 +28,7 @@
                product_type as 'productType',
                memo as 'memo',
                pay_platform as 'payPlatform'
-          FROM app_user_consume ORDER BY user_id ASC limit #{offset}, #{limit}
+          FROM app_user_consume ORDER BY consume_time ASC limit #{offset}, #{limit}
     </select>
 
     <select id="listAllData" resultType="com.pait.consumeAnnual.dto.UserConsume">

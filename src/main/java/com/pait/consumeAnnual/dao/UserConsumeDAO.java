@@ -1,6 +1,7 @@
 package com.pait.consumeAnnual.dao;
 
 import com.pait.consumeAnnual.dto.UserConsume;
+import com.pait.consumeAnnual.dto.UserConsumeDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -84,4 +85,8 @@ public interface UserConsumeDAO {
                                             @Param("userPhone") String userPhone, @Param("loginName") String loginName);
 
     int countUserConsume();
+//
+//    List<UserConsume> getNewData();
+//
+    List<UserConsume> listAllData();
 }

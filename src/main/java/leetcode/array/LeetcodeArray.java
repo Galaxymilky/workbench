@@ -36,28 +36,66 @@ public class LeetcodeArray {
         return j;
     }
 
-    public int removeElement_laji(int[] nums, int val) {
-        if (nums.length == 0 || nums == null) {
-            return 0;
-        }
-        int index = 0;
-        for (int i = 0; i < nums.length - index; i++) {
-            if (val == nums[i]) {
-
-                index++;
-
-                for (int j = i; j < nums.length - 1; j++) {
-                    nums[j] = nums[j + 1];
-                }
-                if (nums[i] == val && i != nums.length - index) {
-                    i--;
-                }
-
+    public int removeElementTwoPoint(int[] nums, int val) {
+        int i = 0;
+        int n = nums.length;
+        while (i < n) {
+            if (nums[i] == val) {
+                nums[i] = nums[n - 1];
+                n--;
+            } else {
+                i++;
             }
         }
-        return nums.length - index;
+        return i;
     }
 
+    /**
+     * Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+     * <p>
+     * Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
+     * <p>
+     * Note:
+     * You are not suppose to use the library's sort function for this problem.
+     */
+    public void sortColorsBrust(int[] nums) {
+        int nums_0 = 0;
+        int nums_1 = 0;
+        int nums_2 = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                nums_0++;
+            } else if (nums[i] == 1) {
+                nums_1++;
+            } else {
+                nums_2++;
+            }
+        }
+
+
+        for (int i = 0; i < nums.length; i++) {
+            if (i < nums_0) {
+                nums[i] = 0;
+            } else if (i < nums_1 + nums_0) {
+                nums[i] = 1;
+            } else if (i < nums.length) {
+                nums[i] = 2;
+            }
+        }
+    }
+
+    public void sortColors(int[] nums) {
+        int i = 0;
+        int n = nums.length;
+        while (i < n) {
+            if (nums[i] == nums[n - 1]) {
+                nums[i+1] = nums[n-1];
+                i++;
+            } else {
+                n--;
+            }
+        }
+    }
 
     /**
      * 189. Rotate Array

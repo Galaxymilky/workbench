@@ -6,6 +6,23 @@ import java.util.Arrays;
  * Created by dynamicniu on 2017/11/5.
  */
 public class LeetcodeBinarySearch {
+//    public int searchInsert(int[] nums, int target) {
+//        int index = nums.length / 2;
+//        if (nums[index] > target) {
+//            binarySearch();
+//        } else {
+//            binarySearch(index, );
+//        }
+//
+//        return -1;
+//    }
+
+//    private int binarySearch(int pre, int end, int[] nums) {
+//        if (nums[]) {
+//
+//        }
+//    }
+
     public boolean isSubsequence(String s, String t) {
         if (s.length() > t.length()) {
             return false;

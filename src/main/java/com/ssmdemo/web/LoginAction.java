@@ -33,14 +33,14 @@ public class LoginAction {
         LOG.info("invoke -------- /loginAction/signin [" + loginName + "]");
 
         if (StrUtils.isNullOrEmpty(loginName)) {
-            return "redirect:/jsp/signin.jsp";
+            return "redirect:/html/signin.html";
         }
 
         AppUser appUser = appUserSrv.getAppUserByLoginName(loginName);
 
         if (appUser == null) {
             model.addAttribute("LOGIN_STATUS", "USER_NOT_EXITS");
-            return "redirect:/jsp/signin.jsp";
+            return "redirect:/html/signin.html";
         }
 
         // 获取加密内容
@@ -55,6 +55,16 @@ public class LoginAction {
 
         model.addAttribute("LOGIN_STATUS", "WRONG_PSW");
         return "redirect:/jsp/signin.jsp";
+    }
+
+    @RequestMapping(value = "/signin", method = RequestMethod.POST)
+    @ResponseBody
+    public String signin(HttpServletRequest request, HttpServletResponse response, String loginName, String password) {
+        LOG.info("invoke -------- /loginAction/login");
+
+        String resp = "{\"accessGranted\":true}";
+
+        return resp;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

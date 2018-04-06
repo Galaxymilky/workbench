@@ -138,6 +138,15 @@ public class UserConsumeController {
 
         Map<String, Object> result = new HashMap<String, Object>();
 
+        Integer taskNum = 1;
+
+        String taskRate = "";
+        String taskDone = "1,2,3";
+        String registerStart = "1";
+        String registerEnd = "1";
+        String secondOrg = "";
+
+
 
         String payPlatform = "PP3";
         String createdBy = request.getParameter("createdBy");

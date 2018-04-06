@@ -15,11 +15,8 @@ function getRootPath() {
 }
 
 function getContextPath() {
-    var curPath = window.document.location.href;
-    var pathName = window.document.location.pathname;
-
-    var pos = curPath.indexOf(pathName);
-    contextPath = curPath.substring(0, pos);
-
-    return contextPath;
+    var path = window.document.location.href;
+    var path_name = window.document.location.pathname;
+    var pos = path.indexOf(path_name);
+    return path.substring(0, pos);
 }

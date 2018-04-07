@@ -45,6 +45,6 @@
     </filter-mapping>
     
     <welcome-file-list>
-        <welcome-file>jsp/signin.jsp</welcome-file>
+        <welcome-file>html/signin.html</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -3,6 +3,8 @@ package com.ssmdemo.web;
 import com.ssmdemo.entity.AppUser;
 import com.ssmdemo.service.AppUserService;
 import com.ssmdemo.service.impl.AppUserServiceImpl;
+import com.ssmdemo.util.JSONUtil;
+import com.ssmdemo.util.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,8 @@ import work.utils.StrUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 /**
  * Created by niu_ben on 2017/5/5.
@@ -28,8 +30,8 @@ import java.io.PrintWriter;
 @RequestMapping("/loginAction")
 public class LoginAction {
 
-    @RequestMapping("/signin")
-    public String signin(Model model, String loginName, String password) {
+    @RequestMapping("/sign")
+    public String sign(Model model, String loginName, String password) {
         LOG.info("invoke -------- /loginAction/signin [" + loginName + "]");
 
         if (StrUtils.isNullOrEmpty(loginName)) {
@@ -47,7 +49,7 @@ public class LoginAction {
         String rPassword = appUser.getPassword() == null ? "" : appUser.getPassword();
         // 对用户输入的密码进行加密
         String dPassword = EncryptUtil.EncryptPassword(password);
-        if(true || rPassword.equals(dPassword)){
+        if (true || rPassword.equals(dPassword)) {
             model.addAttribute("LOGIN_STATUS", "SUCCESS");
             model.addAttribute("appUser", appUser);
             return "redirect:/jsp/index.jsp";
@@ -57,14 +59,37 @@ public class LoginAction {
         return "redirect:/jsp/signin.jsp";
     }
 
-    @RequestMapping(value = "/signin", method = RequestMethod.POST)
+    private final String LOGIN_SUCCESS = "success";
+    private final String LOGIN_FAILED = "failed";
+
+    @RequestMapping(value = "/signin", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String signin(HttpServletRequest request, HttpServletResponse response, String loginName, String password) {
+    public String signin(HttpServletRequest request, HttpServletResponse response, String loginName, String passwd) {
         LOG.info("invoke -------- /loginAction/login");
+        Map<String, Object> resMap = new HashMap<String, Object>();
+        resMap.put("resultCode", LOGIN_FAILED);
+        try {
+            AppUser appUser = appUserSrv.getAppUserByLoginName(loginName);
+            if (appUser == null) {
+                resMap.put("resultMsg", "用户不存在");
+                return JsonUtils.transObject2Json(resMap);
+            }
 
-        String resp = "{\"accessGranted\":true}";
+            // 获取加密内容
+            String rPassword = appUser.getPassword() == null ? "" : appUser.getPassword();
+            // 对用户输入的密码进行加密
+            String dPassword = EncryptUtil.EncryptPassword(passwd);
+            if (true || rPassword.equals(dPassword)) {
+                resMap.put("resultCode", LOGIN_SUCCESS);
+                resMap.put("resultMsg", "登录成功");
+                resMap.put("accessGranted", true);
+                return JsonUtils.transObject2Json(resMap);
+            }
 
-        return resp;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonUtils.transObject2Json(resMap);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -78,7 +103,7 @@ public class LoginAction {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpServletRequest request, HttpServletResponse response){
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
         return "";
     }
 

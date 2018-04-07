@@ -39,7 +39,7 @@
             </label>
         </div>
 
-        <button id="inputSubmit" class="btn btn-lg btn-primary btn-block" onclick="validateUserInfo()">Sign in</button>
+        <button id="inputSubmit" class="btn btn-lg btn-primary btn-block" onclick="validateUserInfo(); return false">Sign in</button>
     </form>
 
 </div>
@@ -53,20 +53,27 @@
             'password': $('#inputPassword').val()
         }
 
-        var data = $("#login-form");
+        var data = $("#login-form").serialize();
+
+//        $.post(url, params, function (data) {
+//            alert(data);
+//        });
 
         $.ajax({
             type: "POST",
             url: url,
+            async: false,
             data: params,
 //            data: data.serialize(),
 //            dataType: 'json',
             error: function (request) {
-
+                alert(result.resultCode);
             },
             success: function (result) {
-                if (result.success) {
-                    alert("Error");
+                alert(result.resultCode);
+                if (result.resultCode == 'success') {
+                    alert("success");
+                    window.href = 'index.html';
                 }
             }
         });

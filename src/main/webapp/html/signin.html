@@ -65,15 +65,14 @@
             async: false,
             data: params,
 //            data: data.serialize(),
-//            dataType: 'json',
-            error: function (request) {
-                alert(result.resultCode);
+            dataType: 'json',
+            error: function (result) {
+                alert(result.resultMsg);
             },
             success: function (result) {
-                alert(result.resultCode);
+                alert(result.resultMsg);
                 if (result.resultCode == 'success') {
-                    alert("success");
-                    window.href = 'index.html';
+                    window.location.href = 'html/index.html';
                 }
             }
         });

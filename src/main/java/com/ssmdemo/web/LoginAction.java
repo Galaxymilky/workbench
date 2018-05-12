@@ -64,10 +64,12 @@ public class LoginAction {
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String signin(HttpServletRequest request, HttpServletResponse response, String loginName, String passwd) {
+    public String signin(HttpServletRequest request, HttpServletResponse response, String loginName, String password) {
         LOG.info("invoke -------- /loginAction/login");
+        response.setContentType("text/html;charset=utf-8");
         Map<String, Object> resMap = new HashMap<String, Object>();
         resMap.put("resultCode", LOGIN_FAILED);
+        String passwd = request.getParameter("password");
         try {
             AppUser appUser = appUserSrv.getAppUserByLoginName(loginName);
             if (appUser == null) {

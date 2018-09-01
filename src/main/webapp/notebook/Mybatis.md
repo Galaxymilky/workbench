@@ -1,4 +1,7 @@
 ### MyBatis
+
+ MyBatis 来源于 apache 开源项目 iBatis，在2010年由 apache software foundation 迁移到 google code，改名 MyBatis。
+
  #### MyBatis中使用#和$书写占位符有什么区别？
  答：#将传入的数据都当成一个字符串，会对传入的数据自动加上引号；$将传入的数据直接显示生成在SQL中。注意：使用$占位符可能会导致SQL注射攻击，能用#的地方就不要使用$，写order by子句的时候应该用$而不是#。
  
@@ -149,3 +152,13 @@
  #### 为什么 MyBatis 是半自动 ORM 映射工具，与全自动有什么区别；
  答：Hibernate 全自动，使用 Hibernate 查询关联对象或者关联集合对象，可根据对象模型直接获取，所以是全自动；
      MyBatis 在查询关联对象时，需要手工编写sql，所以是半自动。
+     
+ ### MyBatis 逆向工程
+
+ ### MyBatis 缓存机制，整合 ehcache
+ 
+ ### MyBatis 二级缓存处理
+ 
+ ### MyBatis、Spring、SpringMVC 整合
+ 
+ ### MyBatis 自定义拦截器

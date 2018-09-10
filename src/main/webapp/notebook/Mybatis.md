@@ -8,7 +8,7 @@
  #### 解释一下MyBatis中命名空间（namespace）的作用。
  答：在大型项目中，可能存在大量的SQL语句，这时候为每个SQL语句起一个唯一的标识（ID）就变得并不容易了。为了解决这个问题，在MyBatis中，可以为每个映射文件起一个唯一的命名空间，这样定义在这个映射文件中的每个SQL语句就成了定义在这个命名空间中的一个ID。只要我们能够保证每个命名空间中这个ID是唯一的，即使在不同映射文件中的语句ID相同，也不会再产生冲突了。
  
- #### 除了常见 select|insert|update|delete 外，还有哪些标签？
+ #### 除了常见 select | insert | update | delete 外，还有哪些标签？
  答：除了9个动态SQL标签，还有
  - resultMap：
  - parameterMap：
@@ -156,9 +156,72 @@
  ### MyBatis 逆向工程
 
  ### MyBatis 缓存机制，整合 ehcache
+ 答：可以针对单个 Mapper 设置缓存，使用 cache 标签
+ 
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
  
  ### MyBatis 二级缓存处理
  
  ### MyBatis、Spring、SpringMVC 整合
  
  ### MyBatis 自定义拦截器
+ 
+ 
+ ### 基础查询
+ 
+ - 查询 t_customer 表 memo_1 和 memo_2 字段和最长的记录;
+    
+    SELECT
+      concat(memo_1, memo_2),
+      id
+    FROM t_customer
+    WHERE length(concat(memo_1, memo_2)) = (
+      SELECT max(length(concat(a.memo_1, a.memo_2)))
+      FROM t_customer a
+    ;
+    
+ - 查询 t_customer 没有下过订单(t_order)的客户;
+    
+    select * from t_customer c 
+    left join t_order p on c.id_customer = p.id_customer
+    where p.id_order is null
+    ;
+ 
+ - 查询 t_customer 既买过 a 又买过 b 的客户;
+ 
+   SELECT
+     c.id_customer,
+     c.name
+   FROM t_customer c
+   WHERE exists(select 1 from t_order p1 where p1.id_item = 'a' and c.id_customer = p1.id_customer)
+     and exists(select 1 from t_order p2 where p2.id_item = 'b' and c.id_customer = p1.id_customer)
+   ;
+    
+ - 查询 t_order 表，所有商品的第一个购买的客户;
+ 
+    select
+    b.id,
+    SUBSTRING_INDEX(GROUP_CONCAT(b.givenName ),',',1) name
+    from
+    (
+     select g.id, g.name, s.givenName
+     from Groups g, StudentInGroup sg, Student s
+     where g.id = sg.groupId and sg.StudentId = s.id
+     order by g.id, s.familyName desc
+    ) b
+    GROUP BY id
+    ;
+    
+    select 
+    b.id_item,
+    SUBSTRING_INDEX(GROUP_CONCAT(b.name),',',1) name
+    from 
+    (
+    select p.id_item, c.name
+    from t_order p, t_customer c
+    where c.id_customer = p.id_customer
+    order by p.id_item desc, p.created_time asc
+    ) b
+    group by b.id_item
+    ;
+     

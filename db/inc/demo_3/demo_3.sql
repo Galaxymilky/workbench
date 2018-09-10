@@ -218,3 +218,4 @@ FROM Student s
 WHERE exists(select 1 from Availability a1 where a1.day = 'Wed' and a1.hour = 10 and s.id = a1.Student)
   and exists(select 1 from Availability a1 where a1.day = 'Wed' and a1.hour = 11 and s.id = a1.Student)
 ;
+

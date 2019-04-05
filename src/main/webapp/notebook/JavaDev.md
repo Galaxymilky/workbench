@@ -20,8 +20,15 @@
 
 9、ExecutorService你一般是怎么用的？是每个service放一个还是一个项目里面放一个？有什么好处？
 
-第二，第三站
 
+Other
+1、POST和GET的区别
+
+答：GET请求参数在url中，POST请求封装在报文中；GET进行一次TCP，POST进行两次。
+
+2、HttpURLConnection 的两个方法 addRequestProperty 和 setRequestProperty 有什么不一样
+
+答：addRequestProperty 不管 key 是否存在，直接添加，setRequestProperty 是有则覆盖，无则添加。
 
 Spring
 

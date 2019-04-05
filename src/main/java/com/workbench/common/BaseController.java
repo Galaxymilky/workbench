@@ -5,6 +5,4 @@ package com.workbench.common;
  */
 public abstract class BaseController {
 
-
-
 }

@@ -8,7 +8,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- 组件扫描，扫描 aop 包相关组件 -->
-    <context:component-scan base-package="com.ssmdemo.aop"/>
+    <context:component-scan base-package="com.workbench.aop"/>
 
     <!-- 启动对 @AspectJ 注解的支持  -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
@@ -53,11 +53,11 @@
     </bean>
 
     <!-- 扫描 web 相关的 controller  -->
-    <context:component-scan base-package="com.ssmdemo.web;com.pait" use-default-filters="false">
+    <context:component-scan base-package="com.workbench.ssmdemo.web;com.workbench" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
 
     <!-- 全局异常捕捉 -->
-    <bean class="com.ssmdemo.exception.GlobalExceptionResolver"/>
+    <bean class="com.workbench.exception.GlobalExceptionResolver"/>
 </beans>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pait.consumeAnnual.dao.UserConsumeDAO">
+<mapper namespace="com.workbench.consumeAnnual.dao.UserConsumeDAO">
 
     <!-- 插入数据 -->
     <insert id="insertUserConsume">
@@ -14,7 +14,7 @@
     <select id="countUserConsume" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM app_user_consume
     </select>
-    <select id="queryAll" resultType="com.pait.consumeAnnual.dto.UserConsume">
+    <select id="queryAll" resultType="com.workbench.consumeAnnual.dto.UserConsume">
         SELECT id_user_consume as 'idUserConsume',
                user_id as 'userId',
                order_id as 'orderId',
@@ -31,7 +31,7 @@
           FROM app_user_consume ORDER BY consume_time ASC limit #{offset}, #{limit}
     </select>
 
-    <select id="listAllData" resultType="com.pait.consumeAnnual.dto.UserConsume">
+    <select id="listAllData" resultType="com.workbench.consumeAnnual.dto.UserConsume">
         SELECT id_user_consume as 'idUserConsume',
                user_id as 'userId',
                order_id as 'orderId',

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>欢迎使用</title>
+
+    <!-- Bootstrap core CSS -->
+    <!--<link rel="stylesheet" href="../css/bootstrap.min.css">-->
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../css/signin.css">
+
+    <!-- js -->
+    <!--<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>-->
+    <!--<script type="text/javascript" src="../js/ui/bootstrap/js/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="../js/common/common.js"></script>
+
+    <!--local-->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/angular.min.js"></script>
+
+    <!--online-->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>-->
+    <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <!--<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>-->
+
+
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>-->
+    <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <!--<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>-->
+</head>
+<body>
+
+<div class="container" ng-app="indexApp" ng-controller="indexCtrl">
+
+    <p>欢迎您，请选择协议类型进行采集</p>
+
+    <button type="button" class="btn btn-primary" ng-click="gotoProtocolPage('1')">HTTP</button>
+
+    <button type="button" class="btn btn-primary" ng-click="gotoProtocolPage('0')">MODBUS</button>
+
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        console.log("加载完成");
+    });
+
+</script>
+
+<script type="text/javascript">
+    var app = angular.module("indexApp", []);
+    app.controller("indexCtrl", function ($scope) {
+
+        $scope.gotoProtocolPage = function (protocolType) {
+            console.log('submit new log' + protocolType);
+
+            var url = getRootPath() + '/httpSubmit.html';
+
+            if (protocolType == '0') {
+                url = getRootPath() + '/tcpSubmit.html';
+            }
+
+            console.log(url);
+
+            window.location.href = url;
+
+        };
+
+    });
+</script>
+
+</body>
+</html>

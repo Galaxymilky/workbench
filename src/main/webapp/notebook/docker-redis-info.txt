@@ -1,0 +1,51 @@
+
+Last login: Sun Apr 21 21:21:54 on ttys003
+dynamicdeMacBook-Pro:~ dynamicniu$ docker run -p 6379:6379 -v $SPWD/data:/data -d redis local-redis redis.conf
+8d6829e7a5d8b99aac776289832e17cd00ccabfb8e3976a2f391b0b7a4248d51
+docker: Error response from daemon: Mounts denied:
+The path /data
+is not shared from OS X and is not known to Docker.
+You can configure shared paths from Docker -> Preferences... -> File Sharing.
+See https://docs.docker.com/docker-for-mac/osxfs/#namespaces for more info.
+.
+
+
+
+dynamicdeMacBook-Pro:~ dynamicniu$ docker run -p 6379:6379 -v $PWD/data:/data -d redis local-redis redis.conf
+d05d6965a498c85a2146fe970535a88da7a71bcfd3e237da6ac4810a18ac8057
+dynamicdeMacBook-Pro:~ dynamicniu$
+
+
+
+新建redis的container
+dynamicdeMacBook-Pro:~ dynamicniu$ docker run --name local-redis -p 6379:6379 -d redis redis-server --appendonly yes
+07d1f650c877f5fcd5d492dee50b6c14eef77a7b7d88a142aa5b4dd587de1fff
+dynamicdeMacBook-Pro:~ dynamicniu$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+07d1f650c877        redis               "docker-entrypoint.s…"   13 seconds ago      Up 12 seconds       0.0.0.0:6379->6379/tcp   local-redis
+
+
+通过cli访问redis
+dynamicdeMacBook-Pro:~ dynamicniu$ docker exec -it 07d1f650c877 redis-cli
+127.0.0.1:6379>
+
+
+打开container
+dynamicdeMacBook-Pro:~ dynamicniu$ docker container start local-redis
+local-redis
+
+
+查看container运行个状态
+dynamicdeMacBook-Pro:~ dynamicniu$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+07d1f650c877        redis               "docker-entrypoint.s…"   22 hours ago        Up 27 seconds       0.0.0.0:6379->6379/tcp   local-redis
+dynamicdeMacBook-Pro:~ dynamicniu$
+
+
+查看container的端口及IP状态
+dynamicdeMacBook-Pro:~ dynamicniu$ docker inspect 3d3c87c9c0c8
+
+
+
+
+

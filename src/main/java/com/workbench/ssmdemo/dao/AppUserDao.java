@@ -30,7 +30,7 @@ public interface AppUserDao {
      * @param loginName
      * @return
      */
-    AppUser queryByLoginName(String loginName);
+    AppUser queryByLoginName(@Param("loginName") String loginName);
 
     /**
      * 根据偏移量查询用户列表

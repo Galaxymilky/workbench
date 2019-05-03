@@ -1,7 +1,9 @@
 package com.workbench.consumeAnnual.web;
 
 
+import com.workbench.common.service.impl.RedisHelperImpl;
 import com.workbench.consumeAnnual.dao.UserConsumeDAO;
+import com.workbench.ssmdemo.entity.AppUser;
 import com.workbench.taskPool.thread.*;
 import com.workbench.common.DataPager;
 import com.workbench.consumeAnnual.dto.UserConsume;
@@ -11,6 +13,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +49,7 @@ public class UserConsumeController {
 
 
     @GetMapping(value = "/listUserConsumeHtml")
-    public String list(Model model, Integer offset, Integer limit) {
+    public String list(Model model, Integer offset, Integer limit) throws Exception {
         log.info("invoke -------- /appuser/list");
         offset = offset == null ? 0 : offset; // 从第几行开始
         limit = limit == null ? 15 : limit; // 检索多少行

@@ -1,5 +1,7 @@
 package com.workbench.ssmdemo.web;
 
+import com.workbench.common.BaseRest;
+import com.workbench.common.service.impl.RedisHelperImpl;
 import com.workbench.ssmdemo.entity.AppUser;
 import com.workbench.ssmdemo.service.AppUserService;
 import com.workbench.ssmdemo.service.impl.AppUserServiceImpl;
@@ -13,11 +15,15 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -28,12 +34,23 @@ import java.util.*;
 @Scope("session")
 @RequestMapping("/login")
 @Api(description = "登录API")
-public class LoginRest {
+public class LoginRest extends BaseRest {
 
-    @ApiOperation(value = "登录", notes = "登录系统")
-    @PostMapping(params = "/sign")
+    @Autowired
+    private RedisHelperImpl redisHelper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+    private static final String LOGIN_USER = "login_user";
+
+    @ApiOperation(value = "跳转到登录首页", notes = "跳转到登录首页")
+    @PostMapping(value = "/sign")
     public String sign(Model model, String loginName, String password) {
-        log.info("invoke -------- /loginAction/signin [" + loginName + "]");
+        log.info("invoke -------- /{}/{}", this.getClass().getSimpleName(), "sign");
 
         if (StrUtils.isNullOrEmpty(loginName)) {
             return "redirect:/html/signin.html";
@@ -57,24 +74,31 @@ public class LoginRest {
         }
 
         model.addAttribute("LOGIN_STATUS", "WRONG_PSW");
+
         return "redirect:/jsp/signin.jsp";
     }
 
-    private final String LOGIN_SUCCESS = "success";
-    private final String LOGIN_FAILED = "failed";
-
-    @PostMapping(params =  "/signin", produces = "text/html;charset=UTF-8")
+    @ApiOperation(value = "登录系统", notes = "登录系统")
+    @PostMapping(value = "/signIn", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String signin(HttpServletRequest request, HttpServletResponse response, String loginName, String password) {
-        log.info("invoke -------- /loginAction/login");
+    public String signIn(HttpServletRequest request, HttpServletResponse response, String loginName, String password) {
+        log.info("invoke -------- /{}/{}", this.getClass().getSimpleName(), "signIn");
+
         response.setContentType("text/html;charset=utf-8");
         Map<String, Object> resMap = new HashMap<String, Object>();
-        resMap.put("resultCode", LOGIN_FAILED);
+        resMap.put(RESULT_CODE, FAILED);
         String passwd = request.getParameter("password");
         try {
+
+            if (redisHelper.getValue(LOGIN_USER + loginName) != null) {
+                resMap.put(RESULT_CODE, SUCCESS);
+                resMap.put(RESULT_MESG, "用户已登陆");
+                return JsonUtils.transObject2Json(resMap);
+            }
+
             AppUser appUser = appUserSrv.getAppUserByLoginName(loginName);
             if (appUser == null) {
-                resMap.put("resultMsg", "用户不存在");
+                resMap.put(RESULT_MESG, "用户不存在");
                 return JsonUtils.transObject2Json(resMap);
             }
 
@@ -83,9 +107,12 @@ public class LoginRest {
             // 对用户输入的密码进行加密
             String dPassword = EncryptUtil.EncryptPassword(passwd);
             if (true || rPassword.equals(dPassword)) {
-                resMap.put("resultCode", LOGIN_SUCCESS);
-                resMap.put("resultMsg", "登录成功");
+                resMap.put(RESULT_CODE, SUCCESS);
+                resMap.put(RESULT_MESG, "登录成功");
                 resMap.put("accessGranted", true);
+
+                redisHelper.valuePut(LOGIN_USER + loginName, appUser);
+
                 return JsonUtils.transObject2Json(resMap);
             }
 
@@ -95,28 +122,48 @@ public class LoginRest {
         return JsonUtils.transObject2Json(resMap);
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @ResponseBody
-    public String login(HttpServletRequest request, HttpServletResponse response, String loginName, String password) {
-        log.info("invoke -------- /loginAction/login");
+    @ApiOperation(value = "退出系统", notes = "退出系统")
+    @PostMapping(value = "/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response, String loginName) {
+        log.info("invoke -------- /{}/{}", this.getClass().getSimpleName(), "logout");
 
-        String resp = "{\"accessGranted\":true}";
+        AppUser appUser = new AppUser();
+        appUser.setLoginName(loginName);
 
-        return resp;
-    }
-
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        ValueOperations<String, AppUser> operations = redisTemplate.opsForValue();
+        String loginKey = LOGIN_USER + loginName;
+        operations.set(loginKey, appUser);
+        boolean exists = redisTemplate.hasKey(LOGIN_USER + loginName);
+        if (exists) {
+            log.info("User exists!", redisTemplate.opsForValue().get(loginKey));
+        } else {
+            log.error("User not exists!");
+        }
         return "";
     }
 
-    @RequestMapping(value = "/loginSession", method = RequestMethod.GET)
-    public String loginSession() {
-        log.info("invoke -------- /loginAction/loginSession");
+    @ApiOperation(value = "获取用户登录信息", notes = "获取用户登录信息")
+    @PostMapping(value = "/getLoginInfo", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getLoginInfo(HttpServletRequest request, HttpServletResponse response) {
+        log.info("invoke -------- /{}/{}", this.getClass().getSimpleName(), "getLoginInfo");
 
-        System.out.println(this.getClass().toString());
+        response.setContentType("text/html;charset=utf-8");
+        Map<String, Object> resMap = new HashMap<String, Object>();
+        resMap.put(RESULT_CODE, FAILED);
 
-        return "appuser/list";
+        HttpSession session = request.getSession();
+        if (session == null && session.getAttribute(LOGIN_INFO) == null) {
+            resMap.put(RESULT_MESG, "用户未登录");
+            return JsonUtils.transObject2Json(resMap);
+        }
+
+        AppUser appUser = (AppUser) session.getAttribute(LOGIN_INFO);
+
+        resMap.put(RESULT_CODE, "success");
+        resMap.put(LOGIN_INFO, appUser);
+
+        return JsonUtils.transObject2Json(resMap);
     }
 
     @Autowired

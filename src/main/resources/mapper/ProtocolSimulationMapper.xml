@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.workbench.protocolSimulation.mapper.ProtocolSimulationMapper">
+
+    <!-- 插入数据 -->
+    <insert id="insertProtocolSimulation"
+            parameterType="com.workbench.protocolSimulation.dto.ProtocolSimulationDto">
+        INSERT INTO app_protocol_simulation
+          (M_SN, M_PRE, M_D_PRE, M_LEAKAGE, M_RESULT,
+          OPER_TIME,
+          OPER_TIME_STR,
+          PROTOCOL_TYPE,
+          CREATED_TIME,
+          CREATED_BY,
+          MEMO)
+        VALUES
+          (
+          #{snCode, jdbcType=VARCHAR},
+          #{kPre, jdbcType=VARCHAR},
+          #{dkPre, jdbcType=VARCHAR},
+          #{leakage, jdbcType=VARCHAR},
+          #{result, jdbcType=VARCHAR},
+          str_to_date(#{operTime, jdbcType=VARCHAR}, '%Y-%m-%d %H-%i-%s'),
+          #{operTime, jdbcType=VARCHAR},
+          #{protocolType, jdbcType=VARCHAR},
+          now(),
+          'SYSTEM',
+          #{memo, jdbcType=VARCHAR}
+          )
+    </insert>
+
+    <resultMap id="BaseProtocolSimulationMap" type="com.workbench.protocolSimulation.dto.ProtocolSimulationJson">
+        <id column="ID_PROTOCOL_SIMULATION" property="idProtocolSimulation" jdbcType="BIGINT"/>
+        <result column="M_SN" property="snCode" jdbcType="VARCHAR"/>
+        <result column="M_PRE" property="kPre" jdbcType="VARCHAR"/>
+        <result column="M_D_PRE" property="dkPre" jdbcType="VARCHAR"/>
+        <result column="M_LEAKAGE" property="leakage" jdbcType="VARCHAR"/>
+        <result column="M_RESULT" property="result" jdbcType="VARCHAR"/>
+        <result column="OPER_TIME" property="operTime" jdbcType="VARCHAR"/>
+        <result column="OPER_DATE" property="operDate" jdbcType="VARCHAR"/>
+        <result column="PROTOCOL_TYPE" property="protocolType" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="listProtocolSimulation"
+            parameterType="java.lang.String"
+            resultMap="BaseProtocolSimulationMap">
+        SELECT * FROM (
+        SELECT ID_PROTOCOL_SIMULATION,
+               M_SN,
+               M_PRE,
+               M_D_PRE,
+               M_LEAKAGE,
+               M_RESULT,
+               OPER_TIME,
+               DATE_FORMAT(OPER_TIME, '%Y-%m-%d') OPER_DATE,
+               PROTOCOL_TYPE
+          FROM app_protocol_simulation
+         WHERE PROTOCOL_TYPE = #{protocolType, jdbcType=VARCHAR}
+         <if test="operDate != null">
+           AND DATE_FORMAT(OPER_TIME, '%Y-%m-%d') = #{operDate, jdbcType=VARCHAR}
+         </if>
+         ORDER BY OPER_TIME DESC
+         ) T
+         LIMIT 11
+
+    </select>
+</mapper>

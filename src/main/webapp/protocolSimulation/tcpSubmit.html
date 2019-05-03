@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>欢迎使用</title>
+
+    <!-- Bootstrap core CSS -->
+    <!--<link rel="stylesheet" href="../css/bootstrap.min.css">-->
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../css/signin.css">
+
+    <!-- js -->
+    <!--<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>-->
+    <!--<script type="text/javascript" src="../js/ui/bootstrap/js/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="../js/common/common.js"></script>
+
+    <!--local-->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link href="../css/libs/jquery.terminal/2.4.1/jquery.terminal.min.css" rel="stylesheet"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/plugins/jquery.terminal/2.4.1/jquery.terminal.min.js"></script>
+    <script src="../js/plugins/jquery.terminal/keyboard.js"></script>
+
+
+    <!--online-->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>-->
+    <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <!--<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.4.1/js/jquery.terminal.min.js"></script>-->
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.4.1/css/jquery.terminal.min.css" rel="stylesheet"/>-->
+
+
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>-->
+    <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <!--<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>-->
+</head>
+<body>
+
+<div class="container" ng-app="indexApp" ng-controller="indexCtrl">
+
+    <div id="myTabContent" class="tab-content">
+        <div id="protocolInfo">
+
+            <p style="margin-top: 5px;">
+                MODBUS协议                                    <br/>
+                数据示例：00 00 00 00 00 04 01 01 01 01        <br/>
+                数据示例：00 00 00 00 00 06 01 03 00 00 00 03  <br/>
+                数据示例：00 00 00 00 00 04 01 01 01 00        <br/>
+            </p>
+
+
+            <div id="term_demo"></div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        console.log("加载完成");
+    });
+
+    var url = getRootPath() + '/tcpProtocolProcess';
+    var result = '';
+    var callBackFunction = function (command) {
+        $.ajax({
+            type: 'POST',
+            url: url,
+            async: false,
+            data: {
+                'command': command
+            },
+            dataType: 'json',
+            error: function (data) {
+                result = data.resultMesg;
+            },
+            success: function (data) {
+                result = data.resultMesg;
+            }
+        })
+    };
+
+    $(function ($, undefined) {
+        $('#term_demo').terminal(function (command) {
+            if (command !== '') {
+                // 默认当作js命令来处理
+                // var result = window.eval(command);
+
+                console.log("Command > " + command);
+
+                callBackFunction(command);
+
+                if (result != undefined) {
+                    this.echo(String(result));
+                }
+            }
+        }, {
+            greetings: 'Welcome to the MODBUS Interpreter',
+            name: 'js_demo',
+            height: 400,
+            width: 600,
+            prompt: '> '
+        });
+    });
+
+    // $(function() {
+    //     $('body').terminal(function(command, term) {
+    //         return $.post(url, {command: command});
+    //     }, {
+    //         greetings: 'Simple php example'
+    //     });
+    // });
+
+
+</script>
+
+<script type="text/javascript">
+    var app = angular.module("indexApp", []);
+    app.controller("indexCtrl", function ($scope) {
+
+        // 2
+        $scope.getLoginInfo = function () {
+            var url = getRequestPath() + '/login/getLoginInfo';
+
+            console.log(url);
+
+            var params = {
+                'curTime': '1'
+            };
+
+            console.log(params);
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                async: false,
+                data: params,
+                dataType: 'json',
+                error: function (data) {
+                    alert(data.resultMesg);
+                },
+                success: function (data) {
+                    if (data.resultCode == 'success') {
+                        $scope.loginInfo = data.loginInfo;
+                    }
+                }
+            });
+        };
+
+        // 0
+        $scope.refreshPage = function () {
+            console.log($scope.name);
+
+            // 获取登录信息
+            $scope.getLoginInfo();
+
+        };
+
+
+        $scope.submitNewProtocol = function () {
+            console.log('submit new log');
+
+            var url = getRequestPath() + '/protocolSimulation/add';
+
+            console.log(url);
+
+            // if (!checkMobile($scope.refer.referPhone)) {
+            //     alert('请检查手机格式');
+            //     return;
+            // }
+
+            var params = {
+                'operTime': '2018-03-2210-42-22',
+                'snCode': '999999999999',
+                'kPre': '123.2',
+                'dkPre': '12.9',
+                'leakage': '1.2',
+                'result': 'OK',
+                'protocolType': '1'
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                async: false,
+                data: params,
+                dataType: 'json',
+                error: function (data) {
+                    alert(data.resultMesg);
+                },
+                success: function (data) {
+                    alert('推荐' + data.resultMesg);
+
+                    // 提交后清空
+                    $scope.refer = {};
+                }
+            })
+        };
+
+        $scope.refreshPage();
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>欢迎使用</title>
+
+    <!-- Bootstrap core CSS -->
+    <!--<link rel="stylesheet" href="../css/bootstrap.min.css">-->
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../css/signin.css">
+
+    <!-- js -->
+    <!--<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>-->
+    <!--<script type="text/javascript" src="../js/ui/bootstrap/js/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="../js/common/common.js"></script>
+
+    <!--local-->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/angular.min.js"></script>
+
+    <!--online-->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>-->
+    <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <!--<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>-->
+
+
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>-->
+    <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <!--<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>-->
+</head>
+<body>
+
+<div class="container" ng-app="indexApp" ng-controller="indexCtrl">
+
+    <div id="myTabContent" class="tab-content">
+        <div id="protocolInfo">
+            <p style="margin-top: 5px;">HTTP协议</p>
+            <div>
+                <div class="form-group">
+                    <label for="protocolData">数据示例：TIME=2018-03-2210-42-18&M_SN=999999999999&M_Pre=121.1&M_D_Pre=12.3&M_Leakage=1.3&M_Result=OK</label>
+                    <textarea id="protocolData" name="protocolData" class="form-control"
+                              ng-model="protocolInfo.protocolData"
+                              placeholder="请输入数据"
+                              rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="submitNewProtocol()">提交</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        console.log("加载完成");
+    });
+
+</script>
+
+<script type="text/javascript">
+    var app = angular.module("indexApp", []);
+    app.controller("indexCtrl", function ($scope) {
+
+        // 2
+        $scope.getLoginInfo = function () {
+            var url = getRequestPath() + '/login/getLoginInfo';
+
+            console.log(url);
+
+            var params = {
+                'curTime': '1'
+            };
+
+            console.log(params);
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                async: false,
+                data: params,
+                dataType: 'json',
+                error: function (data) {
+                    alert(data.resultMesg);
+                },
+                success: function (data) {
+                    if (data.resultCode == 'success') {
+                        $scope.loginInfo = data.loginInfo;
+                    }
+                }
+            });
+        };
+
+        // 0
+        $scope.refreshPage = function () {
+            console.log($scope.name);
+
+            // 获取登录信息
+            $scope.getLoginInfo();
+
+        };
+
+
+        $scope.submitNewProtocol = function () {
+            console.log('submit new log');
+
+            var url = getRequestPath() + '/protocolSimulation/add';
+            var page = getRootPath() + '/httpView.html';
+
+            console.log(url);
+
+            // TIME=2018-03-2210-42-18&M_SN=999999999999&M_Pre=121.1&M_D_Pre=12.3&M_Leakage=1.3&M_Result=OK
+
+            var v = $scope.protocolInfo.protocolData;
+            var vArray = v.split('&');
+            var vTime = vArray[0].split('=')[1];
+            var vSnCode = vArray[1].split('=')[1];
+            var vKPre = vArray[2].split('=')[1];
+            var vDkPre = vArray[3].split('=')[1];
+            var vLeakage = vArray[4].split('=')[1];
+            var vResult = vArray[5].split('=')[1];
+
+            var params = {
+                'operTime': vTime,
+                'snCode': vSnCode,
+                'kPre': vKPre,
+                'dkPre': vDkPre,
+                'leakage': vLeakage,
+                'result': vResult,
+                'protocolType': '1'
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                async: false,
+                data: params,
+                dataType: 'json',
+                error: function (data) {
+                    alert(data.resultMesg);
+                },
+                success: function (data) {
+                    alert('提交' + data.resultMesg);
+
+                    if (data.resultCode == 'success') {
+                        // 提交后清空
+                        $scope.protocolInfo = {};
+
+                        window.location.href = page;
+                    }
+                }
+            })
+        };
+
+        $scope.refreshPage();
+
+    });
+</script>
+
+</body>
+</html>

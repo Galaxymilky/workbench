@@ -61,6 +61,9 @@
 
             <div id="term_demo"></div>
 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="submitNewProtocol()">去数据展示</button>
+            </div>
         </div>
     </div>
 
@@ -169,45 +172,16 @@
 
         };
 
-
+        // 2 跳转数据展示
         $scope.submitNewProtocol = function () {
             console.log('submit new log');
 
-            var url = getRequestPath() + '/protocolSimulation/add';
+            var page = getRootPath() + '/tcpView.html';
 
-            console.log(url);
+            console.log(page);
 
-            // if (!checkMobile($scope.refer.referPhone)) {
-            //     alert('请检查手机格式');
-            //     return;
-            // }
+            window.location.href = page;
 
-            var params = {
-                'operTime': '2018-03-2210-42-22',
-                'snCode': '999999999999',
-                'kPre': '123.2',
-                'dkPre': '12.9',
-                'leakage': '1.2',
-                'result': 'OK',
-                'protocolType': '1'
-            };
-
-            $.ajax({
-                type: 'POST',
-                url: url,
-                async: false,
-                data: params,
-                dataType: 'json',
-                error: function (data) {
-                    alert(data.resultMesg);
-                },
-                success: function (data) {
-                    alert('推荐' + data.resultMesg);
-
-                    // 提交后清空
-                    $scope.refer = {};
-                }
-            })
         };
 
         $scope.refreshPage();

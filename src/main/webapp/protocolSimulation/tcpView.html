@@ -25,6 +25,7 @@
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/angular.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
 
     <!--online-->
     <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
@@ -43,31 +44,45 @@
 <div class="container" ng-app="indexApp" ng-controller="indexCtrl">
 
     <div id="myTabContent" class="tab-content" style="display: block;">
-        <!--查询-->
-        <div id="infoQuery" style="display: block;">
-            <p style="margin-top: 5px;">列表</p>
+
+        <!--折线图-->
+        <p style="margin-top: 5px;">折线图</p>
+        <div id="allInOneChart" style="width: 600px;height:400px;"></div>
+
+        <p style="margin-top: 5px;">折线图(充气压力KPa)</p>
+        <div id="kPreChart" style="width: 600px;height:400px;"></div>
+
+        <p style="margin-top: 5px;">折线图(差压值Pa)</p>
+        <div id="dkPreChart" style="width: 600px;height:400px;"></div>
+
+        <p style="margin-top: 5px;">折线图(泄漏率ml/min)</p>
+        <div id="leakageChart" style="width: 600px;height:400px;"></div>
+
+        <!--列表-->
+        <p style="margin-top: 5px;">列表</p>
+        <div id="dataTable" style="display: block;">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                        <tr>
-                            <td>时间</td>
-                            <td>条形码</td>
-                            <td>充气压力KPa</td>
-                            <td>差压值Pa</td>
-                            <td>泄漏率ml/min</td>
-                            <td>判断结果(OK或者NG)</td>
-                        </tr>
+                    <tr>
+                        <td>时间</td>
+                        <td>条形码</td>
+                        <td>充气压力KPa</td>
+                        <td>差压值Pa</td>
+                        <td>泄漏率ml/min</td>
+                        <td>判断结果(OK或者NG)</td>
+                    </tr>
                     </thead>
 
                     <tbody>
-                        <tr ng-repeat="item in protocolDataList">
-                            <td>{{item.operTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
-                            <td>{{item.snCode}}</td>
-                            <td>{{item.kPre}}</td>
-                            <td>{{item.dkPre}}</td>
-                            <td>{{item.leakage}}</td>
-                            <td>{{item.result}}</td>
-                        </tr>
+                    <tr ng-repeat="item in protocolDataList">
+                        <td>{{item.operTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+                        <td>{{item.snCode}}</td>
+                        <td>{{item.kPre || item.kpre}}</td>
+                        <td>{{item.dkPre}}</td>
+                        <td>{{item.leakage}}</td>
+                        <td>{{item.result}}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -77,6 +92,7 @@
 
 
 </div>
+
 
 <script type="text/javascript">
 
@@ -99,7 +115,7 @@
             var params = {
                 'loginName': $('#inputLoginName').val(),
                 'password': $('#inputPassword').val(),
-                'protocolType': '1'
+                'protocolType': '2'
             };
 
             console.log(params);
@@ -121,6 +137,186 @@
             });
         };
 
+        // 2
+        var xDataArray = [];
+
+        var yDataKPre = [];
+        var yDataDkPre = [];
+        var yDataLeakage = [];
+
+        $scope.prepareEchartsData = function () {
+            $scope.xData = '';
+
+            // var heros = [{
+            //         "hero": "曙光女神",
+            //         "role": "sup",
+            //         "line": "不管刮风还是下雨，太阳照常升起"
+            //     }],
+            //     context = document.getElementById('context'),
+            //     arr = [];
+            // angular.forEach(heros, function (hero, index, objs) {
+            //     //value === objs[index]
+            //     angular.forEach(hero, function (value, index) {
+            //         this.push(index + "-" + value);
+            //     }, arr);
+            // });
+            // context.innetText ? context.innetText = arr.join('') : context.textContent = arr.join('');
+
+            // angular.forEach($scope.protocolDataList, function (value, index) {
+            //     this.push(value.operTime.split(" ")[1]);
+            // }, xDataArray);
+
+            angular.forEach($scope.protocolDataList, function (value) {
+                xDataArray.push(value.operTime.split(" ")[1]);
+                yDataKPre.push(value.kpre);
+                yDataDkPre.push(value.dkPre);
+                yDataLeakage.push(value.leakage);
+            });
+
+            console.log('data format done');
+        };
+
+        $scope.buildKPreChart = function () {
+            var kPreChart = echarts.init(document.getElementById('kPreChart'));
+            option = {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['充气压力KPa']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: xDataArray
+                },
+                yAxis: {
+                    type: 'value',
+                    splitLine: {
+                        show: false
+                    },
+                    scale:true,
+                    minInterval: 0.1
+                },
+                series: [
+                    {
+                        name: '充气压力KPa',
+                        type: 'line',
+                        stack: '总量',
+                        data: yDataKPre
+                    }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            kPreChart.setOption(option);
+        };
+
+        $scope.buildDkPreChart = function () {
+            var dkPreChart = echarts.init(document.getElementById('dkPreChart'));
+            option = {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['差压值Pa']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: xDataArray
+                },
+                yAxis: {
+                    type: 'value',
+                    splitLine: {
+                        show: false
+                    },
+                    scale:true,
+                    minInterval: 0.1
+                },
+                series: [
+                    {
+                        name: '差压值Pa',
+                        type: 'line',
+                        stack: '总量',
+                        data: yDataDkPre
+                    }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            dkPreChart.setOption(option);
+        };
+
+        $scope.buildLeakageChart = function () {
+            var leakageChart = echarts.init(document.getElementById('leakageChart'));
+            option = {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['泄漏率ml/min']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: xDataArray
+                },
+                yAxis: {
+                    type: 'value',
+                    splitLine: {
+                        show: false
+                    },
+                    scale:true,
+                    minInterval: 0.1
+                },
+                series: [
+                    {
+                        name: '泄漏率ml/min',
+                        type: 'line',
+                        stack: '总量',
+                        data: yDataLeakage
+                    }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            leakageChart.setOption(option);
+        };
+
         // 0
         $scope.refreshPage = function () {
             console.log($scope.name);
@@ -128,9 +324,75 @@
             // 获取提案列表
             $scope.getProtocolList();
 
+            if ($scope.protocolDataList != null) {
+                $scope.prepareEchartsData();
+
+                $scope.buildKPreChart();
+                $scope.buildDkPreChart();
+                $scope.buildLeakageChart();
+            }
         };
 
         $scope.refreshPage();
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('allInOneChart'));
+
+        option = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['泄漏率ml/min', '差压值Pa', '充气压力KPa']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: xDataArray
+            },
+            yAxis: {
+                type: 'value',
+                splitLine: {
+                    show: false
+                },
+                scale:true,
+                minInterval: 0.1
+            },
+            series: [
+                {
+                    name: '泄漏率ml/min',
+                    type: 'line',
+                    stack: '总量',
+                    data: yDataLeakage
+                },
+                {
+                    name: '差压值Pa',
+                    type: 'line',
+                    stack: '总量',
+                    data: yDataDkPre
+                },
+                {
+                    name: '充气压力KPa',
+                    type: 'line',
+                    stack: '总量',
+                    data: yDataKPre
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
 
     });
 </script>

@@ -20,8 +20,14 @@
           #{dkPre, jdbcType=VARCHAR},
           #{leakage, jdbcType=VARCHAR},
           #{result, jdbcType=VARCHAR},
+          <if test="operTime != null">
           str_to_date(#{operTime, jdbcType=VARCHAR}, '%Y-%m-%d %H-%i-%s'),
           #{operTime, jdbcType=VARCHAR},
+          </if>
+          <if test="operTime == null">
+          now(),
+          now(),
+          </if>
           #{protocolType, jdbcType=VARCHAR},
           now(),
           'SYSTEM',

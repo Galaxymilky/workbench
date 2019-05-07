@@ -1,8 +1,6 @@
-package leetcode.math;
+package com.leetcode.math;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by dynam on 2017/1/22.

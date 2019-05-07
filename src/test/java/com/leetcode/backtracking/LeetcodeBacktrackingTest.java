@@ -1,5 +1,6 @@
-package leetcode.backtracking;
+package com.leetcode.backtracking;
 
+import io.swagger.models.auth.In;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -42,6 +43,14 @@ public class LeetcodeBacktrackingTest {
     }
 
     @Test
+    public void testGenerateParenthesis() {
+        List<String> list = lb.generateParenthesis(4);
+        for (String s : list) {
+            System.out.println(s);
+        }
+    }
+
+    @Test
     public void testGenerateDigit() {
 //        List<String> list = lb.readBinaryWatch(8);
 //        for (String s : list) {
@@ -65,6 +74,26 @@ public class LeetcodeBacktrackingTest {
         for (Object s : arrayList) {
             System.out.println(String.valueOf(s));
         }
+    }
 
+    @Test
+    public void testPermute() {
+        int[] nums = new int[]{1,2,3,4,5};
+        List<List<Integer>> list = lb.permute(nums);
+        for (List<Integer> aList : list) {
+            for (Integer val : aList) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void testLetterCombinations() {
+        String digits = "23";
+        List<String> list = lb.letterCombinations(digits);
+        for (String s : list) {
+            System.out.print(s + ",");
+        }
     }
 }

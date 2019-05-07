@@ -1,7 +1,6 @@
-package work;
+package workbench;
 
 import org.junit.Test;
-import work.utils.StrUtils;
 
 /**
  * Created by dynam on 2017/1/9.

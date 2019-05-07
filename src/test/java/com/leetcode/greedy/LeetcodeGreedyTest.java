@@ -1,10 +1,8 @@
-package leetcode.greedy;
+package com.leetcode.greedy;
 
 import org.junit.Test;
 
 import java.util.Arrays;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by niu_ben on 2017/1/17.

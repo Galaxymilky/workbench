@@ -179,8 +179,6 @@ public class LeetcodeBacktracking {
             return list;
         }
 
-
-
         for (int i = 0; i < nums.length; i++) {
 
             int[] curNums = new int[nums.length -1];
@@ -216,26 +214,31 @@ public class LeetcodeBacktracking {
     public List<String> generateParenthesis(int n) {
         List<String> list = new ArrayList<String>();
 
-        int[] data = new int[2 * n];
-        long max = (long) Math.pow(2, n);
-        for (int i = 0; i < n; i++) {
-
+        if (n == 0) {
+            return list;
         }
+
+        if (n == 1) {
+            list.add("()");
+            return list;
+        }
+
+        Map<String, Integer> countMap = new HashMap<>();
+
+        List<String> tmpList = generateParenthesis(--n);
+        for (String s : tmpList) {
+            for (int j = 0; j < s.length(); j++) {
+                String tmp = "(" + s.substring(0, j) + ")" + s.substring(j, s.length());
+                if (countMap.containsKey(tmp)) {
+                    continue;
+                } else {
+                    countMap.put(tmp, 1);
+                    list.add(tmp);
+                }
+            }
+        }
+
         return list;
-    }
-
-    public List<String> generateHelper(long max, int[] data, int sum, int num) {
-        List<String> res = new ArrayList<String>();
-
-        for (int i = 0; i < data.length; i++) {
-
-        }
-
-        for (int i = 0; i < num * 2; i++) {
-
-        }
-
-        return res;
     }
 
     /**
@@ -285,7 +288,6 @@ public class LeetcodeBacktracking {
                 }
             }
         }
-
 
         return list;
     }

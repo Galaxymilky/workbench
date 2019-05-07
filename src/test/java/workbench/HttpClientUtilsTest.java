@@ -1,7 +1,7 @@
-package work;
+package workbench;
 
 import org.junit.Test;
-import work.utils.HttpClientUtils;
+import com.workbench.util.HttpClientUtils;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

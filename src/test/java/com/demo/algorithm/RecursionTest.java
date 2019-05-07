@@ -1,4 +1,4 @@
-package demo.algorithm;
+package com.demo.algorithm;
 
 import org.junit.Test;
 

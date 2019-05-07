@@ -1,8 +1,6 @@
-package leetcode.string;
+package com.leetcode.string;
 
 import org.junit.Test;
-
-import java.util.List;
 
 /**
  * Created by niu_ben on 2016/12/13.

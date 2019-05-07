@@ -147,28 +147,6 @@ public class LeetcodeHashTable {
     }
 
     /**
-     * 238. Product of Array Except Self
-     * <p/>
-     * Given an array of n integers where n > 1, nums, return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].
-     * Solve it without division and in O(n).
-     * For example, given [1,2,3,4], return [24,12,8,6].
-     */
-    public static int[] productExceptSelf(int[] nums) {
-        int[] res = new int[nums.length];
-
-        if (nums == null || nums.length == 1) {
-            return new int[0];
-        }
-
-
-        for (int i = 0; i < nums.length; i++) {
-
-        }
-
-        return res;
-    }
-
-    /**
      * 49. Group Anagrams
      * Given an array of strings, group anagrams together.
      * For example, given: ["eat", "tea", "tan", "ate", "nat", "bat"],
@@ -247,10 +225,6 @@ public class LeetcodeHashTable {
 
     public static void main(String[] args) {
         System.out.println();
-
-        int[] nums = {2, 3, 4, 5};
-        System.out.println(Arrays.toString(productExceptSelf(nums)));
-
 
 //        ListNode node1 = new ListNode(0);
 //        ListNode node2 = new ListNode(1);

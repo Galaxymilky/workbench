@@ -1,14 +1,19 @@
-package leetcode.binarysearch;
+package com.leetcode.binarysearch;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by dynamicniu on 2017/11/5.
  */
 public class LeetcodeBinarySearchTest {
     LeetcodeBinarySearch lb = new LeetcodeBinarySearch();
+
+//    @Test
+//    public void searchInsert() {
+//        int[] nums = {1, 3, 5, 6};
+//        int target = 0;
+//        System.out.println(lb.searchInsert(nums, target));
+//    }
 
     @Test
     public void findRadius() throws Exception {

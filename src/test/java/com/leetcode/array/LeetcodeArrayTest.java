@@ -1,7 +1,7 @@
-package leetcode.array;
+package com.leetcode.array;
 
 import org.junit.Test;
-import work.utils.FileUtils;
+import com.workbench.util.FileUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,7 +82,7 @@ public class LeetcodeArrayTest {
         System.out.println(lcArray.minSubArrayLen(s, array));
 
         s = 120331635;
-        FileUtils fileUtils = new FileUtils();
+        FileUtil fileUtils = new FileUtil();
         String diectory = "C:\\";
         String fileName = "data_1.txt";
         String str = fileUtils.readFile(diectory, fileName);
@@ -106,7 +106,7 @@ public class LeetcodeArrayTest {
     @Test
     public void testMinSubArrayLenTimeLimit() {
         int s = 120331635;
-        FileUtils fileUtils = new FileUtils();
+        FileUtil fileUtils = new FileUtil();
         String diectory = "C:\\";
         String fileName = "data_1.txt";
         String str = fileUtils.readFile(diectory, fileName);

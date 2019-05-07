@@ -1,9 +1,9 @@
-package work;
+package workbench;
 
 import org.dom4j.DocumentException;
 import org.junit.Test;
-import work.utils.Dom4jXML;
-import work.utils.XmlUtils;
+import com.workbench.util.Dom4jXML;
+import com.workbench.util.XmlUtils;
 
 import java.util.ArrayList;
 import java.util.List;

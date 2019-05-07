@@ -88,7 +88,7 @@ public class LeetcodeArray {
         int n = nums.length;
         while (i < n) {
             if (nums[i] == nums[n - 1]) {
-                nums[i+1] = nums[n-1];
+                nums[i + 1] = nums[n - 1];
                 i++;
             } else {
                 n--;
@@ -1349,8 +1349,90 @@ public class LeetcodeArray {
         }
     }
 
+
+    /**
+     * 15. 3Sum
+     * Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0?
+     * Find all unique triplets in the array which gives the sum of zero.
+     * <p>
+     * Given array nums = [-1, 0, 1, 2, -1, -4],
+     * <p>
+     * A solution set is:
+     * [
+     * [-1, 0, 1],
+     * [-1, -1, 2]
+     * ]
+     *
+     * Given array nums = {-1, 0, 1, 2, -1, -4, 5}
+     * A solution set is:
+     * [
+     * [-1, 0, 1],[1, -4, 5],[-1, -1, 2]
+     * ]
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+
+        if (nums == null || nums.length < 3) {
+            return null;
+        }
+
+        // need to sort the list
+
+        return list;
+    }
+
+
+    /**
+     * 11. Container With Most Water
+     * Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai).
+     * n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0).
+     * Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+     */
+    public int maxArea(int[] height) {
+
+        int result = 0;
+
+        if (height == null || height.length <= 1) {
+            return 0;
+        }
+
+        int i = 0;
+        int j = height.length - 1;
+
+        while (i < j) {
+            int curResult = 0;
+            if (height[i] < height[j]) {
+                curResult = (j - i) * height[i];
+                if (result < curResult) {
+                    result = curResult;
+                }
+                i++;
+            } else {
+                curResult = (j - i) * height[j];
+                if (result < curResult) {
+                    result = curResult;
+                }
+                j--;
+            }
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
         LeetcodeArray arrayCode = new LeetcodeArray();
+
+        int[] array_container = {1, 8, 6, 2, 5, 4, 8, 3, 7, 8};
+        int target_container = arrayCode.maxArea(array_container);
+        System.out.println("container = " + target_container);
+
+        int[] numsA = {1, -1, 0, -4, 5};
+        int[] numsB = {-1, 0, 1, 2, -1, -4};
+        int[] numsC = {-1, 0, 1, 2, -1, -4, 5};
+        int[] numsD = {-1, 0, 1, 2, -1, -4, 3, 5, 1};
+        List<List<Integer>> threeSumList = arrayCode.threeSum(numsD);
+        System.out.println(threeSumList.size());
+
 
         RandomizedSet randomizedSet = new RandomizedSet();
         randomizedSet.insert(1);

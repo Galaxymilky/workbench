@@ -167,8 +167,43 @@ public class LeetcodeBacktracking {
      * [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]
      */
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> list = new ArrayList<List<Integer>>();
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
 
+        List<List<Integer>> list = new ArrayList<List<Integer>>();
+        List<Integer> curList = new ArrayList<>();
+        if (nums.length == 1) {
+            curList.add(nums[0]);
+            list.add(curList);
+            return list;
+        }
+
+
+
+        for (int i = 0; i < nums.length; i++) {
+
+            int[] curNums = new int[nums.length -1];
+            int j = 0;
+            while (j < nums.length - 1) {
+                if (j < i) {
+                    curNums[j] = nums[j];
+                } else if (j > i) {
+                    curNums[j] = nums[j + 1];
+                } else {
+                    curNums[j] = nums[i + 1];
+                }
+                j++;
+            }
+
+            List<List<Integer>> bList = permute(curNums);
+            for (int k = 0; k < bList.size(); k++) {
+                List<Integer> aInnerList = new ArrayList<>();
+                aInnerList.add(nums[i]);
+                aInnerList.addAll(bList.get(k));
+                list.add(aInnerList);
+            }
+        }
 
         return list;
     }
@@ -201,6 +236,58 @@ public class LeetcodeBacktracking {
         }
 
         return res;
+    }
+
+    /**
+     * 17. Letter Combinations of a Phone Number
+     * Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent.
+     * A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+     * Input: "23"
+     * Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+     */
+    public List<String> letterCombinations(String digits) {
+        List<String> list = new ArrayList<>();
+
+        Map<Integer, String> map = new HashMap();
+        map.put(1, "*");
+        map.put(2, "abc");
+        map.put(3, "def");
+        map.put(4, "ghi");
+        map.put(5, "jkl");
+        map.put(6, "mno");
+        map.put(7, "pqrs");
+        map.put(8, "tuv");
+        map.put(9, "wxyz");
+        map.put(0, " ");
+
+        if (digits == null || "".equals(digits)) {
+            return list;
+        }
+
+        Integer x = Integer.valueOf(digits.substring(0, 1));
+        String xs = map.get(x);
+        System.out.println(x + " " + xs);
+
+        if (digits.length() > 1) {
+            digits = digits.substring(1, digits.length());
+        } else {
+            digits = "";
+        }
+        System.out.println(digits);
+
+        List<String> curList = letterCombinations(digits);
+        for (int m = 0; m < xs.length(); m++) {
+            if (curList == null || curList.size() <= 0) {
+                list.add(xs.charAt(m) + "");
+            } else {
+                for (String str : curList) {
+                    list.add(xs.charAt(m) + str);
+                }
+            }
+        }
+
+
+        return list;
     }
 
 }

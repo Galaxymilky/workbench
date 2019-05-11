@@ -13,4 +13,7 @@ public interface ProtocolSimulationService {
     List<ProtocolSimulationJson> listProtocolSimulation(String protocolType, String operDate);
 
     Integer countProtocol(String protocolType);
+
+    Integer countTodayProtocol();
+
 }

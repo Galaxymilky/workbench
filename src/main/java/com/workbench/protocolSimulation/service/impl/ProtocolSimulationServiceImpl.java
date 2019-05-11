@@ -40,4 +40,9 @@ public class ProtocolSimulationServiceImpl implements ProtocolSimulationService 
     public Integer countProtocol(String protocolType) {
         return mapper.countProtocol(protocolType);
     }
+
+    @Override
+    public Integer countTodayProtocol() {
+        return mapper.countTodayProtocol();
+    }
 }

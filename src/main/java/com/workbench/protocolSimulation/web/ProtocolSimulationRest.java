@@ -57,7 +57,8 @@ public class ProtocolSimulationRest extends BaseRest {
         result.put("httpCount", httpCount);
         Integer tcpCount = protocolSimulationService.countProtocol("2");
         result.put("tcpCount", tcpCount);
-
+        Integer todayCount = protocolSimulationService.countTodayProtocol();
+        result.put("todayCount", todayCount);
         return result;
     }
 

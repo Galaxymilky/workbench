@@ -20,4 +20,6 @@ public interface ProtocolSimulationMapper {
     List<ProtocolSimulationJson> listProtocolSimulation(@Param("protocolType") String protocolType, @Param("operDate") String operDate);
 
     Integer countProtocol(@Param("protocolType") String protocolType);
+
+    Integer countTodayProtocol();
 }

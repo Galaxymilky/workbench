@@ -48,11 +48,15 @@ public class ProtocolSimulationRest extends BaseRest {
     public Map<String, Object> list(HttpServletRequest request, String protocolType, String operDate) {
         log.info("invoke -------- /{}/{}", this.getClass().getSimpleName(), "list");
         Map<String, Object> result = new HashMap<>();
+        result.put(RESULT_CODE, SUCCESS);
 
         List<ProtocolSimulationJson> list = protocolSimulationService.listProtocolSimulation(protocolType, operDate);
-
-        result.put(RESULT_CODE, SUCCESS);
         result.put("protocolDataList", list);
+
+        Integer httpCount = protocolSimulationService.countProtocol("1");
+        result.put("httpCount", httpCount);
+        Integer tcpCount = protocolSimulationService.countProtocol("2");
+        result.put("tcpCount", tcpCount);
 
         return result;
     }

@@ -35,4 +35,9 @@ public class ProtocolSimulationServiceImpl implements ProtocolSimulationService 
     public List<ProtocolSimulationJson> listProtocolSimulation(String protocolType, String operDate) {
         return mapper.listProtocolSimulation(protocolType, operDate);
     }
+
+    @Override
+    public Integer countProtocol(String protocolType) {
+        return mapper.countProtocol(protocolType);
+    }
 }

@@ -11,4 +11,6 @@ public interface ProtocolSimulationService {
     void addProtocolSimulation(ProtocolSimulationForm form);
 
     List<ProtocolSimulationJson> listProtocolSimulation(String protocolType, String operDate);
+
+    Integer countProtocol(String protocolType);
 }

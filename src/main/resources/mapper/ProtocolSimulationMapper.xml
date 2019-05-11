@@ -70,4 +70,11 @@
          LIMIT 11
 
     </select>
+
+    <select id="countProtocol"
+            parameterType="java.lang.String"
+            resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM app_protocol_simulation WHERE PROTOCOL_TYPE = #{protocolType, jdbcType=VARCHAR}
+    </select>
+
 </mapper>

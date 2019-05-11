@@ -161,6 +161,52 @@ public class LeetcodeBacktracking {
      */
 
     /**
+     * 78. Subsets
+     * Given a set of distinct integers, nums, return all possible subsets (the power set).
+     * Input: nums = [1,2,3]
+     * Output:
+     * [
+     * [3],
+     * [1],
+     * [2],
+     * [1,2,3],
+     * [1,3],
+     * [2,3],
+     * [1,2],
+     * []
+     * ]
+     */
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> list = new ArrayList<List<Integer>>();
+        if (nums == null || nums.length <= 0) {
+
+            return null;
+        }
+
+        if (nums.length == 1) {
+            List<Integer> intList = new ArrayList<>();
+            intList.add(nums[0]);
+            list.add(intList);
+            return list;
+        }
+
+        Map<String, Integer> container = new HashMap<String, Integer>();
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 1; j <= nums.length; j++) {
+                String key = "";
+                if (container.containsKey(key)) { // 如果包含当前
+
+                } else {
+                    container.put(key, nums[j]);
+                }
+            }
+        }
+
+        return list;
+    }
+
+    /**
      * 46. Permutations
      * Given a collection of distinct numbers, return all possible permutations.
      * For example, [1,2,3] have the following permutations:
@@ -181,7 +227,7 @@ public class LeetcodeBacktracking {
 
         for (int i = 0; i < nums.length; i++) {
 
-            int[] curNums = new int[nums.length -1];
+            int[] curNums = new int[nums.length - 1];
             int j = 0;
             while (j < nums.length - 1) {
                 if (j < i) {

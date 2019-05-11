@@ -2,38 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.workbench.ssmdemo.dao.AppUserDao">
 
-    <!-- 插入数据 -->
-    <insert id="insertUser">
-        INSERT INTO app_user
-          (user_name, login_name, user_phone, priority)
-        VALUES
-          (#{userName}, #{loginName}, #{userPhone}, #{priority})
-    </insert>
-
-    <!-- 根据登录名获取用户信息 -->
-    <select id="queryByLoginName" resultType="AppUser">
-        SELECT * FROM app_user WHERE login_name = #{loginName} limit 1
-    </select>
-
-    <!-- 查询总数 -->
-    <select id="queryTotalCount" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM app_user
-    </select>
-    <select id="queryAll" resultType="AppUser">
-        SELECT * FROM app_user ORDER BY user_id ASC limit #{offset}, #{limit}
-    </select>
-    <!--
-    <resultMap id="BaseResultMap" type="AppUser">
+    <resultMap id="BaseAppUserResultMap" type="com.workbench.ssmdemo.entity.AppUser">
         <id column="user_id" property="userId" jdbcType="BIGINT"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="priority" property="priority" jdbcType="INTEGER"/>
         <result column="user_phone" property="userPhone" jdbcType="BIGINT"/>
-        <association property="totalCount" select="queryTotalCount" jdbcType="BIGINT"/>
     </resultMap>
-    -->
 
+    <!-- 插入数据 -->
+    <insert id="insertUser">
+        INSERT INTO app_user
+          (user_name, login_name, user_phone, priority)
+        VALUES
+          (#{userName, jdbcType=VARCHAR}, #{loginName, jdbcType=VARCHAR}, #{userPhone}, #{priority})
+    </insert>
+
+    <!-- 根据登录名获取用户信息 -->
+    <select id="queryByLoginName"
+            parameterType="java.lang.String"
+            resultMap="BaseAppUserResultMap">
+        SELECT * FROM app_user WHERE login_name = #{loginName, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="queryTotalCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM app_user
+    </select>
+    <select id="queryAll" resultMap="BaseAppUserResultMap">
+        SELECT * FROM app_user ORDER BY user_id ASC limit #{offset, jdbcType=BIGINT}, #{limit, jdbcType=BIGINT}
+    </select>
 
     <!-- 更新 priority -->
     <update id="updatePriority">

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Xenon Boostrap Admin Panel"/>
+    <meta name="author" content=""/>
+
+    <title>Xenon - Dashboard</title>
+
+    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Arimo:400,700,400italic">
+    <link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/xenon-core.css">
+    <link rel="stylesheet" href="assets/css/xenon-forms.css">
+    <link rel="stylesheet" href="assets/css/xenon-components.css">
+    <link rel="stylesheet" href="assets/css/xenon-skins.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+
+    <link href="../css/libs/jquery.terminal/2.4.1/jquery.terminal.min.css" rel="stylesheet"/>
+
+    <!-- local -->
+    <script type="text/javascript" src="assets/js/jquery-1.11.1.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.min.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- local -->
+    <script type="text/javascript" src="../js/common/common.js"></script>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="../js/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="../js/angular.min.js"></script>
+    <script type="text/javascript" src="../js/echarts.min.js"></script>
+
+    <script src="../js/plugins/jquery.terminal/2.4.1/jquery.terminal.min.js"></script>
+    <script src="../js/plugins/jquery.terminal/keyboard.js"></script>
+
+</head>
+<body class="page-body">
+<div ng-app="indexApp" ng-controller="indexCtrl">
+
+    <div class="copyrights">Collect from <a href="#" title="工业数据采集系统">工业数据采集系统</a></div>
+    <div class="page-container">
+        <!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
+        <!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
+        <!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
+        <!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
+        <div class="sidebar-menu toggle-others fixed">
+
+            <div class="sidebar-menu-inner">
+
+                <header class="logo-env">
+
+                    <!-- logo -->
+                    <div class="logo">
+                        <a href="dashboard-1.html" class="logo-expanded">
+                            <img src="assets/images/logo@2x.png" width="80" alt=""/>
+                        </a>
+
+                        <a href="dashboard-1.html" class="logo-collapsed">
+                            <img src="assets/images/logo-collapsed@2x.png" width="40" alt=""/>
+                        </a>
+                    </div>
+
+                    <!-- This will toggle the mobile menu and will be visible only on mobile devices -->
+                    <div class="mobile-menu-toggle visible-xs">
+                        <a href="#" data-toggle="user-info-menu">
+                            <i class="fa-bell-o"></i>
+                            <span class="badge badge-success">7</span>
+                        </a>
+
+                        <a href="#" data-toggle="mobile-menu">
+                            <i class="fa-bars"></i>
+                        </a>
+                    </div>
+
+                    <!-- This will open the popup with user profile settings, you can use for any purpose, just be creative -->
+                    <div class="settings-icon">
+                        <a href="#" data-toggle="settings-pane" data-animate="true">
+                            <i class="linecons-cog"></i>
+                        </a>
+                    </div>
+
+
+                </header>
+
+
+                <ul id="main-menu" class="main-menu">
+                    <li class="active opened active">
+                        <a href="dashboard-data-claw.html">
+                            <i class="linecons-cog"></i>
+                            <span class="title">协议数据</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="dashboard-data-http.html">
+                                    <span class="title">HTTP数据采集</span>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="dashboard-data-tcp.html">
+                                    <span class="title">TCP数据采集</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="dashboard-data-view.html">
+                                    <span class="title">数据展示</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="main-content">
+            <!-- User Info, Notifications and Menu Bar -->
+            <div ng-include="'dashboard-data-navbar.html'"></div>
+
+            <div id="myTabContent" class="tab-content" style="display: block;">
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div id="protocolInfo">
+                            <p style="margin-top: 5px;">
+                                MODBUS协议                                    <br/>
+                                数据示例：00 00 00 00 00 04 01 01 01 01        <br/>
+                                数据示例：00 00 00 00 00 06 01 03 00 00 00 03  <br/>
+                                数据示例：00 00 00 00 00 04 01 01 01 00        <br/>
+                            </p>
+
+
+                            <div id="term_demo"></div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" ng-click="submitNewProtocol()">去数据展示</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Footer -->
+            <!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
+            <!-- Add class "sticky" to  always stick the footer to the end of page (if page contents is small) -->
+            <!-- Or class "fixed" to  always fix the footer to the end of page -->
+            <div ng-include="'dashboard-data-footer.html'"></div>
+        </div>
+
+    </div>
+
+
+    <div class="page-loading-overlay">
+        <div class="loader-2"></div>
+    </div>
+
+</div>
+
+<!-- Bottom Scripts -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/TweenMax.min.js"></script>
+<script src="assets/js/resizeable.js"></script>
+<script src="assets/js/joinable.js"></script>
+<script src="assets/js/xenon-api.js"></script>
+<script src="assets/js/xenon-toggles.js"></script>
+
+
+<!-- Imported scripts on this page -->
+<script src="assets/js/xenon-widgets.js"></script>
+<script src="assets/js/devexpress-web-14.1/js/globalize.min.js"></script>
+<script src="assets/js/devexpress-web-14.1/js/dx.chartjs.js"></script>
+<script src="assets/js/toastr/toastr.min.js"></script>
+
+
+<!-- JavaScripts initializations and stuff -->
+<script src="assets/js/xenon-custom.js"></script>
+
+
+<script type="text/javascript">
+
+    $(function () {
+        console.log("加载完成");
+    });
+
+    var url = getRequestPath() + '/protocolSimulation/tcpProtocolProcess';
+    var result = '';
+    var callBackFunction = function (command) {
+        $.ajax({
+            type: 'POST',
+            url: url,
+            async: false,
+            data: {
+                'command': command
+            },
+            dataType: 'json',
+            error: function (data) {
+                result = data.resultMesg;
+            },
+            success: function (data) {
+                result = data.resultMesg;
+            }
+        })
+    };
+
+    $(function ($, undefined) {
+        $('#term_demo').terminal(function (command) {
+            if (command !== '') {
+                // 默认当作js命令来处理
+                // var result = window.eval(command);
+
+                console.log("Command > " + command);
+
+                callBackFunction(command);
+
+                if (result != undefined) {
+                    this.echo(String(result));
+                }
+            }
+        }, {
+            greetings: 'Welcome to the MODBUS Interpreter',
+            name: 'js_demo',
+            height: 400,
+            width: 600,
+            prompt: '> '
+        });
+    });
+
+</script>
+
+<script type="text/javascript">
+    var app = angular.module("indexApp", []);
+    app.controller("indexCtrl", function ($scope) {
+        // 2 跳转数据展示
+        $scope.submitNewProtocol = function () {
+            console.log('submit new protocol');
+
+            var page = getRootPath() + '/dashboard-data-view.html?protocolType=2';
+
+            console.log(page);
+
+            window.location.href = page;
+
+        };
+
+        // 0
+        $scope.refreshPage = function () {
+            console.log('refresh page');
+        };
+
+        $scope.refreshPage();
+
+    });
+
+</script>
+
+<script src="js/navbar.js"></script>
+</body>
+</html>

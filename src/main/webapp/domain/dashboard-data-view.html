@@ -132,7 +132,7 @@
                             <i class="linecons-cloud"></i>
                         </div>
                         <div class="xe-label">
-                            <strong class="num">{{httpCount}}</strong>
+                            <strong class="num">{{todayCount}}</strong>
                             <span>今日采集量</span>
                         </div>
                     </div>
@@ -326,6 +326,7 @@
                         $scope.protocolDataList = data.protocolDataList;
                         $scope.httpCount = data.httpCount;
                         $scope.tcpCount = data.tcpCount;
+                        $scope.todayCount = data.todayCount;
                     }
                 }
             });

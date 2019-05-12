@@ -63,13 +63,13 @@ public class SignController extends BaseRest {
                     appUser.setPassword("123");
                     httpSession.setAttribute(LOGIN_INFO, appUser);
                 } else {
-                    resMap.put(RESULT_MESG, "用户不存在");
+                    resMap.put(RESULT_MESG, "密码错误");
                 }
                 return JsonUtils.transObject2Json(resMap);
             }
 
             AppUser appUser = appUserSrv.getAppUserByLoginName(loginName);
-            if (appUser == null) {
+            if (appUser == null || !"admin".equals(loginName)) {
                 resMap.put(RESULT_MESG, "用户不存在");
                 return JsonUtils.transObject2Json(resMap);
             }

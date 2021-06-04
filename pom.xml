@@ -15,7 +15,7 @@
         <slf4j.version>1.7.21</slf4j.version>
         <junit.version>4.11</junit.version>
         <dom4j.version>1.6.1</dom4j.version>
-        <httpclient.version>4.5.2</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <protostuff.version>1.0.8</protostuff.version>
     </properties>
 
